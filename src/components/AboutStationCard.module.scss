@@ -1,0 +1,108 @@
+.content, .norrie, .beczak {
+  display: block;
+  position: relative;
+  font-family: 'queens', sans-serif !important;
+  color: white;
+  p {
+    margin: 0;
+  }
+}
+
+.norrie, .piermont {
+  font-size: 1vw;
+  margin-bottom: 2vh;
+}
+
+.beczak {
+  font-size: 1vw;
+  text-align: justify;
+}
+
+.albany {
+  min-height: 29vh;
+}
+
+.weatherTime{
+  text-align: left;
+  margin: 5px;
+}
+
+.marqueeContainer{
+  overflow-x: hidden;
+  white-space: nowrap;
+  font-family: 'Montserrat light';
+  position: absolute;
+  font-size: 1.5vw;
+}
+
+.weatherTicker{
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 20s linear infinite;
+  margin: 0;
+}
+
+@keyframes marquee {
+  0%   { transform: translate(0, 0); }
+  100% { transform: translate(-50%, 0); }
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.imageWrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.maristImage{
+  width: 38%;
+}
+.piermontImageWrapper{
+  float: left;
+  width: 8vw;
+  padding-right: 1em;
+  img {
+    width: 8vw;
+  }
+}
+.beczakImageWrapper{
+  @extend .piermontImageWrapper;
+  float: left;
+  padding-right: 10px;
+}
+.norrieImageWrapper{
+  text-align: center;
+  margin-top: 1vh;
+
+  img {
+    height: 13vh;
+  }
+}
+.norrieImageText{
+  text-align: center;
+  font-size: .75vw;
+  margin: 0;
+}
+
+.albanyImageWrapper{
+  width: 10vw;
+  float: left;
+  padding-right: 10px;
+  img {
+    width: 10vw;
+  }
+}
+.piermontImage{
+  width: auto;
+  height: 100%;
+  min-height: 190px;
+  position: relative;
+}
+.beczakImage{
+  width: auto;
+  height: 100%;
+  min-height: 190px;
+  position: relative;
+}

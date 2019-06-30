@@ -1,0 +1,16 @@
+$backgroundTeal: #90CAF9;
+
+html {
+  background: $backgroundTeal;
+}
+
+.grid-layout {
+  background: $backgroundTeal;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 20px;
+  height: calc(100vh - 128px);
+  padding: 1em;
+}

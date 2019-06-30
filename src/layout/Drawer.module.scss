@@ -1,0 +1,28 @@
+
+.drawer{
+}
+.selected{
+  background: lightgray;
+  &:hover{
+    background: darkgray;
+    color: white;
+  }
+}
+.disclaimer{
+  white-space: normal;
+  margin: 1em;
+  bottom: 0;
+}
+
+.sizeDisclaimer{
+  white-space: normal;
+  margin: 1em;
+  font-size: 1.2em;
+  font-style: italic;
+}
+
+@media (min-width: 1800px) and (min-height: 900px) {
+  .sizeMessage {
+    display: none;
+  }
+}
