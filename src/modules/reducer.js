@@ -5,8 +5,8 @@ const COUNTDOWN_MAX = 30;
 
 const defaultState = {
   countdown: COUNTDOWN_MAX,
-  stationData: JSON.parse(stubbedData),
   scale: 1,
+  stationData: {},
   stationID: 'pier84',
   tabIndex: 0,
   timerEnabled: true,
@@ -16,15 +16,24 @@ const defaultState = {
 const todoReducer = (state = defaultState, action) => {
   switch (action.type) {
     case ACTIONS.UPDATE_STATION: {
-      return { ...state, stationID: action.payload };
+      return { ...state, stationID: action.payload, stationData: {}, tabIndex: 0 };
     }
 
     case ACTIONS.SET_SCALE: {
       return { ...state, scale: action.payload };
     }
 
+    // TODO: verify this is unneeded
+    // case ACTIONS.LOADING_STATION: {
+    //   return { ...state, stationData: {} };
+    // }
+
     case ACTIONS.LOADED_STATION: {
-      return { ...state, stationData: JSON.parse(stubbedData) };
+      const stationData = action.payload;
+      if (['marist', 'piermont', 'norriePoint'].includes(state.stationID)) {
+        stationData.DEPTH = stationData.ELEV;
+      }
+      return { ...state, stationData };
     }
 
     case ACTIONS.COUNTDOWN: {

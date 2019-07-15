@@ -34,32 +34,26 @@ const decimals = {
 
 const MIN_WIDTH = 800;
 
-
 export default function getChartData({
-  tabIndex, width, stationData, location, height,
+  tabIndex, width, stationData, location,
 }) {
   const station = stations[location];
   const key = station.params[tabIndex];
   const imageScale = width / 1250;
   const config = getChartConfig(imageScale * imageScale * CHART_HEIGHT);
+  const hasData = stationData[key];
 
   const topHeight = -210 * imageScale;
   const bottomHeight = -75 * imageScale;
 
   set(config, ['chart', 'width'], width || MIN_WIDTH);
-  set(config, ['series', '0', 'data'], [{}]);
-  set(config, ['xAxis', 'min'], moment().startOf('day').subtract(2, 'days').valueOf());
-
 
   const metric = metricConversion[key];
   const units = metric.unit;
-  if (!stationData[key]) {
-    stationData[key] = [];
-  }
 
-  let rows = stationData[key].slice();
-  if (metric.conversion) {
-    rows = rows.map(([a, b]) => [a, metric.conversion(b)]);
+  let rows = stationData[key] ? stationData[key].slice() : []
+  if (Array.isArray(rows) && metric.conversion) {
+    rows = rows.map(row => [row[0], metric.conversion(row[1])]);
   }
   let max = get(rows, '0.1');
   let min = get(rows, '0.1');
@@ -79,6 +73,7 @@ export default function getChartData({
   const isOffline = (Math.abs(moment().valueOf() - lastX) >= moment.duration(6, 'hours').valueOf())
     ? moment(lastX).fromNow(true) : false;
 
+
   rows.pop();
   rows.push({
     marker: { fillColor: GREEN, radius: 6 },
@@ -87,17 +82,22 @@ export default function getChartData({
   });
   const xAxisLabel = width > 1000 ? '%b %e' : '%e';
   const titleAlign = lastY < (max + min) / 2 ? topHeight : bottomHeight;
-  const xAxisMin = location !== 'norriePoint' ? moment().startOf('day').subtract(2, 'days').valueOf() : undefined;
+
+  const xAxisMin = (
+    location !== 'norriePoint'
+      ? moment().startOf('day').subtract(2, 'days').valueOf()
+      : moment().startOf('day').subtract(10, 'days').valueOf()
+  );
   const isOfflineOffset = titleAlign > -100 || width < 1000 ? 0 : 85;
 
-  set(config, ['series', '0', 'data'], rows.map(a=>[a[0], a[1]]));
+  set(config, ['series', '0', 'data'], rows.map(a => [a[0], a[1]]));
   set(config, ['yAxis', 'title', 'text'], units);
   set(config, ['title', 'text'], finalString);
   set(config, ['title', 'y'], titleAlign);
   set(config, ['chart', 'animation'], false);
   set(config, ['plotOptions', 'series', 'animation'], false);
-  set(config, ['xAxis', 'min'], xAxisMin);
+  // set(config, ['xAxis', 'min'], xAxisMin);
   set(config, ['xAxis', 'dateTimeLabelFormats', 'day'], xAxisLabel);
 
-  return { config, isOffline, isOfflineOffset };
+  return { config, isOffline, isOfflineOffset, hasData };
 }

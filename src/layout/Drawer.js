@@ -58,12 +58,17 @@ function Drawer({ open, setOpen }) {
     }
   };
 
+  const navigateAndResetIndex = (newStationID) => {
+    dispatch({ payload: 0, type: ACTIONS.SET_TAB_INDEX });
+    navigate(`/station/${newStationID}`);
+  };
+
   const ListItems = Object.values(stations).map(station => (
     <ListItem
       key={station.id}
       button
       selected={stationID === station.id}
-      onClick={() => navigate(`/station/${station.id}`)}
+      onClick={() => navigateAndResetIndex(station.id)}
     >
       <ListItemText primary={station.title} />
     </ListItem>

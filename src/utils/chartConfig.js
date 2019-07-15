@@ -4,7 +4,7 @@ export const GREEN = '#04ca01';
 export const TEAL = '#4084a7';
 export const CHART_HEIGHT = 280;
 
-export const getChartConfig = (height) => JSON.parse(JSON.stringify({
+export const getChartConfig = (height, min) => JSON.parse(JSON.stringify({
   chart: {
     backgroundColor: 'transparent',
     height,
@@ -40,11 +40,11 @@ export const getChartConfig = (height) => JSON.parse(JSON.stringify({
     floating: true,
     style: {
       color: WHITE,
-      fontSize: '24px',
       fontFamily: 'Montserrate Light',
+      fontSize: '24px',
     },
-    useHTML: true,
     text: '',
+    useHTML: true,
     verticalAlign: 'bottom',
     x: 10,
     y: -75,
@@ -57,9 +57,6 @@ export const getChartConfig = (height) => JSON.parse(JSON.stringify({
     endOnTick: true,
     gridLineColor: WHITE,
     gridLineWidth: 1,
-    minTickInterval: 24 * 3600 * 1000,
-    minRange: 3600 * 1000 * 24 * 3,
-    visible: true, // one day
     labels: {
       formatter() {
         if (this.isFirst) {
@@ -75,6 +72,9 @@ export const getChartConfig = (height) => JSON.parse(JSON.stringify({
         fontSize: '1.75rem',
       },
     },
+    min,
+    minRange: 3600 * 1000 * 24 * 3,
+    minTickInterval: 24 * 3600 * 1000, // one day
     minorTickWidth: 12,
     tickInterval: 6 * 3600 * 1000,
     title: {
@@ -86,6 +86,7 @@ export const getChartConfig = (height) => JSON.parse(JSON.stringify({
       },
     },
     type: 'datetime',
+    visible: true,
   },
   yAxis: {
     endOnTick: true,
