@@ -27,9 +27,9 @@ function App() {
     <Provider store={reduxStore}>
       <ThemeProvider theme={theme}>
         <Router>
-          <Layout path="/" default/>
+          <Layout path="/" default />
           <Layout path="/station/:stationID" />
-          <Layout path="/station/:stationID/auto" autoCycle/>
+          <Layout path="/station/:stationID/auto" autoCycle />
           <Layout path="/embedded/:stationID" embedded />
         </Router>
       </ThemeProvider>

@@ -101,14 +101,12 @@ function HydroContent({size}) {
 
   const stationData = useSelector(state => state.stationData);
 
-  console.log('-----stationData', stationData)
-
   const scale = size.width / 1252;
 
   const height = 800 * scale;
   const width = 1250 * scale;
 
-  const { config, isOffline } = getChartData({
+  const { config, isOffline, hasData } = getChartData({
     height, location, scale, stationData, tabIndex, width,
   });
 
@@ -138,7 +136,10 @@ function HydroContent({size}) {
           {`Live ${stationName} ${selectedParameter} Data`}
         </h3>
         {offlineWarning}
-        <HighchartsReact highcharts={Highcharts} options={config} />
+        <HighchartsReact
+          highcharts={Highcharts}
+          options={config}
+        />
       </div>
     </div>
   );

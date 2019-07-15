@@ -39,7 +39,7 @@ export function Piermont({ weatherTicker, time, scale }) {
 
 Piermont.propTypes = {
   scale: PropTypes.number.isRequired,
-  time: PropTypes.string.isRequired,
+  time: PropTypes.string,
   weatherTicker: PropTypes.object.isRequired,
 };
 

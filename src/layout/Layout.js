@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 
@@ -28,8 +28,17 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const INTERVAL = 60 * 1000 * 15;
+
 function Layout({ stationID, autoCycle, embedded }) {
   const dispatch = useDispatch();
+  const [refresh, toggleRefresh] = useState(false);
+
+  useEffect(() => {
+    const timer = setInterval(() => toggleRefresh(!refresh), INTERVAL);
+    return () => clearInterval(timer);
+  });
+
   useEffect(() => {
     dispatch({ type: autoCycle ? ACTIONS.ENABLE_TIMER : ACTIONS.DISABLE_TIMER });
   }, [autoCycle, dispatch]);
@@ -41,7 +50,7 @@ function Layout({ stationID, autoCycle, embedded }) {
       .then(data => (
         console.log('fetch!', data) || dispatch({ payload: data, type: ACTIONS.LOADED_STATION })
       ));
-  }, [dispatch, stationID]);
+  }, [dispatch, stationID, refresh]);
 
   if (embedded) {
     return <Chart />;

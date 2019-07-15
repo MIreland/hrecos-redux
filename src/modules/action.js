@@ -1,12 +1,12 @@
 // types of action
 export const ACTIONS = {
+  COUNTDOWN: 'COUNTDOWN',
   DISABLE_TIMER: 'DISABLE_TIMER',
   ENABLE_TIMER: 'ENABLE_TIMER',
-  COUNTDOWN: 'COUNTDOWN',
   LOADED_STATION: 'LOADED_STATION',
   LOADING_STATION: 'LOADING_STATION',
-  SET_TAB_INDEX: 'SET_TAB_INDEX',
   SET_SCALE: 'SET_SCALE',
+  SET_TAB_INDEX: 'SET_TAB_INDEX',
   UPDATE_STATION: 'UPDATE_STATION',
 };
 // actions
@@ -27,6 +27,6 @@ export const updateStation = station => ({
 
 export default {
   ACTIONS,
-  updateStation,
   setScale,
+  updateStation,
 };
