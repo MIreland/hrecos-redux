@@ -45,7 +45,7 @@ function Layout({ stationID, autoCycle, embedded }) {
   useEffect(() => {
     dispatch(updateStation(stationID));
     dispatch({ type: ACTIONS.LOADING_STATION });
-    fetch(`${isLocal ? 'http://localhost:3002/' : ''}api/station/${stationID}`)
+    fetch(`${isLocal ? 'http://localhost:3002' : ''}/api/station/${stationID}`)
       .then(data => data.json())
       .then(data => (
         console.log('fetch!', data) || dispatch({ payload: data, type: ACTIONS.LOADED_STATION })
