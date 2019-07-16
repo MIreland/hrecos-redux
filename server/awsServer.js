@@ -6,7 +6,7 @@ const cors = require('cors');
 const station = require('./stationParams');
 const soapService = require('./soapService');
 
-const port = process.env.PORT || 3002;
+const port = process.env.PORT || 3000;
 
 // app.options('*', cors())
 app.use(cors());
