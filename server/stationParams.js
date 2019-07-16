@@ -54,8 +54,8 @@ const SOAP_METRIC_MAPPING = {
 const memoizedTime = memoize(dateStr => moment.tz(dateStr, 'YYYY-MM-DD HH:mm:ss', 'America/New_York').valueOf());
 
 function getStationData(station, res) {
-  let { stationId } = station.params;
-  stationId = stationId || 'piermont';
+  let { stationID } = station.params;
+  stationID = stationID || 'piermont';
   const startDate = moment.utc().add(-3, 'days').format('YYYY-MM-DD');
   const endDate = moment.utc().format('YYYY-MM-DD');
   const stationStatus = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRTd9ro6ylJ4LBECGlszV_UI9od-5MAC6W60iqpWB2HTZFjK5q5y0G1CMHVcNXL4IptubblYo-w7gDz/pub?gid=0&single=true&output=csv';
@@ -65,7 +65,7 @@ function getStationData(station, res) {
 
 
     // Norrie Point
-    if (stationId === 'norrie') {
+    if (stationID === 'norriePoint') {
       const soapURL = 'http://cdmo.baruch.sc.edu/webservices2/requests.cfc?wsdl';
 
       const waterArgs = { station_code: 'hudnpwq', records: 500 };
@@ -99,9 +99,9 @@ function getStationData(station, res) {
 
       const urlParams = Object.keys(METRIC_MAPPING).map(key => `cb_${key}=on`).join('&');
       const urlRoot = 'https://waterdata.usgs.gov/nwis/uv?';
-      const isMarist = stationId === 'marist';
+      const isMarist = stationID === 'marist';
 
-      const siteID = stations[stationId].usgsKey;
+      const siteID = stations[stationID].usgsKey;
 
       const url = `${urlRoot}${urlParams}&format=rdb&site_no=${siteID}&period=4&begin_date=${startDate}&end_date=${endDate}`;
 
@@ -139,7 +139,7 @@ function getStationData(station, res) {
 }
 
 api.get('/', (req, res) => {
-  const station = req.params.stationId;
+  const station = req.params.stationID;
   getStationData(station, res);
 });
 
