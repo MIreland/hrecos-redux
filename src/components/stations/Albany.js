@@ -49,7 +49,7 @@ export function Beczak({ weatherTicker, time, scale }) {
 
 Beczak.propTypes = {
   scale: PropTypes.number.isRequired,
-  time: PropTypes.string.isRequired,
+  time: PropTypes.string,
   weatherTicker: PropTypes.object.isRequired,
 };
 

@@ -1,1 +1,1 @@
-web: npm run build && node server/awsServer.js
+web: node server/awsServer.js

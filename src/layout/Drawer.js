@@ -50,17 +50,17 @@ function Drawer({ open, setOpen }) {
 
   const toggleTimer = () => {
     if (timerEnabled) {
-      navigate(`#/station/${stationID}`);
+      navigate(`/station/${stationID}`);
       dispatch({ type: ACTIONS.DISABLE_TIMER });
     } else {
-      navigate(`#/station/${stationID}/auto`);
+      navigate(`/station/${stationID}/auto`);
       dispatch({ type: ACTIONS.ENABLE_TIMER });
     }
   };
 
   const navigateAndResetIndex = (newStationID) => {
     dispatch({ payload: 0, type: ACTIONS.SET_TAB_INDEX });
-    navigate(`#/station/${newStationID}`);
+    navigate(`/station/${newStationID}`);
   };
 
   const ListItems = Object.values(stations).map(station => (

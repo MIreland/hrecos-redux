@@ -1,12 +1,11 @@
 import React, { useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector } from 'react-redux';
 import sizeMe from 'react-sizeme';
 import stationMetrics from 'utils/metrics';
 import salt from 'assets/HRECOS_PANEL_SALT.png';
 import dissolvedOxygen from 'assets/HRECOS_PANEL_DO.png';
-import backgroundSource from 'assets/HRECOS_background_small.png';
+// import backgroundSource from 'assets/HRECOS_background_small.png';
 import piermontDO from 'assets/HRECOS_PANEL_DO_PIERMONT.png';
 import conductivity from 'assets/HRECOS_PANEL_COND.png';
 import waterTemp from 'assets/HRECOS_PANEL_WATER_TEMP.png';
@@ -17,9 +16,7 @@ import backgroundPanel from 'assets/HRECOS_panel_background.png';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import getChartData from 'utils/chartData';
-import Chart from './Chart';
 import stations from '../utils/stations.json';
-import { mapList } from './AboutStationCard';
 
 const backgroundImages = {
   backgroundPanel,
@@ -37,7 +34,7 @@ const imageList = Object.values(backgroundImages);
 
 const useStyles = makeStyles(theme => ({
   backgroundImage: {
-    // position: 'fixed',
+    height: '100%',
     width: '100%',
   },
   chartWrapper: {
@@ -46,6 +43,7 @@ const useStyles = makeStyles(theme => ({
   },
   imageWrapper: {
     position: 'absolute',
+    height: '100%',
   },
   liveDataTitle: {
     color: '#e58030',
@@ -74,6 +72,8 @@ const useStyles = makeStyles(theme => ({
     gridColumnStart: 2,
     gridRowEnd: 'span 2',
     gridRowStart: 1,
+    height: 'calc(100% - 48px)',
+    position: 'relative',
   },
 }));
 

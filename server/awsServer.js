@@ -20,7 +20,10 @@ app.use(express.static('build', {
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../build/index.html'));
 });
+app.get('/station*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../build/index.html'));
+});
 
 app.listen(port, () => {
-  console.log('Example app listening on port 3002!');
+  console.log(`Example app listening on port ${port}!`);
 });

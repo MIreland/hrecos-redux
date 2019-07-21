@@ -5,13 +5,13 @@ const {
   get, forEach, memoize, map, findIndex,
 } = require('lodash');
 const moment = require('moment-timezone');
-const stations = require('../src/utils/stations.json');
 const fetch = require('node-fetch');
 const unzip = require('unzip');
 
 const api = express.Router();
 const NodeCache = require('node-cache');
 const soap = require('soap');
+const stations = require('../src/utils/stations.json');
 
 const myCache = new NodeCache({ checkperiod: 60 * 2, stdTTL: 60 * 15 });
 
@@ -19,37 +19,37 @@ const myCache = new NodeCache({ checkperiod: 60 * 2, stdTTL: 60 * 15 });
 
 
 const METRIC_MAPPING = {
-  '63680': 'TURB',
+  '00010': 'WTMP',
+  '00020': 'ATMP',
+  '00045': 'RAIN',
+  '00052': 'RHUM',
+  '00095': 'SPCO',
   '00300': 'DO',
   '00301': 'DOPC',
   '00400': 'PH',
-  '90860': 'SALT',
-  '00095': 'SPCO',
-  '00010': 'WTMP',
-  '00020': 'ATMP',
-  '75969': 'BARO',
-  '00045': 'RAIN',
-  '82127': 'WSPD',
   '62620': 'ELEV',
-  '00052': 'RHUM',
+  '63680': 'TURB',
+  '75969': 'BARO',
+  '82127': 'WSPD',
+  '90860': 'SALT',
 };
 
 const SOAP_METRIC_MAPPING = {
   // Metrics listed at: http://cdmo.baruch.sc.edu/data/parameters.cfm
-  Depth: 'DEPTH',
-  DO_mgl: 'DO',
-  pH: 'PH',
-  SpCond: 'SPCO',
-  Turb: 'TURB',
-  Temp: 'WTMP',
   BP: 'BARO',
-  // DEWP,
-  TotPrcp: 'RAIN',
-  RH: 'RHUM',
   ATemp: 'ATMP',
+  DO_mgl: 'DO',
+  Depth: 'DEPTH',
   MaxWSpdT: 'GST',
+  RH: 'RHUM',
+  SpCond: 'SPCO',
+  // DEWP,
+  Temp: 'WTMP',
+  TotPrcp: 'RAIN',
+  Turb: 'TURB',
   WSpd: 'WSPD',
   Wdir: 'WD',
+  pH: 'PH',
 };
 const memoizedTime = memoize(dateStr => moment.tz(dateStr, 'YYYY-MM-DD HH:mm:ss', 'America/New_York').valueOf());
 
@@ -61,34 +61,41 @@ function getStationData(station, res) {
   const stationStatus = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRTd9ro6ylJ4LBECGlszV_UI9od-5MAC6W60iqpWB2HTZFjK5q5y0G1CMHVcNXL4IptubblYo-w7gDz/pub?gid=0&single=true&output=csv';
 
   fetch(stationStatus).then(statusResponse => statusResponse.text()).then((status) => {
-    const stationStatusDetails = Papa.parse(status, { header: true, dynamicTyping: true }).data;
+    const stationStatusDetails = Papa.parse(status, { dynamicTyping: true, header: true }).data;
 
 
     // Norrie Point
     if (stationID === 'norriePoint') {
       const soapURL = 'http://cdmo.baruch.sc.edu/webservices2/requests.cfc?wsdl';
 
-      const waterArgs = { station_code: 'hudnpwq', records: 500 };
-      const atmosArgs = { station_code: 'hudnpmet', records: 500 };
-      const dataMapping = { stationStatusDetails, sourceUrl: soapURL };
+      const waterArgs = { records: 500, station_code: 'hudnpwq' };
+      const atmosArgs = { records: 500, station_code: 'hudnpmet' };
+      const dataMapping = { sourceUrl: soapURL, stationStatusDetails };
 
       soap.createClient(soapURL, (err, client) => {
         client.exportAllParamsXMLNew(waterArgs, (soapErr, waterResult) => {
           client.exportAllParamsXMLNew(atmosArgs, (soapWaterErr, atmosResult) => {
             [waterResult, atmosResult].forEach((result) => {
-              const data = get(result, 'exportAllParamsXMLNewReturn.returnData.data', {});
-              data.reverse().forEach((row) => {
-                const timeStamp = moment(row.DateTimeStamp, 'MM/DD/YYYY HH:mm').valueOf();
-                Object.keys(SOAP_METRIC_MAPPING).forEach((key) => {
-                  if (!row[key]) { return; }
-                  const newValue = [timeStamp, parseFloat(row[key])];
-                  if (dataMapping[SOAP_METRIC_MAPPING[key]]) {
-                    dataMapping[SOAP_METRIC_MAPPING[key]].push(newValue);
-                  } else {
-                    dataMapping[SOAP_METRIC_MAPPING[key]] = [newValue];
-                  }
+              const data = get(result, 'exportAllParamsXMLNewReturn.returnData.data', []);
+              try {
+                data.reverse().forEach((row) => {
+                  const timeStamp = moment(row.DateTimeStamp, 'MM/DD/YYYY HH:mm').valueOf();
+                  Object.keys(SOAP_METRIC_MAPPING).forEach((key) => {
+                    if (!row[key]) {
+                      return;
+                    }
+                    const newValue = [timeStamp, parseFloat(row[key])];
+                    if (dataMapping[SOAP_METRIC_MAPPING[key]]) {
+                      dataMapping[SOAP_METRIC_MAPPING[key]].push(newValue);
+                    } else {
+                      dataMapping[SOAP_METRIC_MAPPING[key]] = [newValue];
+                    }
+                  });
                 });
-              });
+              } catch (e) {
+                console.log('error', e)
+                dataMapping.error = e;
+              }
             });
             res.send(dataMapping);
           });
@@ -106,12 +113,11 @@ function getStationData(station, res) {
       const url = `${urlRoot}${urlParams}&format=rdb&site_no=${siteID}&period=4&begin_date=${startDate}&end_date=${endDate}`;
 
       fetch(url).then(usgsRes => usgsRes.text()).then((siteData) => {
-
         const csvString = siteData.slice(siteData.lastIndexOf('#') + 3);
         const values = Papa.parse(csvString, { dynamicTyping: true }).data;
         const [headers] = values.slice(0, 1);
         const rows = values.slice(2);
-        const mappedResults = { stationStatusDetails, sourceUrl: url, values };
+        const mappedResults = { sourceUrl: url, stationStatusDetails, values };
         headers.forEach((header, headerIndex) => {
           if (header.includes('cd') || header.includes('239021')) {
             return;
@@ -133,8 +139,8 @@ function getStationData(station, res) {
       });
     }
   }).catch((e) => {
-    console.log('e', e)
-    res.send({ error: 'error', e });
+    console.log('e', e);
+    res.send({ e, error: 'error' });
   });
 }
 

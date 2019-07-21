@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "327f7037bdc12127cf012221b4eb7407",
+    "revision": "1e114088aa6179063ccb32732903e8d7",
     "url": "/index.html"
   },
   {
-    "revision": "435b4f88e4e8e4854c57",
-    "url": "/static/css/main.57592c92.chunk.css"
+    "revision": "efcdc0f1fbe9bc8690ef",
+    "url": "/static/css/main.fa77ef88.chunk.css"
   },
   {
-    "revision": "df51bb208eabb039ea81",
-    "url": "/static/js/2.24d00ada.chunk.js"
+    "revision": "6e5a8b70445f9b6bb17b",
+    "url": "/static/js/2.6c06806b.chunk.js"
   },
   {
-    "revision": "435b4f88e4e8e4854c57",
-    "url": "/static/js/main.dce80536.chunk.js"
+    "revision": "efcdc0f1fbe9bc8690ef",
+    "url": "/static/js/main.a3947399.chunk.js"
   },
   {
     "revision": "d15c03722aa864771e5f",
@@ -62,10 +62,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "978ca4cefb757e2edd5860b007d6f40d",
     "url": "/static/media/HRECOS_PANEL_WATER_TEMP.978ca4ce.png"
-  },
-  {
-    "revision": "3f0b8b4d7ff09c7e77c2c69284afcf8f",
-    "url": "/static/media/HRECOS_background_small.3f0b8b4d.png"
   },
   {
     "revision": "00e51699965e1cf4350628f459ff7661",

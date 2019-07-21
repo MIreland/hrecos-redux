@@ -12,5 +12,6 @@ html {
   grid-column-gap: 10px;
   grid-row-gap: 20px;
   height: calc(100vh - 128px);
+  min-height: 800px;
   padding: 1em;
 }
