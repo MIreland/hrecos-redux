@@ -5,7 +5,6 @@ import stationText from 'utils/aboutStationData';
 import theme from 'components/AboutStationCard.module.scss';
 
 export function Piermont({ weatherTicker, time, scale }) {
-
   return (
     <div className={theme.content}>
       <div className={theme.piermont}>
@@ -18,19 +17,19 @@ export function Piermont({ weatherTicker, time, scale }) {
           <p>{stationText.piermont[2]}</p>
         </div>
       </div>
-        <div className={theme.marqueeContainer}>
-          <p className={theme.weatherTime}>
-            <strong className={theme.underline}>
-              {'Piermont Weather'}
-            </strong>
-            {` as of ${time}:`}
-          </p>
-          <p
-            className={theme.weatherTicker}
-          >
-            {weatherTicker}
-          </p>
-        </div>
+      <div className={theme.marqueeContainer}>
+        <p className={theme.weatherTime}>
+          <strong className={theme.underline}>
+            {'Piermont Weather'}
+          </strong>
+          {` as of ${time}:`}
+        </p>
+        <p
+          className={theme.weatherTicker}
+        >
+          {weatherTicker}
+        </p>
+      </div>
 
     </div>
   );

@@ -4,7 +4,7 @@ export const GREEN = '#04ca01';
 export const TEAL = '#4084a7';
 export const CHART_HEIGHT = 280;
 
-export const getChartConfig = (height, min) => JSON.parse(JSON.stringify({
+export const getChartConfig = (height) => JSON.parse(JSON.stringify({
   chart: {
     backgroundColor: 'transparent',
     height,
@@ -72,7 +72,7 @@ export const getChartConfig = (height, min) => JSON.parse(JSON.stringify({
         fontSize: '1.75rem',
       },
     },
-    min,
+    // min,
     minRange: 3600 * 1000 * 24 * 3,
     minTickInterval: 24 * 3600 * 1000, // one day
     minorTickWidth: 12,

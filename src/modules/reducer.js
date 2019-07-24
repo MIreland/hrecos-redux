@@ -16,7 +16,9 @@ const defaultState = {
 const todoReducer = (state = defaultState, action) => {
   switch (action.type) {
     case ACTIONS.UPDATE_STATION: {
-      return { ...state, stationID: action.payload, stationData: {}, tabIndex: 0 };
+      return {
+        ...state, stationID: action.payload, stationData: {}, tabIndex: 0,
+      };
     }
 
     case ACTIONS.SET_SCALE: {
@@ -30,7 +32,7 @@ const todoReducer = (state = defaultState, action) => {
 
     case ACTIONS.LOADED_STATION: {
       const stationData = action.payload;
-      if (['marist', 'piermont', 'norriePoint'].includes(state.stationID)) {
+      if (['marist', 'piermont', 'norriePoint', 'pier84'].includes(state.stationID)) {
         stationData.DEPTH = stationData.ELEV;
       }
       return { ...state, stationData };
