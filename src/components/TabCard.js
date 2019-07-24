@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
   },
   countdown: {
     display: 'flex',
-    width: '12%',
+    width: '14%',
     lineHeight: '3rem',
   },
 }));

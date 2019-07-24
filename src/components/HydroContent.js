@@ -139,6 +139,7 @@ function HydroContent({size}) {
         <HighchartsReact
           highcharts={Highcharts}
           options={config}
+          immutable
         />
       </div>
     </div>

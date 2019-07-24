@@ -36,8 +36,8 @@ const METRIC_MAPPING = {
 
 const SOAP_METRIC_MAPPING = {
   // Metrics listed at: http://cdmo.baruch.sc.edu/data/parameters.cfm
-  BP: 'BARO',
   ATemp: 'ATMP',
+  BP: 'BARO',
   DO_mgl: 'DO',
   Depth: 'DEPTH',
   MaxWSpdT: 'GST',
@@ -84,7 +84,11 @@ function getStationData(station, res) {
                     if (!row[key]) {
                       return;
                     }
-                    const newValue = [timeStamp, parseFloat(row[key])];
+                    let parsedFloat = parseFloat(row[key]);
+                    if (key === 'SpCond') {
+                      parsedFloat *= 1000;
+                    }
+                    const newValue = [timeStamp, parsedFloat];
                     if (dataMapping[SOAP_METRIC_MAPPING[key]]) {
                       dataMapping[SOAP_METRIC_MAPPING[key]].push(newValue);
                     } else {
@@ -93,7 +97,7 @@ function getStationData(station, res) {
                   });
                 });
               } catch (e) {
-                console.log('error', e)
+                console.log('error', e);
                 dataMapping.error = e;
               }
             });
