@@ -111,8 +111,8 @@ function getStationData(station, res) {
       const urlParams = Object.keys(METRIC_MAPPING).map(key => `cb_${key}=on`).join('&');
       const urlRoot = 'https://waterdata.usgs.gov/nwis/uv?';
       const isMarist = stationID === 'marist';
-      console.log('stationID', stationID);
-      const siteID = stations[stationID].usgsKey;
+      console.log('stationIDs', stationID);
+      const siteID = stations[stationID || 'marist'].usgsKey;
 
       const url = `${urlRoot}${urlParams}&format=rdb&site_no=${siteID}&period=4&begin_date=${startDate}&end_date=${endDate}`;
 
