@@ -76,30 +76,23 @@ function getStationData(station, res) {
         client.exportAllParamsXMLNew(waterArgs, (soapErr, waterResult) => {
           client.exportAllParamsXMLNew(atmosArgs, (soapWaterErr, atmosResult) => {
             [waterResult, atmosResult].forEach((result) => {
-              const data = get(result, 'exportAllParamsXMLNewReturn.returnData.data', []);
-              try {
-                data.reverse().forEach((row) => {
-                  const timeStamp = moment(row.DateTimeStamp, 'MM/DD/YYYY HH:mm').valueOf();
-                  Object.keys(SOAP_METRIC_MAPPING).forEach((key) => {
-                    if (!row[key]) {
-                      return;
-                    }
-                    let parsedFloat = parseFloat(row[key]);
-                    if (key === 'SpCond') {
-                      parsedFloat *= 1000;
-                    }
-                    const newValue = [timeStamp, parsedFloat];
-                    if (dataMapping[SOAP_METRIC_MAPPING[key]]) {
-                      dataMapping[SOAP_METRIC_MAPPING[key]].push(newValue);
-                    } else {
-                      dataMapping[SOAP_METRIC_MAPPING[key]] = [newValue];
-                    }
-                  });
+              const data = get(result, 'exportAllParamsXMLNewReturn.returnData.data', {});
+              data.reverse().forEach((row) => {
+                const timeStamp = moment(row.DateTimeStamp, 'MM/DD/YYYY HH:mm').valueOf();
+                Object.keys(SOAP_METRIC_MAPPING).forEach((key) => {
+                  if (!row[key]) { return; }
+                  let parsedFloat = parseFloat(row[key]);
+                  if (key === 'SpCond') {
+                    parsedFloat *= 1000;
+                  }
+                  const newValue = [timeStamp, parsedFloat];
+                  if (dataMapping[SOAP_METRIC_MAPPING[key]]) {
+                    dataMapping[SOAP_METRIC_MAPPING[key]].push(newValue);
+                  } else {
+                    dataMapping[SOAP_METRIC_MAPPING[key]] = [newValue];
+                  }
                 });
-              } catch (e) {
-                console.log('error', e);
-                dataMapping.error = e;
-              }
+              });
             });
             res.send(dataMapping);
           });
@@ -112,7 +105,7 @@ function getStationData(station, res) {
       const urlRoot = 'https://waterdata.usgs.gov/nwis/uv?';
       const isMarist = stationID === 'marist';
       console.log('stationIDs', stationID);
-      const siteID = stations[stationID || 'marist'].usgsKey;
+      const siteID = get(stations, `${stationID}.usgsKey`, stations.marist.usgsKey);
 
       const url = `${urlRoot}${urlParams}&format=rdb&site_no=${siteID}&period=4&begin_date=${startDate}&end_date=${endDate}`;
 
