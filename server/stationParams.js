@@ -76,7 +76,11 @@ function getStationData(station, res) {
         client.exportAllParamsXMLNew(waterArgs, (soapErr, waterResult) => {
           client.exportAllParamsXMLNew(atmosArgs, (soapWaterErr, atmosResult) => {
             [waterResult, atmosResult].forEach((result) => {
-              const data = get(result, 'exportAllParamsXMLNewReturn.returnData.data', {});
+              const data = get(result, 'exportAllParamsXMLNewReturn.returnData.data', []);
+              if (!data.reverse) {
+                res.send({ message: 'no data' });
+                return;
+              }
               data.reverse().forEach((row) => {
                 const timeStamp = moment(row.DateTimeStamp, 'MM/DD/YYYY HH:mm').valueOf();
                 Object.keys(SOAP_METRIC_MAPPING).forEach((key) => {
