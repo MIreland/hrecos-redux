@@ -2,7 +2,7 @@
 const express = require('express');
 const Papa = require('papaparse');
 const {
-  get, forEach, memoize, map, findIndex,
+  get, forEach, memoize, map, findIndex, isFinite,
 } = require('lodash');
 const moment = require('moment-timezone');
 const fetch = require('node-fetch');
@@ -131,9 +131,12 @@ function getStationData(station, res) {
 
           const mappedHeader = METRIC_MAPPING[headerString];
           if (mappedHeader) {
-            mappedResults[mappedHeader] = rows.map(row => (
-              [memoizedTime(row[2]), row[headerIndex], row[2]]
-            )).filter(r => Boolean(r[0]) && Boolean(r[1]));
+            mappedResults[mappedHeader] = rows.map((row) => {
+              if (!isFinite(row[headerIndex])) {
+                return [];
+              }
+              return [memoizedTime(row[2]), row[headerIndex], row[2]];
+            }).filter(r => Boolean(r[0]) && Boolean(r[1]));
           }
         });
         res.send(mappedResults);
