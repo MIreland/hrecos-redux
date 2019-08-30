@@ -131,9 +131,9 @@ function getStationData(station, res) {
 
           const mappedHeader = METRIC_MAPPING[headerString];
           if (mappedHeader) {
-            mappedResults[mappedHeader] = rows.map((row) => {
+            mappedResults[mappedHeader] = rows.map((row, index) => {
               if (!isFinite(row[headerIndex])) {
-                return [];
+                return index === 0 ? [memoizedTime(row[2]), 0, row[2]] : [];
               }
               return [memoizedTime(row[2]), row[headerIndex], row[2]];
             }).filter(r => Boolean(r[0]) && Boolean(r[1]));

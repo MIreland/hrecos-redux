@@ -95,7 +95,7 @@ function HydroContent({size}) {
   // const scale = useSelector(state => state.scale);
   const tabIndex = useSelector(state => state.tabIndex);
   const location = useSelector(state => state.stationID);
-  const paramKey = stations[location].params[tabIndex];
+  const paramKey = stations[location].params[tabIndex] || stations[location].params[0];
   const stationName = stations[location].title;
   const selectedParameter = stationMetrics[paramKey].param_nm;
 
