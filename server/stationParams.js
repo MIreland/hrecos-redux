@@ -69,37 +69,41 @@ function getStationData(station, res) {
       const soapURL = 'http://cdmo.baruch.sc.edu/webservices2/requests.cfc?wsdl';
 
       // eslint-disable-next-line sort-keys-fix/sort-keys-fix
-      const waterArgs = { station_code: 'hudnpwq', recs: 500 };
+      const waterArgs = { station_code: 'hudnpwq', mindate: startDate, maxdate: endDate};
       // eslint-disable-next-line sort-keys-fix/sort-keys-fix
-      const atmosArgs = { station_code: 'hudnpmet', recs: 500  };
+      const atmosArgs = { station_code: 'hudnpmet', mindate: startDate, maxdate: endDate};
       const dataMapping = { sourceUrl: soapURL, stationStatusDetails };
 
       soap.createClient(soapURL, (err, client) => {
-        client.exportAllParamsXMLNew(waterArgs, (soapErr, waterResult) => {
-          client.exportAllParamsXMLNew(atmosArgs, (soapWaterErr, atmosResult) => {
-            [waterResult, atmosResult].forEach((result) => {
-              const data = get(result, 'exportAllParamsXMLNewReturn.returnData.data', []);
-              if (!data.reverse) {
-                res.send({ message: 'no data' });
-                return;
-              }
-              data.reverse().forEach((row) => {
-                const timeStamp = moment(row.DateTimeStamp, 'MM/DD/YYYY HH:mm').valueOf();
-                Object.keys(SOAP_METRIC_MAPPING).forEach((key) => {
-                  if (!row[key]) { return; }
-                  let parsedFloat = parseFloat(row[key]);
-                  if (key === 'SpCond') {
-                    parsedFloat *= 1000;
-                  }
-                  const newValue = [timeStamp, parsedFloat];
-                  if (dataMapping[SOAP_METRIC_MAPPING[key]]) {
-                    dataMapping[SOAP_METRIC_MAPPING[key]].push(newValue);
-                  } else {
-                    dataMapping[SOAP_METRIC_MAPPING[key]] = [newValue];
-                  }
+        client.exportAllParamsDateRangeXMLNew(waterArgs, (soapErr, waterResult) => {
+          client.exportAllParamsDateRangeXMLNew(atmosArgs, (soapWaterErr, atmosResult) => {
+            const results = [waterResult, atmosResult];
+            results.forEach((result) => {
+              const data = get(result, 'exportAllParamsDateRangeXMLNewReturn.returnData.data', []);
+              try {
+                data.reverse().forEach((row) => {
+                  const timeStamp = moment(row.DateTimeStamp, 'MM/DD/YYYY HH:mm').valueOf();
+                  Object.keys(SOAP_METRIC_MAPPING).forEach((key) => {
+                    if (!row[key]) {
+                      return;
+                    }
+                    let parsedFloat = parseFloat(row[key]);
+                    if (key === 'SpCond') {
+                      parsedFloat *= 1000;
+                    }
+                    const newValue = [timeStamp, parsedFloat];
+                    if (dataMapping[SOAP_METRIC_MAPPING[key]]) {
+                      dataMapping[SOAP_METRIC_MAPPING[key]].push(newValue);
+                    } else {
+                      dataMapping[SOAP_METRIC_MAPPING[key]] = [newValue];
+                    }
+                  });
                 });
-              });
+              } catch (e) {
+                dataMapping.error = e
+              }
             });
+            console.log('sending here');
             res.send(dataMapping);
           });
         });

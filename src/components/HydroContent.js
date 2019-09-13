@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
   },
   chartWrapper: {
     position: 'absolute',
-    top: '59vh',
+    bottom: '0',
   },
   imageWrapper: {
     position: 'absolute',
