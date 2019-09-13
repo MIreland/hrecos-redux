@@ -68,8 +68,10 @@ function getStationData(station, res) {
     if (stationID === 'norriePoint') {
       const soapURL = 'http://cdmo.baruch.sc.edu/webservices2/requests.cfc?wsdl';
 
-      const waterArgs = { recs: 500, station_code: 'hudnpwq' };
-      const atmosArgs = { recs: 500, station_code: 'hudnpmet' };
+      // eslint-disable-next-line sort-keys-fix/sort-keys-fix
+      const waterArgs = { station_code: 'hudnpwq', recs: 500 };
+      // eslint-disable-next-line sort-keys-fix/sort-keys-fix
+      const atmosArgs = { station_code: 'hudnpmet', recs: 500  };
       const dataMapping = { sourceUrl: soapURL, stationStatusDetails };
 
       soap.createClient(soapURL, (err, client) => {
