@@ -87,7 +87,7 @@
   },
   "scripts": {
     "dev": "npm run start > /dev/null | npm run server3002",
-    "server3002": "PORT=3002 npm run server",
+    "server3002": "PORT=3002 nodemon server/awsServer.js",
     "server": "node server/awsServer.js",
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
