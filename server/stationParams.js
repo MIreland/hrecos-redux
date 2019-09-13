@@ -66,6 +66,7 @@ function getStationData(station, res) {
 
     // Norrie Point
     if (stationID === 'norriePoint') {
+      console.log('norrie point!');
       const soapURL = 'http://cdmo.baruch.sc.edu/webservices2/requests.cfc?wsdl';
 
       // eslint-disable-next-line sort-keys-fix/sort-keys-fix
