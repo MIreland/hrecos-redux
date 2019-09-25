@@ -24,7 +24,7 @@ export function Beczak({ weatherTicker, time, scale }) {
   const maristImageLink = `http://www.hrecos.org/transfer/PumpSta.JPG#${timehash}`;
 
   return (
-    <div className={theme.beczak}>
+    <div className={theme.marist}>
       <div className={theme.imageWrapper} >
         <p>{stationText.marist[0]}</p>
         <img alt="Marist Live Video Feed" className={theme.maristImage} src={maristImageLink} />
