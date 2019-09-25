@@ -6,12 +6,24 @@ html {
 
 .grid-layout {
   background: $backgroundTeal;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-template-rows: 1fr 1fr;
-  grid-column-gap: 10px;
-  grid-row-gap: 20px;
+  display: flex;
+  flex-direction: row;
   height: calc(100vh - 128px);
   min-height: 800px;
-  padding: 1em;
+  margin-top: 1em;
+}
+
+.leftSide {
+  margin-left: 1em;
+  margin-right: 1em;
+  display: flex;
+  flex-direction: column;
+
+  div:first-child{
+    margin-bottom: 1em;
+  }
+}
+
+.rightSide {
+  margin-right: 1em;
 }

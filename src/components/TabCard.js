@@ -30,6 +30,7 @@ const useStyles = makeStyles(theme => ({
     gridColumnStart: 2,
     gridRowEnd: 'span 2',
     gridRowStart: 1,
+    marginRight: '1em',
   },
   appBar: {
     flexDirection: 'row',

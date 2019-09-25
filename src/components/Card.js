@@ -15,8 +15,8 @@ const useStyles = makeStyles(theme => ({
   },
   root: {
     backgroundColor: 'rgb(56, 125, 159)' || theme.palette.background.paper,
-    flexGrow: 1,
     overflowX: 'hidden',
+    height: 'calc(50% - 0.5em)',
   },
   cardContent: {
     padding: '1rem 1rem 0 1rem',

@@ -61,12 +61,14 @@ function Layout({ stationID, autoCycle, embedded, sample }) {
     <React.Fragment>
       <Header />
       <div className={style['grid-layout']}>
-        <Card title="What is HRECOS?">
-          <AboutHRECOS />
-        </Card>
-        <Card title="About Station">
-          <AboutStation />
-        </Card>
+        <div className={style.leftSide}>
+          <Card title="What is HRECOS?">
+            <AboutHRECOS />
+          </Card>
+          <Card title="About Station">
+            <AboutStation />
+          </Card>
+        </div>
         <TabCard />
       </div>
     </React.Fragment>
