@@ -20,6 +20,7 @@
 
 .albany {
   min-height: 29vh;
+  font-size: 1vw;
 }
 
 .weatherTime{
@@ -27,12 +28,14 @@
   margin: 5px;
 }
 
-.marqueeContainer{
+div.marqueeContainer{
   overflow-x: hidden;
   white-space: nowrap;
   font-family: 'Montserrat light';
   position: absolute;
-  font-size: 1.5vw;
+  p {
+    font-size: 1.5vw;
+  }
 }
 
 .weatherTicker{
