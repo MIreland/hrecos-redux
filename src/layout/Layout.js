@@ -8,7 +8,6 @@ import AboutHRECOS from 'components/AboutHRECOS';
 import AboutStation from 'components/AboutStationCard';
 import { useDispatch } from 'react-redux';
 import { ACTIONS, updateStation } from 'modules/action';
-import stations from 'utils/stations.json';
 import Header from './Header';
 import style from './Layout.module.scss';
 
