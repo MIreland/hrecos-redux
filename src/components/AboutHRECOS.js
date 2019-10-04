@@ -44,10 +44,6 @@ function AboutHRECOS() {
   const classes = useStyles();
   const stationID = useSelector(state => state.stationID);
   const location = stationID;
-  const scale = 1;
-  let percent = (1 - scale) * 100 / 2;
-  percent = `-${percent.toFixed(2)}%`;
-  const transform = `translate(${percent}, ${percent}) scale(${scale > 1 ? 1 : scale})`;
   return (
     <div className={classes.root}>
       <div
