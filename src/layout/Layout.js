@@ -29,8 +29,8 @@ const useStyles = makeStyles(theme => ({
 
 const INTERVAL = 60 * 1000 * 15;
 
-function Layout({ stationID, autoCycle, embedded, sample }) {
-  console.log('stationID layout', stationID, sample)
+function Layout({ stationID, autoCycle, embedded }) {
+
   const dispatch = useDispatch();
   const [refresh, toggleRefresh] = useState(false);
 

@@ -90,7 +90,7 @@ export default function getChartData({
   );
   const isOfflineOffset = titleAlign > -100 || width < 1000 ? 0 : 85;
 
-  set(config, ['series', '0', 'data'], rows);
+  set(config, ['series', '0', 'data'], rows.map(a => [a[0], a[1]]));
   set(config, ['yAxis', 'title', 'text'], units);
   set(config, ['yAxis', 'tickInterval'], key === 'PH' ? 0.2 : undefined);
   set(config, ['title', 'text'], finalString);

@@ -17,9 +17,7 @@ const defaultState = {
 const todoReducer = (state = defaultState, action) => {
   switch (action.type) {
     case ACTIONS.UPDATE_STATION: {
-      return {
-        ...state, stationID: action.payload, stationData: {}, tabIndex: 0,
-      };
+      return { ...state, stationID: action.payload, stationData: {}, tabIndex: 0 };
     }
 
     case ACTIONS.SET_SCALE: {
