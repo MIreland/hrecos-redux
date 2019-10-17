@@ -13,7 +13,8 @@ import style from './Layout.module.scss';
 const isLocal = window.location.href.includes('localhost');
 const INTERVAL = 60 * 1000 * 15;
 
-function Layout({ stationID, autoCycle, embedded }) {
+function Layout({ stationID, autoCycle, embedded, sample }) {
+  console.log('stationID', stationID, embedded, sample);
   const dispatch = useDispatch();
   const timerEnabled = useSelector(state => state.timerEnabled);
   const [refresh, toggleRefresh] = useState(false);
