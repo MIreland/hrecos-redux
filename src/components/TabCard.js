@@ -41,9 +41,12 @@ const useStyles = makeStyles(theme => ({
   tabs: {
     display: 'flex',
   },
+  tab: {
+    minWidth: 140,
+  },
   countdown: {
     display: 'flex',
-    width: '14%',
+    width: '17%',
     lineHeight: '3rem',
   },
 }));
@@ -59,7 +62,7 @@ export default function SimpleTabs() {
   const { params } = stations[location];
 
   const tabs = params.map(key => (
-    <Tab key={key} label={stationMetrics[key].param_nm} />
+    <Tab className={classes.tab} key={key} label={stationMetrics[key].param_nm} />
   ));
 
   function handleChange(event, newValue) {
