@@ -33,7 +33,8 @@ function App() {
           <Layout path="/station/:stationID" />
           <Layout path="/station/:stationID/auto" autoCycle />
           <Layout path="/embedded/:stationID" embedded />
-          <Layout path="/" default sample/>
+          <Layout path="/embedded/:stationID/auto" embedded autoCycle />
+          <Layout path="/" default sample />
         </Router>
       </ThemeProvider>
     </Provider>

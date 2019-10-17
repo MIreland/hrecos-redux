@@ -28,3 +28,16 @@ html {
 .rightSide {
   margin-right: 1em;
 }
+
+.embedded {
+  background: $backgroundTeal;
+  display: flex;
+  flex-direction: row;
+  height: 95vh;
+  min-height: 800px;
+  width: 115vh;
+  margin: 1em auto;
+  .left {
+    margin: 1em;
+  }
+}

@@ -6,7 +6,6 @@ const {
 } = require('lodash');
 const moment = require('moment-timezone');
 const fetch = require('node-fetch');
-const unzip = require('unzip');
 
 const api = express.Router();
 const NodeCache = require('node-cache');
@@ -66,7 +65,6 @@ function getStationData(station, res) {
 
     // Norrie Point
     if (stationID === 'norriePoint') {
-      console.log('norrie point!');
       const soapURL = 'http://cdmo.baruch.sc.edu/webservices2/requests.cfc?wsdl';
 
       // eslint-disable-next-line sort-keys-fix/sort-keys-fix
@@ -104,7 +102,6 @@ function getStationData(station, res) {
                 dataMapping.error = e
               }
             });
-            console.log('sending here');
             res.send(dataMapping);
           });
         });
@@ -115,7 +112,6 @@ function getStationData(station, res) {
       const urlParams = Object.keys(METRIC_MAPPING).map(key => `cb_${key}=on`).join('&');
       const urlRoot = 'https://waterdata.usgs.gov/nwis/uv?';
       const isMarist = stationID === 'marist';
-      console.log('stationIDs', stationID);
       const siteID = get(stations, `${stationID}.usgsKey`, stations.marist.usgsKey);
 
       const url = `${urlRoot}${urlParams}&format=rdb&site_no=${siteID}&period=4&begin_date=${startDate}&end_date=${endDate}`;
@@ -150,7 +146,6 @@ function getStationData(station, res) {
       });
     }
   }).catch((e) => {
-    console.log('e', e);
     res.send({ e, error: 'error' });
   });
 }

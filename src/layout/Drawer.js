@@ -34,19 +34,11 @@ const useStyles = makeStyles({
 
 function Drawer({ open, setOpen }) {
   const classes = useStyles();
+
+
   const stationID = useSelector(state => state.stationID);
   const timerEnabled = useSelector(state => state.timerEnabled);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    let timerID;
-    if (timerEnabled) {
-      timerID = setInterval(() => {
-        dispatch({ type: ACTIONS.COUNTDOWN });
-      }, 1000);
-    }
-    return () => clearInterval(timerID);
-  }, [dispatch, timerEnabled]);
 
   const toggleTimer = () => {
     if (timerEnabled) {

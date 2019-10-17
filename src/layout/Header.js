@@ -1,4 +1,3 @@
-// import Header from '../../components/Header'
 import AppBar from '@material-ui/core/AppBar';
 import logo from 'assets/HRECOS.logo.png';
 import piermontLogo
@@ -10,14 +9,12 @@ import albanyLogo from 'assets/nysdec_logo.png';
 import pier84Logo from 'assets/pier84_logo.png';
 import qrCodeLink from 'assets/hrecos-qr-code.png';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/core/styles';
 import { get } from 'lodash';
-import { connect, useSelector } from 'react-redux';
-import React, { Component, PropTypes, useState } from 'react';
+import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import stations from 'utils/stations.json';
 import theme from './Header.module.scss';
 import Drawer from './Drawer';
