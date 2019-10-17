@@ -29,11 +29,13 @@ function App() {
         <Router>
           <Layout path="#/station/:stationID" />
           <Layout path="#/station/:stationID/auto" autoCycle />
-          <Layout path="#/embedded/:stationID" embedded />
           <Layout path="/station/:stationID" />
           <Layout path="/station/:stationID/auto" autoCycle />
+          <Layout path="#/embedded/:stationID" embedded />
           <Layout path="/embedded/:stationID" embedded />
           <Layout path="/embedded/:stationID/auto" embedded autoCycle />
+          <Layout path="embedded/:stationID" embedded />
+          <Layout path="embedded/:stationID/auto" embedded autoCycle />
           <Layout path="/" default sample />
         </Router>
       </ThemeProvider>
