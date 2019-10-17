@@ -1,4 +1,4 @@
-.content, .norrie, .beczak {
+.content, .norrie, .beczak, .marist {
   display: block;
   position: relative;
   font-family: 'queens', sans-serif !important;
@@ -14,12 +14,18 @@
 }
 
 .beczak {
-  font-size: 1vw;
+  font-size: 0.95vw;
+  text-align: justify;
+}
+
+.marist {
+  font-size: 0.9vw;
   text-align: justify;
 }
 
 .albany {
-  min-height: 29vh;
+  min-height: 25vh;
+  font-size: 1vw;
 }
 
 .weatherTime{
@@ -27,12 +33,14 @@
   margin: 5px;
 }
 
-.marqueeContainer{
+div.marqueeContainer{
   overflow-x: hidden;
   white-space: nowrap;
   font-family: 'Montserrat light';
   position: absolute;
-  font-size: 1.5vw;
+  p {
+    font-size: 1.5vw;
+  }
 }
 
 .weatherTicker{
@@ -58,6 +66,8 @@
 }
 .maristImage{
   width: 38%;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
 }
 .piermontImageWrapper{
   float: left;

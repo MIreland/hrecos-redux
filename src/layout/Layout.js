@@ -8,11 +8,10 @@ import AboutHRECOS from 'components/AboutHRECOS';
 import AboutStation from 'components/AboutStationCard';
 import { useDispatch } from 'react-redux';
 import { ACTIONS, updateStation } from 'modules/action';
-import stations from 'utils/stations.json';
 import Header from './Header';
 import style from './Layout.module.scss';
 
-
+const isLocal = window.location.href.includes('localhost');
 // const AboutStation = () => <div>AboutStation</div>;
 const Chart = () => <div>Chart</div>;
 
@@ -31,6 +30,7 @@ const useStyles = makeStyles(theme => ({
 const INTERVAL = 60 * 1000 * 15;
 
 function Layout({ stationID, autoCycle, embedded }) {
+
   const dispatch = useDispatch();
   const [refresh, toggleRefresh] = useState(false);
 
@@ -45,7 +45,7 @@ function Layout({ stationID, autoCycle, embedded }) {
   useEffect(() => {
     dispatch(updateStation(stationID));
     dispatch({ type: ACTIONS.LOADING_STATION });
-    fetch(`http://localhost:3002/api/station/${stationID}`)
+    fetch(`${isLocal ? 'http://localhost:3002' : ''}/api/station/${stationID}`)
       .then(data => data.json())
       .then(data => (
         console.log('fetch!', data) || dispatch({ payload: data, type: ACTIONS.LOADED_STATION })
@@ -60,12 +60,14 @@ function Layout({ stationID, autoCycle, embedded }) {
     <React.Fragment>
       <Header />
       <div className={style['grid-layout']}>
-        <Card title="What is HRECOS?">
-          <AboutHRECOS />
-        </Card>
-        <Card title="About Station">
-          <AboutStation />
-        </Card>
+        <div className={style.leftSide}>
+          <Card title="What is HRECOS?">
+            <AboutHRECOS />
+          </Card>
+          <Card title="About Station">
+            <AboutStation />
+          </Card>
+        </div>
         <TabCard />
       </div>
     </React.Fragment>

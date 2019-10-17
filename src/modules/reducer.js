@@ -1,5 +1,6 @@
 import { stubbedData } from 'utils/stubbedData';
 import { ACTIONS } from './action';
+import stations from '../utils/stations';
 
 const COUNTDOWN_MAX = 30;
 
@@ -30,7 +31,7 @@ const todoReducer = (state = defaultState, action) => {
 
     case ACTIONS.LOADED_STATION: {
       const stationData = action.payload;
-      if (['marist', 'piermont', 'norriePoint'].includes(state.stationID)) {
+      if (['marist', 'piermont', 'norriePoint', 'pier84'].includes(state.stationID) && stationData.ELEV) {
         stationData.DEPTH = stationData.ELEV;
       }
       return { ...state, stationData };
@@ -41,6 +42,10 @@ const todoReducer = (state = defaultState, action) => {
       let { tabIndex } = state;
       if (state.countdown === 1) {
         tabIndex += 1;
+        const { stationID } = state;
+        if (stations[stationID].params.length - 1 < tabIndex) {
+          tabIndex = 0;
+        }
       }
       return { ...state, countdown, tabIndex };
     }

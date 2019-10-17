@@ -14,7 +14,13 @@ export function formattedWeather(weather) {
   const directionArray = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE',
     'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
   const windDirection = directionArray[arrayIndex];
-  const time = get(last(RAIN), '0') || get(last(BARO), '0') || get(last(DEWP), '0');
+  const time = Math.max(
+    get(last(RAIN), '0', 0),
+    get(last(BARO), '0', 0),
+    get(last(DEWP), '0', 0),
+    get(last(ATMP), '0', 0),
+    get(last(WSPD), '0', 0),
+  );
   return {
     airTemp: ATMP ? get(last(ATMP), '1') * 9 / 5 + 32 : false,
     dewPoint: DEWP ? get(last(DEWP), '1') * 9 / 5 + 32 : false,
@@ -42,54 +48,43 @@ export function createWeather({
   pressure = isNumber(pressure) ? pressure.toFixed(0) : '--';
   direction = direction ? `from ${direction}` : '';
 
-  return (
+  const weatherTicker = (
     <React.Fragment>
-    / Air Temperature
-      {' '}
+      {' / Air Temperature '}
       <strong>
-        {airTemp}
-        {' '}
-F
+        {` ${airTemp} F `}
       </strong>
-  / Dew Point
-      {' '}
+      {'/ Dew Point '}
       <strong>
-        {dewPoint}
-        {' '}
-F
+        {`${dewPoint} F `}
       </strong>
-  / Humidity
-      {' '}
+      {' / Humidity '}
       <strong>
-        {humidity}
-%
+        {` ${humidity} % `}
       </strong>
-  / 24-hr rain
-      {' '}
+      {' / 24-hr rain '}
       <strong>
-        {rain}
-        {' '}
-in
+        {` ${rain} in `}
       </strong>
-  / Wind
-      {' '}
+      {' / Wind '}
       <strong>
-        {wind}
-        {' '}
-knots
-        {' '}
-        {direction}
+        {` ${wind} knots ${direction} `}
       </strong>
-      {stationName !== 'pier84' && (
+      {stationName !== 'Pier 84' && (
       <React.Fragment>
-/ Pressure
+        {' / Pressure '}
         <strong>
-          {pressure}
-          {' '}
-mbars
+          {` ${pressure} mbars `}
         </strong>
       </React.Fragment>
       )}
+    </React.Fragment>
+  );
+
+  return (
+    <React.Fragment>
+      {weatherTicker}
+      {weatherTicker}
     </React.Fragment>
   );
 }

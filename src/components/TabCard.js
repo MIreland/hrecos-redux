@@ -30,6 +30,7 @@ const useStyles = makeStyles(theme => ({
     gridColumnStart: 2,
     gridRowEnd: 'span 2',
     gridRowStart: 1,
+    marginRight: '1em',
   },
   appBar: {
     flexDirection: 'row',
@@ -42,7 +43,7 @@ const useStyles = makeStyles(theme => ({
   },
   countdown: {
     display: 'flex',
-    width: '12%',
+    width: '14%',
     lineHeight: '3rem',
   },
 }));

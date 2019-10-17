@@ -43,7 +43,7 @@ export default function getChartData({
   const config = getChartConfig(imageScale * imageScale * CHART_HEIGHT);
   const hasData = stationData[key];
 
-  const topHeight = -210 * imageScale;
+  const topHeight = -210 * imageScale * imageScale;
   const bottomHeight = -75 * imageScale;
 
   set(config, ['chart', 'width'], width || MIN_WIDTH);
@@ -92,6 +92,7 @@ export default function getChartData({
 
   set(config, ['series', '0', 'data'], rows.map(a => [a[0], a[1]]));
   set(config, ['yAxis', 'title', 'text'], units);
+  set(config, ['yAxis', 'tickInterval'], key === 'PH' ? 0.2 : undefined);
   set(config, ['title', 'text'], finalString);
   set(config, ['title', 'y'], titleAlign);
   set(config, ['chart', 'animation'], false);

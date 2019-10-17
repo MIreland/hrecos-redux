@@ -19,7 +19,7 @@ export function Piermont({ weatherTicker, time, scale }) {
       <div className={theme.marqueeContainer}>
         <p className={theme.weatherTime}>
           <strong className={theme.underline}>
-            {'Piermont Weather'}
+            {'Pier 84 Weather'}
           </strong>
           {` as of ${time}:`}
         </p>
@@ -37,7 +37,7 @@ export function Piermont({ weatherTicker, time, scale }) {
 
 Piermont.propTypes = {
   scale: PropTypes.number.isRequired,
-  time: PropTypes.string.isRequired,
+  time: PropTypes.string,
   weatherTicker: PropTypes.object.isRequired,
 };
 

@@ -50,7 +50,7 @@ export function Norrie({ weatherTicker, time, scale }) {
 
 Norrie.propTypes = {
   scale: PropTypes.number.isRequired,
-  time: PropTypes.string.isRequired,
+  time: PropTypes.string,
   weatherTicker: PropTypes.object.isRequired,
 };
 
