@@ -22,6 +22,12 @@ export const params = {
     param_nm: 'Conductivity',
     unit: 'µS/cm',
   },
+  CHL: {
+    param_nm: 'Chlorophyll',
+    usgs_code: '32315',
+    param_type: 'hyd',
+    unit: 'RFU',
+  },
   CHLA: {
     param_type: 'hyd',
     param_code: 'CHLA',
