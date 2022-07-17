@@ -26,6 +26,7 @@ const METRIC_MAPPING = {
   '00300': 'DO',
   '00301': 'DOPC',
   '00400': 'PH',
+  '32315': 'CHL',
   '62620': 'ELEV',
   '63680': 'TURB',
   '75969': 'BARO',
@@ -126,7 +127,7 @@ function getStationData(station, res) {
           if (header.includes('cd') || header.includes('239021')) {
             return;
           }
-          const maristArray = ['243903', '246496', '243896', '107097', '243902', '243897'];
+          const maristArray = ['243903', '246496', '32315', '243896', '107097', '243902', '243897'];
           const headerString = header.slice(header.indexOf('_') + 1);
           if (isMarist && !maristArray.find(param => header.includes(param))) {
             return;
