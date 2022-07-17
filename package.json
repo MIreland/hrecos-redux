@@ -46,7 +46,7 @@
     "jest-watch-typeahead": "0.3.0",
     "lodash": "^4.17.11",
     "mini-css-extract-plugin": "0.5.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "moment-timezone": "^0.5.26",
     "node-cache": "^4.2.0",
     "node-fetch": "^2.6.0",
