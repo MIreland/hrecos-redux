@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ddde1a8b53048d86828c355433621dd0",
+    "revision": "d34bd85747f570392f744037e8e375d2",
     "url": "/index.html"
   },
   {
-    "revision": "3e1513c8cd93e2928c8b",
-    "url": "/static/css/main.fb635a76.chunk.css"
+    "revision": "b3c53b54a6967759b375",
+    "url": "/static/css/main.fab50eee.chunk.css"
   },
   {
-    "revision": "97b35974c0da60350395",
-    "url": "/static/js/2.60fe4810.chunk.js"
+    "revision": "4c206987051e08cae462",
+    "url": "/static/js/2.706c6455.chunk.js"
   },
   {
-    "revision": "3e1513c8cd93e2928c8b",
-    "url": "/static/js/main.2dcbd752.chunk.js"
+    "revision": "b3c53b54a6967759b375",
+    "url": "/static/js/main.84b6f494.chunk.js"
   },
   {
     "revision": "d15c03722aa864771e5f",
@@ -32,8 +32,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/HRECOS_Map2_Medium.b5b04486.png"
   },
   {
-    "revision": "3aafeef6ed8bad544adff7816419da49",
-    "url": "/static/media/HRECOS_PANEL_CHL.3aafeef6.png"
+    "revision": "bcbacbcceddcc3b7ea807961b95d7d40",
+    "url": "/static/media/HRECOS_PANEL_CHL.bcbacbcc.jpg"
   },
   {
     "revision": "a99e414468280cfecd502140d20079d8",

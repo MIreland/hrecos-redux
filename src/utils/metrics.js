@@ -28,6 +28,12 @@ export const params = {
     param_type: 'hyd',
     unit: 'RFU',
   },
+  FPC: {
+    param_nm: 'Phycocyanin',
+    usgs_code: '32315',
+    param_type: 'hyd',
+    unit: 'RFU',
+  },
   CHLA: {
     param_type: 'hyd',
     param_code: 'CHLA',

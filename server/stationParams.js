@@ -27,12 +27,15 @@ const METRIC_MAPPING = {
   '00301': 'DOPC',
   '00400': 'PH',
   '32315': 'CHL',
+  '32321': 'FPC',
   '62620': 'ELEV',
   '63680': 'TURB',
   '75969': 'BARO',
   '82127': 'WSPD',
   '90860': 'SALT',
 };
+
+const maristArray = ['243903', '246496', '32315', '32321', '243896', '107097', '243902', '243897'];
 
 const SOAP_METRIC_MAPPING = {
   // Metrics listed at: http://cdmo.baruch.sc.edu/data/parameters.cfm
@@ -80,6 +83,11 @@ function getStationData(station, res) {
             const results = [waterResult, atmosResult];
             results.forEach((result) => {
               const data = get(result, 'exportAllParamsDateRangeXMLNewReturn.returnData.data', []);
+              if (!data.reverse) {
+                dataMapping.error = data;
+                // 9999999
+                return;
+              }
               try {
                 data.reverse().forEach((row) => {
                   const timeStamp = moment(row.DateTimeStamp, 'MM/DD/YYYY HH:mm').valueOf();
@@ -127,7 +135,7 @@ function getStationData(station, res) {
           if (header.includes('cd') || header.includes('239021')) {
             return;
           }
-          const maristArray = ['243903', '246496', '32315', '243896', '107097', '243902', '243897'];
+
           const headerString = header.slice(header.indexOf('_') + 1);
           if (isMarist && !maristArray.find(param => header.includes(param))) {
             return;

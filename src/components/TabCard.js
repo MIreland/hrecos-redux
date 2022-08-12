@@ -61,9 +61,13 @@ export default function SimpleTabs() {
   const dispatch = useDispatch();
   const { params } = stations[location];
 
-  const tabs = params.map(key => (
-    <Tab className={classes.tab} key={key} label={stationMetrics[key].param_nm} />
-  ));
+  const tabs = params.map(key => {
+    let label = stationMetrics[key].param_nm;
+    if(label.toLocaleLowerCase().includes('temp')){
+      label = 'Water Temp'
+    }
+    return <Tab className={classes.tab} key={key} label={label}/>
+  });
 
   function handleChange(event, newValue) {
     dispatch(setTabIndex(newValue));
