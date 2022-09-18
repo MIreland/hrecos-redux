@@ -5,6 +5,7 @@ import sizeMe from 'react-sizeme';
 import stationMetrics from 'utils/metrics';
 import salt from 'assets/HRECOS_PANEL_SALT.png';
 import chlorophyll from 'assets/HRECOS_PANEL_CHL.jpg';
+import phycocyan from 'assets/HRECOS_PANEL_FCP.jpg'
 import dissolvedOxygen from 'assets/HRECOS_PANEL_DO.png';
 // import backgroundSource from 'assets/HRECOS_background_small.png';
 import piermontDO from 'assets/HRECOS_PANEL_DO_PIERMONT.png';
@@ -30,7 +31,7 @@ const backgroundImages = {
   turbImage: turb,
   wtmpImage: waterTemp,
   chlImage: chlorophyll,
-  fpcImage: chlorophyll,
+  fpcImage: phycocyan,
 };
 
 const imageList = Object.values(backgroundImages);
