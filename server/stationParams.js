@@ -35,7 +35,7 @@ const METRIC_MAPPING = {
   '90860': 'SALT',
 };
 
-const maristArray = ['243903', '246496', '32315', '32321', '243896', '107097', '243902', '243897'];
+// const maristArray = ['243903', '246496', '32315', '32321', '243896', '107097', '243902', '243897'];
 
 const SOAP_METRIC_MAPPING = {
   // Metrics listed at: http://cdmo.baruch.sc.edu/data/parameters.cfm
@@ -132,16 +132,18 @@ function getStationData(station, res) {
         const rows = values.slice(2);
         const mappedResults = { sourceUrl: url, stationStatusDetails, values };
         headers.forEach((header, headerIndex) => {
+          console.log('headerStrings', header)
           if (header.includes('cd') || header.includes('239021')) {
             return;
           }
 
           const headerString = header.slice(header.indexOf('_') + 1);
-          if (isMarist && !maristArray.find(param => header.includes(param))) {
-            return;
-          }
+          // if (isMarist && !maristArray.find(param => header.includes(param))) {
+          //   return;
+          // }
 
           const mappedHeader = METRIC_MAPPING[headerString];
+          console.log('mappedHeader', mappedHeader)
           if (mappedHeader) {
             mappedResults[mappedHeader] = rows.map((row, index) => {
               if (!isFinite(row[headerIndex])) {
