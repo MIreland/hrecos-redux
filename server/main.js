@@ -23,15 +23,17 @@ if (config.env === 'development') {
   const compiler = webpack(webpackConfig);
 
   debug('Enable webpack dev and HMR middleware');
-  app.use(require('webpack-dev-middleware')(compiler, {
-    contentBase: paths.client(),
-    hot: true,
-    lazy: false,
-    noInfo: config.compiler_quiet,
-    publicPath: webpackConfig.output.publicPath,
-    quiet: config.compiler_quiet,
-    stats: config.compiler_stats,
-  }));
+  app.use(
+    require('webpack-dev-middleware')(compiler, {
+      contentBase: paths.client(),
+      hot: true,
+      lazy: false,
+      noInfo: config.compiler_quiet,
+      publicPath: webpackConfig.output.publicPath,
+      quiet: config.compiler_quiet,
+      stats: config.compiler_stats,
+    }),
+  );
   app.use(require('webpack-hot-middleware')(compiler));
 
   // Serve static assets from ~/src/static since Webpack is unaware of
@@ -41,11 +43,11 @@ if (config.env === 'development') {
   app.use(express.static(paths.client('static')));
 } else {
   debug(
-    'Server is being run outside of live development mode, meaning it will '
-    + 'only serve the compiled application bundle in ~/dist. Generally you '
-    + 'do not need an application server for this and can instead use a web '
-    + 'server such as nginx to serve your static files. See the "deployment" '
-    + 'section in the README for more information on deployment strategies.',
+    'Server is being run outside of live development mode, meaning it will ' +
+      'only serve the compiled application bundle in ~/dist. Generally you ' +
+      'do not need an application server for this and can instead use a web ' +
+      'server such as nginx to serve your static files. See the "deployment" ' +
+      'section in the README for more information on deployment strategies.',
   );
 
   // Serving ~/dist by default. Ideally these files should be served by
