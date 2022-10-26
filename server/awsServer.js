@@ -11,9 +11,11 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use('/api/station/:stationID', station.getStationData);
 // app.use(require('connect-history-api-fallback')())
-app.use(express.static('build', {
-  maxage: '48h',
-}));
+app.use(
+  express.static('build', {
+    maxage: '48h',
+  }),
+);
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../build/index.html'));
