@@ -46,9 +46,7 @@ function AboutHRECOS() {
   const location = stationID;
   return (
     <div className={classes.root}>
-      <div
-        className={classes.imageWrapper}
-      >
+      <div className={classes.imageWrapper}>
         <img
           alt={location}
           className={theme.mapImage}
@@ -56,23 +54,30 @@ function AboutHRECOS() {
         />
       </div>
       <p>
-              The Hudson River Environmental Conditions Observing System (HRECOS) is an alliance of partners that run
+        The Hudson River Environmental Conditions Observing System (HRECOS) is
+        an alliance of partners that run
         <strong>&nbsp;continuous monitoring stations&nbsp;</strong>
-              on the Hudson River and surrounding water bodies, recording their “pulse”.
+        on the Hudson River and surrounding water bodies, recording their
+        “pulse”.
       </p>
       <p>
-            Every 15 minutes, sensors take water quality and weather readings and wirelessly transmit data to our website in near real-time.
+        Every 15 minutes, sensors take water quality and weather readings and
+        wirelessly transmit data to our website in near real-time.
       </p>
       <p>
-              HRECOS data is freely available to the public and is used for research, education, navigation,
-              and environmental management, and by many others.
+        HRECOS data is freely available to the public and is used for research,
+        education, navigation, and environmental management, and by many others.
       </p>
       <p className={classes.centeredText}>
-              Visit&nbsp;
-        <a style={{ color: 'white', fontWeight: 'bold' }} target="_blank" href="http://www.hrecos.org">
-                www.hrecos.org
+        Visit&nbsp;
+        <a
+          style={{ color: 'white', fontWeight: 'bold' }}
+          target="_blank"
+          href="http://www.hrecos.org"
+        >
+          www.hrecos.org
         </a>
-              &nbsp;for more info and live or historical data
+        &nbsp;for more info and live or historical data
       </p>
     </div>
   );

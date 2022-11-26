@@ -109,7 +109,7 @@ export const params = {
     usgs_code: '00010',
     nerrs_code: 'Temp',
     param_nm: 'Water Temperature',
-    conversion: unit => (unit * 1.8 + 32),
+    conversion: unit => unit * 1.8 + 32,
     unit: '°F',
   },
   ATMP: {
@@ -117,7 +117,7 @@ export const params = {
     param_code: 'ATMP',
     usgs_code: '00020',
     param_nm: 'Air Temperature',
-    conversion: unit => (unit * 1.8 + 32),
+    conversion: unit => unit * 1.8 + 32,
     unit: '°F',
   },
   BARO: {
@@ -131,7 +131,7 @@ export const params = {
     param_type: 'met',
     param_code: 'DEWP',
     param_nm: 'Dew Point',
-    conversion: unit => (unit * 1.8 + 32),
+    conversion: unit => unit * 1.8 + 32,
     unit: '°F',
   },
   GST: {
@@ -175,7 +175,7 @@ export const params = {
     param_type: 'met',
     param_code: 'STMP',
     param_nm: 'Soil Temperature',
-    conversion: unit => (unit * 1.8 + 32),
+    conversion: unit => unit * 1.8 + 32,
     unit: '°F',
   },
   WD: {

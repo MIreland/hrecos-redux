@@ -1,20 +1,23 @@
 
-.drawer{
+.drawer {
 }
-.selected{
+
+.selected {
   background: lightgray;
-  &:hover{
+
+  &:hover {
     background: darkgray;
     color: white;
   }
 }
-.disclaimer{
+
+.disclaimer {
   white-space: normal;
   margin: 1em;
   bottom: 0;
 }
 
-.sizeDisclaimer{
+.sizeDisclaimer {
   white-space: normal;
   margin: 1em;
   font-size: 1.2em;

@@ -15,13 +15,14 @@ import { ACTIONS } from 'modules/action';
 import { makeStyles } from '@material-ui/core';
 import theme from './Drawer.module.scss';
 
-const disclaimerText = 'Production of this website was supported by the U.S. EPA, the Hudson River Foundation, and '
-  + 'the NY-NJ Harbor & Estuary Program.  It may not necessarily reflect the views of these organizations, '
-  + 'and no official endorsement should be inferred.';
+const disclaimerText =
+  'Production of this website was supported by the U.S. EPA, the Hudson River Foundation, and ' +
+  'the NY-NJ Harbor & Estuary Program.  It may not necessarily reflect the views of these organizations, ' +
+  'and no official endorsement should be inferred.';
 
-const sizeDisclaimer = 'This page is optimized for viewing at 1920x1080 resolution in '
-  + 'Chrome Web Browser\'s full-screen mode';
-
+const sizeDisclaimer =
+  'This page is optimized for viewing at 1920x1080 resolution in ' +
+  "Chrome Web Browser's full-screen mode";
 
 const useStyles = makeStyles({
   fullList: {
@@ -34,7 +35,6 @@ const useStyles = makeStyles({
 
 function Drawer({ open, setOpen }) {
   const classes = useStyles();
-
 
   const stationID = useSelector(state => state.stationID);
   const timerEnabled = useSelector(state => state.timerEnabled);
@@ -50,7 +50,7 @@ function Drawer({ open, setOpen }) {
     }
   };
 
-  const navigateAndResetIndex = (newStationID) => {
+  const navigateAndResetIndex = newStationID => {
     dispatch({ payload: 0, type: ACTIONS.SET_TAB_INDEX });
     navigate(`/station/${newStationID}`);
   };
@@ -71,10 +71,7 @@ function Drawer({ open, setOpen }) {
         <List subheader={<ListSubheader>Settings</ListSubheader>}>
           {ListItems}
         </List>
-        <List subheader={
-          <ListSubheader>Configuration</ListSubheader>
-        }
-        >
+        <List subheader={<ListSubheader>Configuration</ListSubheader>}>
           <ListItem role={undefined} dense button onClick={toggleTimer}>
             <ListItemIcon>
               <Checkbox
@@ -87,7 +84,6 @@ function Drawer({ open, setOpen }) {
             </ListItemIcon>
             <ListItemText id="timerEnabled" primary="Cycle Automatically" />
           </ListItem>
-
 
           <Divider />
         </List>

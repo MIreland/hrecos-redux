@@ -6,7 +6,6 @@ import { formattedWeather, createWeather } from 'utils/parseWeather';
 import Stations from './stations';
 
 export function AboutStationCard() {
-
   const stationID = useSelector(state => state.stationID);
   const scale = useSelector(state => state.scale);
   const stationData = useSelector(state => state.stationData);
@@ -17,18 +16,54 @@ export function AboutStationCard() {
 
   switch (stationID) {
     case stations.albany.id:
-      return <Stations.Albany weatherTicker={weatherTicker} scale={scale} time={weatherObject.time} />;
+      return (
+        <Stations.Albany
+          weatherTicker={weatherTicker}
+          scale={scale}
+          time={weatherObject.time}
+        />
+      );
     case stations.norriePoint.id:
-      return <Stations.Norrie weatherTicker={weatherTicker} scale={scale} time={weatherObject.time} />;
+      return (
+        <Stations.Norrie
+          weatherTicker={weatherTicker}
+          scale={scale}
+          time={weatherObject.time}
+        />
+      );
     case stations.marist.id:
-      return <Stations.Marist weatherTicker={weatherTicker} scale={scale} time={weatherObject.time} />;
+      return (
+        <Stations.Marist
+          weatherTicker={weatherTicker}
+          scale={scale}
+          time={weatherObject.time}
+        />
+      );
     case stations.beczak.id:
-      return <Stations.Beczak weatherTicker={weatherTicker} scale={scale} time={weatherObject.time} />;
+      return (
+        <Stations.Beczak
+          weatherTicker={weatherTicker}
+          scale={scale}
+          time={weatherObject.time}
+        />
+      );
     case stations.pier84.id:
-      return <Stations.Pier84 weatherTicker={weatherTicker} scale={scale} time={weatherObject.time} />;
+      return (
+        <Stations.Pier84
+          weatherTicker={weatherTicker}
+          scale={scale}
+          time={weatherObject.time}
+        />
+      );
     case stations.piermont.id:
     default:
-      return <Stations.Piermont weatherTicker={weatherTicker} scale={scale} time={weatherObject.time} />;
+      return (
+        <Stations.Piermont
+          weatherTicker={weatherTicker}
+          scale={scale}
+          time={weatherObject.time}
+        />
+      );
   }
 }
 

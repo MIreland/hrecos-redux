@@ -13,14 +13,19 @@ export function Beczak() {
     <div className={theme.marist}>
       <div className={theme.imageWrapper}>
         <p>{stationText.marist[0]}</p>
-        <img alt="Marist Live Video Feed" className={theme.maristImage} src={maristImageLink} />
-        <p><strong>{stationText.marist[1]}</strong></p>
+        <img
+          alt="Marist Live Video Feed"
+          className={theme.maristImage}
+          src={maristImageLink}
+        />
+        <p>
+          <strong>{stationText.marist[1]}</strong>
+        </p>
         <p>{stationText.marist[2]}</p>
       </div>
     </div>
   );
 }
-
 
 Beczak.propTypes = {
   scale: PropTypes.number.isRequired,

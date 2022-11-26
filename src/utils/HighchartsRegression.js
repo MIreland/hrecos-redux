@@ -18,9 +18,12 @@ import ReactHighcharts from 'react-highcharts';
       if (s.regression && !s.rendered) {
         s.regressionSettings = s.regressionSettings || {};
         s.regressionSettings.tooltip = s.regressionSettings.tooltip || {};
-        s.regressionSettings.dashStyle = s.regressionSettings.dashStyle || 'solid';
-        s.regressionSettings.decimalPlaces = s.regressionSettings.decimalPlaces || 2;
-        s.regressionSettings.useAllSeries = s.regressionSettings.useAllSeries || false;
+        s.regressionSettings.dashStyle =
+          s.regressionSettings.dashStyle || 'solid';
+        s.regressionSettings.decimalPlaces =
+          s.regressionSettings.decimalPlaces || 2;
+        s.regressionSettings.useAllSeries =
+          s.regressionSettings.useAllSeries || false;
 
         const regressionType = s.regressionSettings.type || 'linear';
         var regression;
@@ -71,15 +74,28 @@ import ReactHighcharts from 'react-highcharts';
           break;
         }
 
-        regression.rSquared = coefficientOfDetermination(mergedData, regression.points);
-        regression.rValue = Math.sqrt(regression.rSquared).toFixed(s.regressionSettings.decimalPlaces);
-        regression.rSquared = regression.rSquared.toFixed(s.regressionSettings.decimalPlaces);
-        regression.standardError = standardError(mergedData, regression.points).toFixed(s.regressionSettings.decimalPlaces);
+        regression.rSquared = coefficientOfDetermination(
+          mergedData,
+          regression.points,
+        );
+        regression.rValue = Math.sqrt(regression.rSquared).toFixed(
+          s.regressionSettings.decimalPlaces,
+        );
+        regression.rSquared = regression.rSquared.toFixed(
+          s.regressionSettings.decimalPlaces,
+        );
+        regression.standardError = standardError(
+          mergedData,
+          regression.points,
+        ).toFixed(s.regressionSettings.decimalPlaces);
         extraSerie.data = regression.points;
         extraSerie.name = extraSerie.name.replace('%r2', regression.rSquared);
         extraSerie.name = extraSerie.name.replace('%r', regression.rValue);
         extraSerie.name = extraSerie.name.replace('%eq', regression.string);
-        extraSerie.name = extraSerie.name.replace('%se', regression.standardError);
+        extraSerie.name = extraSerie.name.replace(
+          '%se',
+          regression.standardError,
+        );
 
         if (extraSerie.visible == false) {
           extraSerie.visible = false;
@@ -100,8 +116,9 @@ import ReactHighcharts from 'react-highcharts';
    * Code extracted from https://github.com/Tom-Alexander/regression-js/
    */
   function _exponential(data) {
-    const sum = [0, 0, 0, 0, 0, 0]; let n = 0; const
-      results = [];
+    const sum = [0, 0, 0, 0, 0, 0];
+    let n = 0;
+    const results = [];
 
     for (len = data.length; n < len; n++) {
       if (data[n].x != null) {
@@ -118,8 +135,11 @@ import ReactHighcharts from 'react-highcharts';
       }
     }
 
-    const denominator = (sum[1] * sum[2] - sum[5] * sum[5]);
-    const A = Math.pow(Math.E, (sum[2] * sum[3] - sum[5] * sum[4]) / denominator);
+    const denominator = sum[1] * sum[2] - sum[5] * sum[5];
+    const A = Math.pow(
+      Math.E,
+      (sum[2] * sum[3] - sum[5] * sum[4]) / denominator,
+    );
     const B = (sum[1] * sum[4] - sum[5] * sum[3]) / denominator;
 
     for (var i = 0, len = data.length; i < len; i++) {
@@ -128,12 +148,18 @@ import ReactHighcharts from 'react-highcharts';
     }
 
     results.sort((a, b) => {
-      if (a[0] > b[0]) { return 1; }
-      if (a[0] < b[0]) { return -1; }
+      if (a[0] > b[0]) {
+        return 1;
+      }
+      if (a[0] < b[0]) {
+        return -1;
+      }
       return 0;
     });
 
-    const string = `y = ${Math.round(A * 100) / 100}e^(${Math.round(B * 100) / 100}x)`;
+    const string = `y = ${Math.round(A * 100) / 100}e^(${
+      Math.round(B * 100) / 100
+    }x)`;
 
     return { equation: [A, B], points: results, string };
   }
@@ -150,8 +176,10 @@ import ReactHighcharts from 'react-highcharts';
    *
    */
   function _linear(data, decimalPlaces) {
-    const sum = [0, 0, 0, 0, 0]; let n = 0; const results = []; let
-      N = data.length;
+    const sum = [0, 0, 0, 0, 0];
+    let n = 0;
+    const results = [];
+    let N = data.length;
 
     for (; n < data.length; n++) {
       if (data[n].x != null) {
@@ -169,24 +197,33 @@ import ReactHighcharts from 'react-highcharts';
       }
     }
 
-    const gradient = (N * sum[3] - sum[0] * sum[1]) / (N * sum[2] - sum[0] * sum[0]);
-    const intercept = (sum[1] / N) - (gradient * sum[0]) / N;
+    const gradient =
+      (N * sum[3] - sum[0] * sum[1]) / (N * sum[2] - sum[0] * sum[0]);
+    const intercept = sum[1] / N - (gradient * sum[0]) / N;
     // var correlation = (N * sum[3] - sum[0] * sum[1]) / Math.sqrt((N * sum[2] - sum[0] * sum[0]) * (N * sum[4] - sum[1] * sum[1]));
 
     for (let i = 0, len = data.length; i < len; i++) {
       let coorY = data[i][0] * gradient + intercept;
-      if (decimalPlaces) { coorY = parseFloat(coorY.toFixed(decimalPlaces)); }
+      if (decimalPlaces) {
+        coorY = parseFloat(coorY.toFixed(decimalPlaces));
+      }
       const coordinate = [data[i][0], coorY];
       results.push(coordinate);
     }
 
     results.sort((a, b) => {
-      if (a[0] > b[0]) { return 1; }
-      if (a[0] < b[0]) { return -1; }
+      if (a[0] > b[0]) {
+        return 1;
+      }
+      if (a[0] < b[0]) {
+        return -1;
+      }
       return 0;
     });
 
-    const string = `y = ${Math.round(gradient * 100) / 100}x + ${Math.round(intercept * 100) / 100}`;
+    const string = `y = ${Math.round(gradient * 100) / 100}x + ${
+      Math.round(intercept * 100) / 100
+    }`;
     return { equation: [gradient, intercept], points: results, string };
   }
 
@@ -194,8 +231,10 @@ import ReactHighcharts from 'react-highcharts';
    *  Code extracted from https://github.com/Tom-Alexander/regression-js/
    */
   function _logarithmic(data) {
-    const sum = [0, 0, 0, 0]; let n = 0; const results = []; const
-      mean = 0;
+    const sum = [0, 0, 0, 0];
+    let n = 0;
+    const results = [];
+    const mean = 0;
 
     for (len = data.length; n < len; n++) {
       if (data[n].x != null) {
@@ -219,12 +258,18 @@ import ReactHighcharts from 'react-highcharts';
     }
 
     results.sort((a, b) => {
-      if (a[0] > b[0]) { return 1; }
-      if (a[0] < b[0]) { return -1; }
+      if (a[0] > b[0]) {
+        return 1;
+      }
+      if (a[0] < b[0]) {
+        return -1;
+      }
       return 0;
     });
 
-    const string = `y = ${Math.round(A * 100) / 100} + ${Math.round(B * 100) / 100} ln(x)`;
+    const string = `y = ${Math.round(A * 100) / 100} + ${
+      Math.round(B * 100) / 100
+    } ln(x)`;
 
     return { equation: [A, B], points: results, string };
   }
@@ -233,8 +278,9 @@ import ReactHighcharts from 'react-highcharts';
    * Code extracted from https://github.com/Tom-Alexander/regression-js/
    */
   function _power(data) {
-    const sum = [0, 0, 0, 0]; let n = 0; const
-      results = [];
+    const sum = [0, 0, 0, 0];
+    let n = 0;
+    const results = [];
 
     for (len = data.length; n < len; n++) {
       if (data[n].x != null) {
@@ -258,12 +304,18 @@ import ReactHighcharts from 'react-highcharts';
     }
 
     results.sort((a, b) => {
-      if (a[0] > b[0]) { return 1; }
-      if (a[0] < b[0]) { return -1; }
+      if (a[0] > b[0]) {
+        return 1;
+      }
+      if (a[0] < b[0]) {
+        return -1;
+      }
       return 0;
     });
 
-    const string = `y = ${Math.round(A * 100) / 100}x^${Math.round(B * 100) / 100}`;
+    const string = `y = ${Math.round(A * 100) / 100}x^${
+      Math.round(B * 100) / 100
+    }`;
 
     return { equation: [A, B], points: results, string };
   }
@@ -275,8 +327,13 @@ import ReactHighcharts from 'react-highcharts';
     if (typeof order === 'undefined') {
       order = 2;
     }
-    const lhs = []; const rhs = []; const results = []; let a = 0; let b = 0; var i = 0; const
-      k = order + 1;
+    const lhs = [];
+    const rhs = [];
+    const results = [];
+    let a = 0;
+    let b = 0;
+    var i = 0;
+    const k = order + 1;
 
     for (; i < k; i++) {
       for (var l = 0, len = data.length; l < len; l++) {
@@ -288,7 +345,7 @@ import ReactHighcharts from 'react-highcharts';
           a += Math.pow(data[l][0], i) * data[l][1];
         }
       }
-      lhs.push(a), a = 0;
+      lhs.push(a), (a = 0);
       const c = [];
       for (let j = 0; j < k; j++) {
         for (var l = 0, len = data.length; l < len; l++) {
@@ -296,7 +353,7 @@ import ReactHighcharts from 'react-highcharts';
             b += Math.pow(data[l][0], i + j);
           }
         }
-        c.push(b), b = 0;
+        c.push(b), (b = 0);
       }
       rhs.push(c);
     }
@@ -321,8 +378,12 @@ import ReactHighcharts from 'react-highcharts';
     }
 
     results.sort((a, b) => {
-      if (a[0] > b[0]) { return 1; }
-      if (a[0] < b[0]) { return -1; }
+      if (a[0] > b[0]) {
+        return 1;
+      }
+      if (a[0] < b[0]) {
+        return -1;
+      }
       return 0;
     });
 
@@ -330,7 +391,8 @@ import ReactHighcharts from 'react-highcharts';
 
     for (var i = equation.length - 1; i >= 0; i--) {
       if (i > 1) string += `${Math.round(equation[i] * 100) / 100}x^${i} + `;
-      else if (i == 1) string += `${Math.round(equation[i] * 100) / 100}x` + ' + ';
+      else if (i == 1)
+        string += `${Math.round(equation[i] * 100) / 100}x` + ' + ';
       else string += Math.round(equation[i] * 100) / 100;
     }
 
@@ -356,8 +418,10 @@ import ReactHighcharts from 'react-highcharts';
     const yval = data.map(pair => pair[1]);
 
     function array_unique(values) {
-      const o = {}; let i; const l = values.length; const
-        r = [];
+      const o = {};
+      let i;
+      const l = values.length;
+      const r = [];
       for (i = 0; i < l; i += 1) o[values[i]] = values[i];
       for (i in o) r.push(o[i]);
       return r;
@@ -377,19 +441,27 @@ import ReactHighcharts from 'react-highcharts';
       const x = xval[i];
 
       if (i > 0) {
-        if (right < xval.length - 1
-          && xval[right + 1] - xval[i] < xval[i] - xval[left]) {
+        if (
+          right < xval.length - 1 &&
+          xval[right + 1] - xval[i] < xval[i] - xval[left]
+        ) {
           left++;
           right++;
         }
       }
       // console.debug("left: "+left  + " right: " + right );
       var edge;
-      if (xval[i] - xval[left] > xval[right] - xval[i]) { edge = left; } else { edge = right; }
+      if (xval[i] - xval[left] > xval[right] - xval[i]) {
+        edge = left;
+      } else {
+        edge = right;
+      }
       const denom = Math.abs(1.0 / (xval[edge] - x));
       let sumWeights = 0;
-      let sumX = 0; let sumXSquared = 0; let sumY = 0; let
-        sumXY = 0;
+      let sumX = 0;
+      let sumXSquared = 0;
+      let sumY = 0;
+      let sumXY = 0;
 
       let k = left;
       while (k <= right) {
@@ -397,9 +469,9 @@ import ReactHighcharts from 'react-highcharts';
         const yk = yval[k];
         var dist;
         if (k < i) {
-          dist = (x - xk);
+          dist = x - xk;
         } else {
-          dist = (xk - x);
+          dist = xk - x;
         }
         const w = tricube(dist * denom);
         const xkw = xk * w;
@@ -418,7 +490,11 @@ import ReactHighcharts from 'react-highcharts';
       const meanXSquared = sumXSquared / sumWeights;
 
       var beta;
-      if (meanXSquared == meanX * meanX) { beta = 0; } else { beta = (meanXY - meanX * meanY) / (meanXSquared - meanX * meanX); }
+      if (meanXSquared == meanX * meanX) {
+        beta = 0;
+      } else {
+        beta = (meanXY - meanX * meanY) / (meanXSquared - meanX * meanX);
+      }
 
       const alpha = meanY - beta * meanX;
       res[i] = beta * x + alpha;
@@ -435,12 +511,19 @@ import ReactHighcharts from 'react-highcharts';
    * Code extracted from https://github.com/Tom-Alexander/regression-js/
    */
   function gaussianElimination(a, o) {
-    let i = 0; let j = 0; let k = 0; let maxrow = 0; let tmp = 0; const n = a.length - 1; const
-      x = new Array(o);
+    let i = 0;
+    let j = 0;
+    let k = 0;
+    let maxrow = 0;
+    let tmp = 0;
+    const n = a.length - 1;
+    const x = new Array(o);
     for (i = 0; i < n; i++) {
       maxrow = i;
       for (j = i + 1; j < n; j++) {
-        if (Math.abs(a[i][j]) > Math.abs(a[i][maxrow])) { maxrow = j; }
+        if (Math.abs(a[i][j]) > Math.abs(a[i][maxrow])) {
+          maxrow = j;
+        }
       }
       for (k = i; k < n + 1; k++) {
         tmp = a[k][i];
@@ -449,16 +532,18 @@ import ReactHighcharts from 'react-highcharts';
       }
       for (j = i + 1; j < n; j++) {
         for (k = n; k >= i; k--) {
-          a[k][j] -= a[k][i] * a[i][j] / a[i][i];
+          a[k][j] -= (a[k][i] * a[i][j]) / a[i][i];
         }
       }
     }
     for (j = n - 1; j >= 0; j--) {
       tmp = 0;
-      for (k = j + 1; k < n; k++) { tmp += a[k][j] * x[k]; }
+      for (k = j + 1; k < n; k++) {
+        tmp += a[k][j] * x[k];
+      }
       x[j] = (a[n][j] - tmp) / a[j][j];
     }
-    return (x);
+    return x;
   }
 
   /**
@@ -466,14 +551,18 @@ import ReactHighcharts from 'react-highcharts';
    * See http://en.wikipedia.org/wiki/Coefficient_of_determination for theaorical details
    */
   function coefficientOfDetermination(data, pred) {
-    let i = SSE = SSYY = mean = 0; let
-      N = data.length;
+    let i = (SSE = SSYY = mean = 0);
+    let N = data.length;
 
     // Sort the initial data { pred array (model's predictions) is sorted  }
     // The initial data must be sorted in the same way in order to calculate the coefficients
     data.sort((a, b) => {
-      if (a[0] > b[0]) { return 1; }
-      if (a[0] < b[0]) { return -1; }
+      if (a[0] > b[0]) {
+        return 1;
+      }
+      if (a[0] < b[0]) {
+        return -1;
+      }
       return 0;
     });
 
@@ -494,12 +583,12 @@ import ReactHighcharts from 'react-highcharts';
         SSE += Math.pow(data[i][1] - mean, 2);
       }
     }
-    return 1 - (SSYY / SSE);
+    return 1 - SSYY / SSE;
   }
 
   function standardError(data, pred) {
-    let SE = 0; let
-      N = data.length;
+    let SE = 0;
+    let N = data.length;
 
     for (i = 0; i < data.length; i++) {
       if (data[i][1] != null) {
@@ -512,4 +601,4 @@ import ReactHighcharts from 'react-highcharts';
 
     return SE;
   }
-}(ReactHighcharts.Highcharts));
+})(ReactHighcharts.Highcharts);

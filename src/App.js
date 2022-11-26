@@ -7,7 +7,7 @@ import './App.css';
 import Layout from './layout/Layout';
 import configureStore from './modules/store';
 
-console.log("Last updated July 16, 2022");
+console.log('Last updated July 16, 2022');
 
 const reduxStore = configureStore(window.REDUX_INITIAL_DATA);
 
@@ -22,7 +22,6 @@ const theme = createMuiTheme({
     danger: 'orange',
   },
 });
-
 
 function App() {
   return (

@@ -1,7 +1,6 @@
 import AppBar from '@material-ui/core/AppBar';
 import logo from 'assets/HRECOS.logo.png';
-import piermontLogo
-  from 'assets/LamontLogo_trans_2.png';
+import piermontLogo from 'assets/LamontLogo_trans_2.png';
 import maristLogo from 'assets/marist_logo.png';
 import beczakLogo from 'assets/beczak_logo.jpg';
 import norriePointLogo from 'assets/norriePoint_logo.jpg';
@@ -64,22 +63,20 @@ function Header() {
   const titleLogoStyle = titleStyle[stationID] || {};
 
   let logoImage = <img alt="HRECOS" className={theme.logo} src={logo} />;
-  const qrCode = <img alt="hrecos.org" className={theme.code} src={qrCodeLink} />;
+  const qrCode = (
+    <img alt="hrecos.org" className={theme.code} src={qrCodeLink} />
+  );
 
   let sponsorImage = (
-    <img
-      alt={stationID}
-      style={style}
-      className={theme.sponsor}
-      src={image}
-    />
+    <img alt={stationID} style={style} className={theme.sponsor} src={image} />
   );
   if (stationID === 'pier84') {
     const temp = sponsorImage;
     sponsorImage = logoImage;
     logoImage = temp;
   }
-  const stationTitle = get(stations, `${stationID || 'piermont'}.title`) || 'Piermont';
+  const stationTitle =
+    get(stations, `${stationID || 'piermont'}.title`) || 'Piermont';
 
   return (
     <AppBar position="static">
@@ -104,17 +101,11 @@ function Header() {
         <h1 className={theme.title} style={titleLogoStyle}>
           {`${stationTitle} Monitoring Station`}
         </h1>
-        <span className={theme.rightImageWrapper}>
-          {sponsorImage}
-        </span>
+        <span className={theme.rightImageWrapper}>{sponsorImage}</span>
       </Toolbar>
-      <Drawer
-        open={open}
-        setOpen={setOpen}
-      />
+      <Drawer open={open} setOpen={setOpen} />
     </AppBar>
   );
 }
-
 
 export default Header;

@@ -3,23 +3,27 @@ $hrecos-blue: #7f99c7;
 .core-layout__viewport {
   padding-top: 4rem;
 }
-.logo{
+
+.logo {
   height: 100%;
 }
-.acronym{
+
+.acronym {
   width: 20rem;
 }
 
-.sponsor{
+.sponsor {
   height: 75%;
 }
-.title{
+
+.title {
   flex-grow: 1;
   text-align: center;
   font-size: 2.5rem;
   font-weight: bold;
   font-family: 'Montserrat', sans-serif !important;
 }
+
 @media (max-width: 1300px) {
   &.title {
     font-size: 2.5rem;
@@ -32,24 +36,24 @@ $hrecos-blue: #7f99c7;
   }
 }
 
-.appBar{
+.appBar {
   background: $hrecos-blue;
   justify-content: space-between;
   height: 8rem;
 }
 
-.leftImageWrapper{
+.leftImageWrapper {
   height: 100%;
   width: 26%;
   display: flex;
 }
 
-.code{
+.code {
   height: 60px;
   width: 60px;
 }
 
-.qrCodeWrapper{
+.qrCodeWrapper {
   display: flex;
   height: 100%;
   width: 100%;
@@ -61,7 +65,7 @@ $hrecos-blue: #7f99c7;
   }
 }
 
-.rightImageWrapper{
+.rightImageWrapper {
   height: 100%;
   display: flex;
   align-items: center;

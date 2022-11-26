@@ -1,15 +1,11 @@
 /* eslint-disable no-param-reassign */
-import {
-  get, set, forEach, last, isNumber,
-} from 'lodash';
+import { get, set, forEach, last, isNumber } from 'lodash';
 import moment from 'moment';
-import {
-  getChartConfig, GREEN, TEAL, CHART_HEIGHT,
-} from './chartConfig';
+import { getChartConfig, GREEN, TEAL, CHART_HEIGHT } from './chartConfig';
 import stations from './stations';
 import metricConversion from './metrics';
 
-const getFinalString = ({ lastX, lastY, units }) => (
+const getFinalString = ({ lastX, lastY, units }) =>
   `<div style="position: relative;">
     <div style="background: ${TEAL}; opacity: .8; z-index: 10;border:0.5px white solid; 
           width: 100%; height: 100%; position: absolute"></div>
@@ -21,8 +17,7 @@ const getFinalString = ({ lastX, lastY, units }) => (
       <span class="c" style="font-weight:900;color:${TEAL};">${lastY}</span> 
       ${units} at ${moment(lastX).format('h:mm A')}
     </div>
-  </div>`
-);
+  </div>`;
 
 const decimals = {
   DO: 1,
@@ -35,7 +30,10 @@ const decimals = {
 const MIN_WIDTH = 800;
 
 export default function getChartData({
-  tabIndex, width, stationData, location,
+  tabIndex,
+  width,
+  stationData,
+  location,
 }) {
   const station = stations[location];
   const key = station.params[tabIndex];
@@ -51,14 +49,14 @@ export default function getChartData({
   const metric = metricConversion[key];
   const units = metric.unit;
 
-  let rows = stationData[key] ? stationData[key].slice() : []
+  let rows = stationData[key] ? stationData[key].slice() : [];
   if (Array.isArray(rows) && metric.conversion) {
     rows = rows.map(row => [row[0], metric.conversion(row[1])]);
   }
   let max = get(rows, '0.1');
   let min = get(rows, '0.1');
 
-  forEach(rows, (row) => {
+  forEach(rows, row => {
     const newValue = get(row, '1', 0);
     max = Math.max(max, newValue);
     min = Math.min(min, newValue);
@@ -66,13 +64,17 @@ export default function getChartData({
 
   const lastX = get(last(rows), '0');
   let lastY = get(last(rows), '1') || 0;
-  lastY = isNumber(decimals[key]) ? lastY.toFixed(decimals[key]) : lastY.toFixed(2);
+  lastY = isNumber(decimals[key])
+    ? lastY.toFixed(decimals[key])
+    : lastY.toFixed(2);
   lastY = parseFloat(lastY);
 
   const finalString = getFinalString({ lastX, lastY, units });
-  const isOffline = (Math.abs(moment().valueOf() - lastX) >= moment.duration(6, 'hours').valueOf())
-    ? moment(lastX).fromNow(true) : false;
-
+  const isOffline =
+    Math.abs(moment().valueOf() - lastX) >=
+    moment.duration(6, 'hours').valueOf()
+      ? moment(lastX).fromNow(true)
+      : false;
 
   rows.pop();
   rows.push({
@@ -83,11 +85,10 @@ export default function getChartData({
   const xAxisLabel = width > 1000 ? '%b %e' : '%e';
   const titleAlign = lastY < (max + min) / 2 ? topHeight : bottomHeight;
 
-  const xAxisMin = (
+  const xAxisMin =
     location !== 'norriePoint'
       ? moment().startOf('day').subtract(2, 'days').valueOf()
-      : moment().startOf('day').subtract(10, 'days').valueOf()
-  );
+      : moment().startOf('day').subtract(10, 'days').valueOf();
   const isOfflineOffset = titleAlign > -100 || width < 1000 ? 0 : 85;
 
   set(config, ['series', '0', 'data'], rows);

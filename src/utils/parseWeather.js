@@ -5,14 +5,28 @@ import moment from 'moment';
 
 export function formattedWeather(weather) {
   if (!weather || !weather.RAIN) return {};
-  const {
-    BARO, DEWP, RAIN, RHUM, ATMP, GST, WSPD, WD,
-  } = weather;
+  const { BARO, DEWP, RAIN, RHUM, ATMP, GST, WSPD, WD } = weather;
 
   const windAngle = get(last(WD), '1');
-  const arrayIndex = parseInt((windAngle / 22.5) + 0.5, 10);
-  const directionArray = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE',
-    'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
+  const arrayIndex = parseInt(windAngle / 22.5 + 0.5, 10);
+  const directionArray = [
+    'N',
+    'NNE',
+    'NE',
+    'ENE',
+    'E',
+    'ESE',
+    'SE',
+    'SSE',
+    'S',
+    'SSW',
+    'SW',
+    'WSW',
+    'W',
+    'WNW',
+    'NW',
+    'NNW',
+  ];
   const windDirection = directionArray[arrayIndex];
   const time = Math.max(
     get(last(RAIN), '0', 0),
@@ -22,8 +36,8 @@ export function formattedWeather(weather) {
     get(last(WSPD), '0', 0),
   );
   return {
-    airTemp: ATMP ? get(last(ATMP), '1') * 9 / 5 + 32 : false,
-    dewPoint: DEWP ? get(last(DEWP), '1') * 9 / 5 + 32 : false,
+    airTemp: ATMP ? (get(last(ATMP), '1') * 9) / 5 + 32 : false,
+    dewPoint: DEWP ? (get(last(DEWP), '1') * 9) / 5 + 32 : false,
     gust: get(last(GST), '1') * 2.23,
     humidity: get(last(RHUM), '1'),
     pressure: get(last(BARO), '1'),
@@ -34,9 +48,10 @@ export function formattedWeather(weather) {
   };
 }
 
-export function createWeather({
-  airTemp, wind, windDirection, dewPoint, rain, humidity, pressure,
-}, stationName) {
+export function createWeather(
+  { airTemp, wind, windDirection, dewPoint, rain, humidity, pressure },
+  stationName,
+) {
   let direction = windDirection;
   const missingValue = '- -';
 
@@ -51,32 +66,20 @@ export function createWeather({
   const weatherTicker = (
     <React.Fragment>
       {' / Air Temperature '}
-      <strong>
-        {` ${airTemp} F `}
-      </strong>
+      <strong>{` ${airTemp} F `}</strong>
       {'/ Dew Point '}
-      <strong>
-        {`${dewPoint} F `}
-      </strong>
+      <strong>{`${dewPoint} F `}</strong>
       {' / Humidity '}
-      <strong>
-        {` ${humidity} % `}
-      </strong>
+      <strong>{` ${humidity} % `}</strong>
       {' / 24-hr rain '}
-      <strong>
-        {` ${rain} in `}
-      </strong>
+      <strong>{` ${rain} in `}</strong>
       {' / Wind '}
-      <strong>
-        {` ${wind} knots ${direction} `}
-      </strong>
+      <strong>{` ${wind} knots ${direction} `}</strong>
       {stationName !== 'Pier 84' && (
-      <React.Fragment>
-        {' / Pressure '}
-        <strong>
-          {` ${pressure} mbars `}
-        </strong>
-      </React.Fragment>
+        <React.Fragment>
+          {' / Pressure '}
+          <strong>{` ${pressure} mbars `}</strong>
+        </React.Fragment>
       )}
     </React.Fragment>
   );

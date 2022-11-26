@@ -35,7 +35,9 @@ function Layout({ stationID, autoCycle, embedded, sample }) {
   });
 
   useEffect(() => {
-    dispatch({ type: autoCycle ? ACTIONS.ENABLE_TIMER : ACTIONS.DISABLE_TIMER });
+    dispatch({
+      type: autoCycle ? ACTIONS.ENABLE_TIMER : ACTIONS.DISABLE_TIMER,
+    });
   }, [autoCycle, dispatch]);
 
   useEffect(() => {
@@ -43,7 +45,7 @@ function Layout({ stationID, autoCycle, embedded, sample }) {
     dispatch({ type: ACTIONS.LOADING_STATION });
     fetch(`${isLocal ? 'http://localhost:3002' : ''}/api/station/${stationID}`)
       .then(data => data.json())
-      .then(data => (dispatch({ payload: data, type: ACTIONS.LOADED_STATION })));
+      .then(data => dispatch({ payload: data, type: ACTIONS.LOADED_STATION }));
   }, [dispatch, stationID, refresh]);
 
   if (embedded) {

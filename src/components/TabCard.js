@@ -63,10 +63,10 @@ export default function SimpleTabs() {
 
   const tabs = params.map(key => {
     let label = stationMetrics[key].param_nm;
-    if(label.toLocaleLowerCase().includes('temp')){
-      label = 'Water Temp'
+    if (label.toLocaleLowerCase().includes('temp')) {
+      label = 'Water Temp';
     }
-    return <Tab className={classes.tab} key={key} label={label}/>
+    return <Tab className={classes.tab} key={key} label={label} />;
   });
 
   function handleChange(event, newValue) {
@@ -75,8 +75,7 @@ export default function SimpleTabs() {
 
   const countdownWrapper = timerEnabled && (
     <span className={classes.countdown}>{`Next in ${countdown} seconds`}</span>
-  )
-
+  );
 
   return (
     <div className={classes.root}>

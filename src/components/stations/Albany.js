@@ -16,23 +16,15 @@ export function Beczak({ weatherTicker, time, scale }) {
       <div className="marqueeRelative marqueeRelativeTest">
         <div className={theme.marqueeContainer}>
           <p className={theme.weatherTime}>
-            <strong className={theme.underline}>
-              Albany Weather
-            </strong>
+            <strong className={theme.underline}>Albany Weather</strong>
             {` as of ${time}:`}
           </p>
-          <p
-            className={theme.weatherTicker}
-          >
-            {weatherTicker}
-          </p>
+          <p className={theme.weatherTicker}>{weatherTicker}</p>
         </div>
       </div>
-
     </div>
   );
 }
-
 
 Beczak.propTypes = {
   scale: PropTypes.number.isRequired,

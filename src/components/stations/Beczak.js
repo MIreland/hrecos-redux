@@ -8,7 +8,11 @@ export function Beczak({ weatherTicker, time, scale }) {
   return (
     <div className={theme.beczak}>
       <div className={theme.beczakImageWrapper}>
-        <img alt="Beczak Sampling" className={theme.piermontImage} src={beczakMap} />
+        <img
+          alt="Beczak Sampling"
+          className={theme.piermontImage}
+          src={beczakMap}
+        />
       </div>
       <div>
         <p>{stationText.beczak[0]}</p>
@@ -17,7 +21,6 @@ export function Beczak({ weatherTicker, time, scale }) {
     </div>
   );
 }
-
 
 Beczak.propTypes = {
   scale: PropTypes.number.isRequired,

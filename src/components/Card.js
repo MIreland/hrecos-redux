@@ -34,9 +34,7 @@ function Card({ title, children }) {
       <AppBar position="static" className={classes.appBar}>
         {title}
       </AppBar>
-      <div className={classes.cardContent}>
-        {children}
-      </div>
+      <div className={classes.cardContent}>{children}</div>
     </div>
   );
 }

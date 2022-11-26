@@ -12,28 +12,18 @@ export function Norrie({ weatherTicker, time, scale }) {
         <div className={theme.norrieImageWrapper}>
           <img alt="Norrie Point" src={norrieCanoe} />
         </div>
-        <p className={theme.norrieImageText}>
-          {stationText.norrie[1]}
-        </p>
+        <p className={theme.norrieImageText}>{stationText.norrie[1]}</p>
       </div>
       <div className={theme.marqueeContainer}>
         <p className={theme.weatherTime}>
-          <strong className={theme.underline}>
-            {'Norrie Weather'}
-          </strong>
+          <strong className={theme.underline}>{'Norrie Weather'}</strong>
           {` as of ${time}:`}
         </p>
-        <p
-          className={theme.weatherTicker}
-        >
-          {weatherTicker}
-        </p>
+        <p className={theme.weatherTicker}>{weatherTicker}</p>
       </div>
-
     </div>
   );
 }
-
 
 Norrie.propTypes = {
   scale: PropTypes.number.isRequired,

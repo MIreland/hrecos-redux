@@ -5,7 +5,7 @@ import sizeMe from 'react-sizeme';
 import stationMetrics from 'utils/metrics';
 import salt from 'assets/HRECOS_PANEL_SALT.png';
 import chlorophyll from 'assets/HRECOS_PANEL_CHL.jpg';
-import phycocyan from 'assets/HRECOS_PANEL_FCP.jpg'
+import phycocyan from 'assets/HRECOS_PANEL_FCP.jpg';
 import dissolvedOxygen from 'assets/HRECOS_PANEL_DO.png';
 // import backgroundSource from 'assets/HRECOS_background_small.png';
 import piermontDO from 'assets/HRECOS_PANEL_DO_PIERMONT.png';
@@ -81,8 +81,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
-function HydroContent({size}) {
+function HydroContent({ size }) {
   // This pre-caches the background images.
   // The server used to host some of the displays has a very slow connection
   const imageRef = useRef({});
@@ -99,7 +98,8 @@ function HydroContent({size}) {
   // const scale = useSelector(state => state.scale);
   const tabIndex = useSelector(state => state.tabIndex);
   const location = useSelector(state => state.stationID);
-  const paramKey = stations[location].params[tabIndex] || stations[location].params[0];
+  const paramKey =
+    stations[location].params[tabIndex] || stations[location].params[0];
   const stationName = stations[location].title;
   const selectedParameter = stationMetrics[paramKey].param_nm;
 
@@ -111,7 +111,12 @@ function HydroContent({size}) {
   const width = 1250 * scale;
 
   const { config, isOffline, hasData } = getChartData({
-    height, location, scale, stationData, tabIndex, width,
+    height,
+    location,
+    scale,
+    stationData,
+    tabIndex,
+    width,
   });
 
   const offlineWarning = isOffline && (
@@ -127,28 +132,27 @@ function HydroContent({size}) {
   const toolbarOffset = 48;
   const topOffset = chartOffset + toolbarOffset;
 
-  const imgSrc = backgroundImages[`${paramKey.toLowerCase()}Image`] || backgroundPanel;
-
+  const imgSrc =
+    backgroundImages[`${paramKey.toLowerCase()}Image`] || backgroundPanel;
 
   return (
     <div className={classes.root}>
       <div className={classes.imageWrapper}>
-        <img className={classes.backgroundImage} alt={`${paramKey}`} src={imgSrc} />
+        <img
+          className={classes.backgroundImage}
+          alt={`${paramKey}`}
+          src={imgSrc}
+        />
       </div>
       <div className={classes.chartWrapper}>
         <h3 className={classes.liveDataTitle}>
           {`Live ${stationName} ${selectedParameter} Data`}
         </h3>
         {offlineWarning}
-        <HighchartsReact
-          highcharts={Highcharts}
-          options={config}
-          immutable
-        />
+        <HighchartsReact highcharts={Highcharts} options={config} immutable />
       </div>
     </div>
   );
 }
-
 
 export default sizeMe()(HydroContent);
