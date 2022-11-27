@@ -34,7 +34,6 @@ const useStyles = makeStyles({
   },
   root: {
     color: 'white',
-    fontSize: '1vw',
     fontFamily: 'calibre',
     position: 'relative',
   },

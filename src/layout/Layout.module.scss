@@ -4,21 +4,34 @@ html {
   background: $backgroundTeal;
 }
 
+.parent {
+  display: grid;
+  grid-template-areas:
+            "hrecos  metric"
+            "station metric";
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+.div1 { grid-area: 1 / 2 / 3 / 3; }
+
 .grid-layout {
   background: $backgroundTeal;
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-areas:
+            "hrecos  metric"
+            "station metric";
   height: calc(100vh - 128px);
+  grid-gap: 1em;
   min-height: 800px;
-  margin-top: 1em;
+  margin: 1em;
 }
 
+
+
 .leftSide {
-  margin-left: 1em;
-  margin-right: 1em;
-  display: flex;
+  grid-area: hrecos;
   flex-direction: column;
-  width: 33%;
 
   div:first-child {
     margin-bottom: 1em;
@@ -26,6 +39,7 @@ html {
 }
 
 .rightSide {
+  grid-area: metric;
   margin-right: 1em;
 }
 

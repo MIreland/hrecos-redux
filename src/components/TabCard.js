@@ -27,9 +27,10 @@ const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.paper,
     flexGrow: 1,
-    gridColumnStart: 2,
-    gridRowEnd: 'span 2',
-    gridRowStart: 1,
+    gridArea: 'metric',
+    // gridColumnStart: 2,
+    // gridRowEnd: 'span 2',
+    // gridRowStart: 1,
     marginRight: '1em',
   },
   appBar: {
