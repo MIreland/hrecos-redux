@@ -15,34 +15,28 @@
 }
 
 .beczak {
-  font-size: 0.95vw;
   text-align: justify;
 }
 
 .marist {
-  font-size: 0.9vw;
   text-align: justify;
 }
 
 .albany {
   min-height: 25vh;
-  font-size: 1vw;
 }
 
-.weatherTime {
+p.weatherTime{
   text-align: left;
-  margin: 5px;
+  margin-bottom: 10px;
 }
 
 div.marqueeContainer {
   overflow-x: hidden;
   white-space: nowrap;
   font-family: 'Montserrat light';
-  position: absolute;
+  //position: absolute;
 
-  p {
-    font-size: 1.5vw;
-  }
 }
 
 .weatherTicker {
@@ -109,7 +103,6 @@ div.marqueeContainer {
 }
 
 .albanyImageWrapper {
-  width: 10vw;
   float: left;
   padding-right: 10px;
 

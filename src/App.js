@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { Router } from '@reach/router';
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import './App.css';
 import Layout from './layout/Layout';
@@ -11,7 +11,7 @@ console.log('Last updated July 16, 2022');
 
 const reduxStore = configureStore(window.REDUX_INITIAL_DATA);
 
-const theme = createMuiTheme({
+const theme = createTheme({
   primary: {
     // light: will be calculated from palette.primary.main,
     main: '#007465',

@@ -2,9 +2,10 @@ import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import norrieCanoe from 'assets/norrieCanoe.jpg';
 import stationText from 'utils/aboutStationData';
+import Marquee from 'react-fast-marquee';
 import theme from 'components/AboutStationCard.module.scss';
 
-export function Norrie({ weatherTicker, time, scale }) {
+export function Norrie({ weatherTicker, time }) {
   return (
     <div className={theme.norrie}>
       <div>
@@ -16,10 +17,18 @@ export function Norrie({ weatherTicker, time, scale }) {
       </div>
       <div className={theme.marqueeContainer}>
         <p className={theme.weatherTime}>
-          <strong className={theme.underline}>{'Norrie Weather'}</strong>
+          <strong className={theme.underline}>Norrie Weather</strong>
           {` as of ${time}:`}
         </p>
-        <p className={theme.weatherTicker}>{weatherTicker}</p>
+        <Marquee
+          gradient={false}
+          style={{
+            width: 400,
+          }}
+          speed={50}
+        >
+          {weatherTicker}
+        </Marquee>
       </div>
     </div>
   );

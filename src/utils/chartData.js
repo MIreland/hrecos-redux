@@ -38,7 +38,7 @@ export default function getChartData({
   const station = stations[location];
   const key = station.params[tabIndex];
   const imageScale = width / 1250;
-  const config = getChartConfig(imageScale * imageScale * CHART_HEIGHT);
+  const config = getChartConfig();
   const hasData = stationData[key];
 
   const topHeight = -210 * imageScale * imageScale;

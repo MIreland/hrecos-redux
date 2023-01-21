@@ -2,14 +2,13 @@ export const WHITE = '#ffffff';
 export const ORANGE = '#e58030';
 export const GREEN = '#04ca01';
 export const TEAL = '#4084a7';
-export const CHART_HEIGHT = 280;
 
 export const getChartConfig = height =>
   JSON.parse(
     JSON.stringify({
       chart: {
         backgroundColor: 'transparent',
-        height,
+        // height,
         legend: {
           enabled: false,
         },
