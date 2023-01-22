@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 import React from 'react';
 import { useSelector } from 'react-redux';
-import stations from 'utils/stations.json';
-import { formattedWeather, createWeather } from 'utils/parseWeather';
+import stations from '../utils/stations.json';
+import { formattedWeather, createWeather } from '../utils/parseWeather';
 import Stations from './stations';
 
 export function AboutStationCard() {

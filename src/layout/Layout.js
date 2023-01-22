@@ -1,12 +1,12 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import Card from 'components/Card';
-import TabCard from 'components/TabCard';
-import AboutHRECOS from 'components/AboutHRECOS';
-import AboutStation from 'components/AboutStationCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { ACTIONS, updateStation } from 'modules/action';
+import Card from '../components/Card';
+import TabCard from '../components/TabCard';
+import AboutHRECOS from '../components/AboutHRECOS';
+import AboutStation from '../components/AboutStationCard';
+import { ACTIONS, updateStation } from '../modules/action';
 import Header from './Header';
 import style from './Layout.module.scss';
 
@@ -60,14 +60,15 @@ function Layout({ stationID, autoCycle, embedded, sample }) {
     <Fragment>
       <Header />
       <div className={style['grid-layout']}>
-        <div className={style.leftSide}>
-          <Card title="What is HRECOS?">
-            <AboutHRECOS />
-          </Card>
-          <Card title="About Station">
-            <AboutStation />
-          </Card>
-        </div>
+        <Card title="What is HRECOS?" className={style.aboutHrecos}>
+          <AboutHRECOS />
+        </Card>
+        <Card
+          title="About Station"
+          className={`about-station ${style.aboutStation}`}
+        >
+          <AboutStation />
+        </Card>
         <TabCard />
       </div>
     </Fragment>
@@ -77,6 +78,7 @@ function Layout({ stationID, autoCycle, embedded, sample }) {
 Layout.propTypes = {
   autoCycle: PropTypes.bool,
   embedded: PropTypes.bool,
+  sample: PropTypes.bool,
   stationID: PropTypes.string,
 };
 

@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { round } from 'lodash';
-import stationText from 'utils/aboutStationData';
 import theme from 'components/AboutStationCard.module.scss';
+import stationText from '../../utils/aboutStationData';
 
 export function Beczak() {
   const t = new Date();

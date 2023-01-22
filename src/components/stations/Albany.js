@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import aboutPortOfAlbany from 'assets/about_albany.png';
-import stationText from 'utils/aboutStationData';
 import theme from 'components/AboutStationCard.module.scss';
+import aboutPortOfAlbany from '../../assets/about_albany.png';
+import stationText from '../../utils/aboutStationData';
 
 export function Beczak({ weatherTicker, time, scale }) {
   return (

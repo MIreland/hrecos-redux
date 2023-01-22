@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import beczakMap from 'assets/beczakMap.jpg';
-import stationText from 'utils/aboutStationData';
 import theme from 'components/AboutStationCard.module.scss';
+import beczakMap from '../../assets/beczakMap.jpg';
+import stationText from '../../utils/aboutStationData';
 
 export function Beczak({ weatherTicker, time, scale }) {
   return (

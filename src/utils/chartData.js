@@ -5,8 +5,11 @@ import { getChartConfig, GREEN, TEAL, CHART_HEIGHT } from './chartConfig';
 import stations from './stations';
 import metricConversion from './metrics';
 
-const getFinalString = ({ lastX, lastY, units }) =>
-  `<div style="position: relative;">
+const getFinalString = ({
+  lastX,
+  lastY,
+  units,
+}) => `<div style="position: relative;">
     <div style="background: ${TEAL}; opacity: .8; z-index: 10;border:0.5px white solid; 
           width: 100%; height: 100%; position: absolute"></div>
     <div style="z-index: 10000; position: absolute;margin: 0 3px;font-family:Montserrat;">
@@ -44,8 +47,8 @@ export default function getChartData({
   const topHeight = -210 * imageScale * imageScale;
   const bottomHeight = -75 * imageScale;
 
-  set(config, ['chart', 'width'], width || MIN_WIDTH);
-
+  // set(config, ['chart', 'width'], width || MIN_WIDTH);
+  // console.log('width', width);
   const metric = metricConversion[key];
   const units = metric.unit;
 
@@ -101,5 +104,10 @@ export default function getChartData({
   // set(config, ['xAxis', 'min'], xAxisMin);
   set(config, ['xAxis', 'dateTimeLabelFormats', 'day'], xAxisLabel);
 
-  return { config, isOffline, isOfflineOffset, hasData };
+  return {
+    config,
+    hasData,
+    isOffline,
+    isOfflineOffset,
+  };
 }

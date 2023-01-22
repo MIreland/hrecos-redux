@@ -12,7 +12,7 @@ import salt from '../assets/HRECOS_PANEL_SALT.png';
 import chlorophyll from '../assets/HRECOS_PANEL_CHL.jpg';
 import phycocyan from '../assets/HRECOS_PANEL_FCP.jpg';
 import dissolvedOxygen from '../assets/HRECOS_PANEL_DO.png';
-// import backgroundSource from 'assets/HRECOS_background_small.png';
+// import backgroundSource from '../assets/HRECOS_background_small.png';
 import getChartData from '../utils/chartData';
 import piermontDO from '../assets/HRECOS_PANEL_DO_PIERMONT.png';
 import conductivity from '../assets/HRECOS_PANEL_COND.png';
@@ -20,7 +20,7 @@ import waterTemp from '../assets/HRECOS_PANEL_WATER_TEMP.png';
 import turb from '../assets/HRECOS_PANEL_TURB.png';
 import waterDepth from '../assets/HRECOS_PANEL_WATER_LEVEL.png';
 import acidity from '../assets/HRECOS_PANEL_PH.png';
-import backgroundPanel from '../assets/HRECOS_panel_background.png';
+import backgroundPanel from '../assets/HRECOS_background.png';
 import stations from '../utils/stations.json';
 
 const backgroundImages = {
@@ -45,6 +45,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
   },
   chartWrapper: {
+    border: '3px solid green',
     gridArea: 'chartContent',
   },
   formToggle: {
@@ -79,8 +80,12 @@ const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.paper,
     backgroundRepeat: 'no-repeat',
-    backgroundSize: 'contain',
+    backgroundSize: 'cover',
     display: 'grid',
+
+    fullHeightChart: {
+      gridTemplateRows: '1fr',
+    },
 
     gridTemplateAreas: `
       'imageContent'
@@ -121,18 +126,19 @@ function HydroContent({ size }) {
 
   const stationData = useSelector(state => state.stationData);
 
-  const scale = size.width / 1252;
+  const { width } = size || {};
+  const scale = width / 1252;
 
-  const height = 800 * scale;
-  const width = 1250 * scale;
+  const scaleHeight = 800 * scale;
+  const scaleWidth = 1250 * scale;
 
   const { config, isOffline, hasData } = getChartData({
-    height,
+    height: scaleHeight,
     location,
     scale,
     stationData,
     tabIndex,
-    width,
+    width: scaleWidth,
   });
 
   const offlineWarning = isOffline && (
@@ -143,24 +149,30 @@ function HydroContent({ size }) {
   );
 
   // These are an unfortunate result of using an image for content- there are ways around it,
-  // but this is the simplest option.
-  const chartOffset = scale * 600;
-  const toolbarOffset = 48;
-  const topOffset = chartOffset + toolbarOffset;
+  // // but this is the simplest option.
+  // const chartOffset = scale * 600;
+  // const toolbarOffset = 48;
+  // const topOffset = chartOffset + toolbarOffset;
 
-  const imgSrc =
-    backgroundImages[`${paramKey.toLowerCase()}Image`] || backgroundPanel;
+  let imgSrc = backgroundImages[`${paramKey.toLowerCase()}Image`];
+  if (!imgSrc || fullSizeChart) {
+    imgSrc = backgroundPanel;
+  }
+  console.log('width', width);
 
   return (
     <div
-      className={`${classes.root} hydro-wrapper`}
+      className={`${classes.root} hydro-wrapper ${
+        fullSizeChart && classes.fullHeightChart
+      }`}
+      key={imgSrc}
       style={{ backgroundImage: `url(${imgSrc})` }}
     >
       <FormControl className={classes.formToggle}>
         <InputLabel htmlFor="chartsize">Maximize Chart</InputLabel>
         <Switch
           value={fullSizeChart}
-          onChange={e => setFullSizeChart(!fullSizeChart)}
+          onChange={() => setFullSizeChart(!fullSizeChart)}
         />
       </FormControl>
       {/* <div className={`hydro-content ${classes.imageWrapper}`}> */}
@@ -171,7 +183,10 @@ function HydroContent({ size }) {
       {/*  /> */}
       {/* </div> */}
       <div
-        className={fullSizeChart ? classes.fullSizeChart : classes.chartWrapper}
+        className={`${fullSizeChart && classes.fullSizeChart}  ${
+          classes.chartWrapper
+        }`}
+        key={width}
       >
         <h3 className={classes.liveDataTitle}>
           {`Live ${stationName} ${selectedParameter} Data`}
@@ -183,4 +198,5 @@ function HydroContent({ size }) {
   );
 }
 
-export default sizeMe()(HydroContent);
+// export default sizeMe()(HydroContent);
+export default HydroContent;

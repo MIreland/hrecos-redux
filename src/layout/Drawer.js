@@ -10,9 +10,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import Divider from '@material-ui/core/Divider';
 import Checkbox from '@material-ui/core/Checkbox';
-import stations from 'utils/stations.json';
 import { ACTIONS } from 'modules/action';
 import { makeStyles } from '@material-ui/core';
+import stations from '../utils/stations.json';
 import theme from './Drawer.module.scss';
 
 const disclaimerText =

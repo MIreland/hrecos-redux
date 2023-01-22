@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import aboutPier84 from 'assets/about_pier84.jpg';
-import stationText from 'utils/aboutStationData';
 import theme from 'components/AboutStationCard.module.scss';
+import aboutPier84 from '../../assets/about_pier84.jpg';
+import stationText from '../../utils/aboutStationData';
 
 export function Piermont({ weatherTicker, time, scale }) {
   return (
@@ -22,7 +22,7 @@ export function Piermont({ weatherTicker, time, scale }) {
       </div>
       <div className={theme.marqueeContainer}>
         <p className={theme.weatherTime}>
-          <strong className={theme.underline}>{'Pier 84 Weather'}</strong>
+          <strong className={theme.underline}>Pier 84 Weather</strong>
           {` as of ${time}:`}
         </p>
         <p className={theme.weatherTicker}>{weatherTicker}</p>

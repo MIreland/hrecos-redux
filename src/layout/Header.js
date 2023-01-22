@@ -1,12 +1,4 @@
 import AppBar from '@material-ui/core/AppBar';
-import logo from 'assets/HRECOS.logo.png';
-import piermontLogo from 'assets/LamontLogo_trans_2.png';
-import maristLogo from 'assets/marist_logo.png';
-import beczakLogo from 'assets/beczak_logo.jpg';
-import norriePointLogo from 'assets/norriePoint_logo.jpg';
-import albanyLogo from 'assets/nysdec_logo.png';
-import pier84Logo from 'assets/pier84_logo.png';
-import qrCodeLink from 'assets/hrecos-qr-code.png';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -14,7 +6,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import { get } from 'lodash';
 import { useSelector } from 'react-redux';
 import React, { useState } from 'react';
-import stations from 'utils/stations.json';
+import logo from '../assets/HRECOS.logo.png';
+import piermontLogo from '../assets/LamontLogo_trans_2.png';
+import maristLogo from '../assets/marist_logo.png';
+import beczakLogo from '../assets/beczak_logo.jpg';
+import norriePointLogo from '../assets/norriePoint_logo.jpg';
+import albanyLogo from '../assets/nysdec_logo.png';
+import pier84Logo from '../assets/pier84_logo.png';
+import qrCodeLink from '../assets/hrecos-qr-code.png';
+import stations from '../utils/stations.json';
 import theme from './Header.module.scss';
 import Drawer from './Drawer';
 
@@ -47,10 +47,10 @@ const useStyles = makeStyles(styleTheme => ({
     flexGrow: 1,
   },
   toolbar: {
-    height: '6rem',
-    display: 'flex',
-    justifyContent: 'space-between',
     background: '#7f99c7',
+    display: 'flex',
+    height: '6rem',
+    justifyContent: 'space-between',
   },
 }));
 

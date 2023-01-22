@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import norrieCanoe from 'assets/norrieCanoe.jpg';
-import stationText from 'utils/aboutStationData';
 import Marquee from 'react-fast-marquee';
 import theme from 'components/AboutStationCard.module.scss';
+import norrieCanoe from '../../assets/norrieCanoe.jpg';
+import stationText from '../../utils/aboutStationData';
 
 export function Norrie({ weatherTicker, time }) {
   return (

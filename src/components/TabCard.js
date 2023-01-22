@@ -6,9 +6,9 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import { useDispatch, useSelector } from 'react-redux';
-import stations from 'utils/stations.json';
-import stationMetrics from 'utils/metrics';
 import { setTabIndex } from 'modules/action';
+import stations from '../utils/stations.json';
+import stationMetrics from '../utils/metrics';
 import HydroContent from './HydroContent';
 
 function TabContainer({ children }) {
@@ -24,6 +24,17 @@ TabContainer.propTypes = {
 };
 
 const useStyles = makeStyles(theme => ({
+  appBar: {
+    background: '#007465',
+    flexDirection: 'row',
+    fontFamily: 'Montserrat,sans-serif !important',
+    justifyContent: 'space-between',
+  },
+  countdown: {
+    display: 'flex',
+    lineHeight: '3rem',
+    width: '17%',
+  },
   root: {
     backgroundColor: theme.palette.background.paper,
     flexGrow: 1,
@@ -33,22 +44,11 @@ const useStyles = makeStyles(theme => ({
     // gridRowStart: 1,
     marginRight: '1em',
   },
-  appBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    fontFamily: 'Montserrat,sans-serif !important',
-    background: '#007465',
-  },
-  tabs: {
-    display: 'flex',
-  },
   tab: {
     minWidth: 140,
   },
-  countdown: {
+  tabs: {
     display: 'flex',
-    width: '17%',
-    lineHeight: '3rem',
   },
 }));
 

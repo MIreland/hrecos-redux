@@ -1,13 +1,13 @@
 /* eslint-disable max-len */
 import React, { PropTypes } from 'react';
 import { makeStyles } from '@material-ui/core';
-import maristMap from 'assets/Marist_map.png';
-import norrieMap from 'assets/Norrie_map.png';
-import pier84Map from 'assets/Pier84_map.png';
-import piermontPierMap from 'assets/Piermont_map.png';
-import albanyMap from 'assets/Albany_map.png';
-import RiverMap from 'assets/HRECOS_Map2_Medium.png';
 import { useSelector } from 'react-redux';
+import maristMap from '../assets/Marist_map.png';
+import norrieMap from '../assets/Norrie_map.png';
+import pier84Map from '../assets/Pier84_map.png';
+import piermontPierMap from '../assets/Piermont_map.png';
+import albanyMap from '../assets/Albany_map.png';
+import RiverMap from '../assets/HRECOS_Map2_Medium.png';
 import theme from './AboutHRECOS.module.scss';
 
 const mapMap = {
