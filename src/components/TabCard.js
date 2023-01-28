@@ -10,6 +10,7 @@ import { setTabIndex } from 'modules/action';
 import stations from '../utils/stations.json';
 import stationMetrics from '../utils/metrics';
 import HydroContent from './HydroContent';
+import { useWindowSize } from '../utils/useWindowSize';
 
 function TabContainer({ children }) {
   return (
@@ -42,7 +43,6 @@ const useStyles = makeStyles(theme => ({
     // gridColumnStart: 2,
     // gridRowEnd: 'span 2',
     // gridRowStart: 1,
-    marginRight: '1em',
   },
   tab: {
     minWidth: 140,
@@ -58,6 +58,9 @@ export default function SimpleTabs() {
   const location = useSelector(state => state.stationID);
   const timerEnabled = useSelector(state => state.timerEnabled);
   const countdown = useSelector(state => state.countdown);
+  const windowSize = useWindowSize();
+
+  const orientation = windowSize.width < 1200 ? 'vertical' : 'horizontal';
 
   const dispatch = useDispatch();
   const { params } = stations[location];
@@ -81,12 +84,17 @@ export default function SimpleTabs() {
   return (
     <div className={classes.root}>
       <AppBar className={classes.appBar} position="static">
-        <Tabs className={classes.tabs} value={tabIndex} onChange={handleChange}>
+        <Tabs
+          className={classes.tabs}
+          value={tabIndex}
+          onChange={handleChange}
+          orientation={orientation}
+        >
           {tabs}
         </Tabs>
         {countdownWrapper}
       </AppBar>
-      <HydroContent />
+      <HydroContent windowSize={windowSize} />
     </div>
   );
 }

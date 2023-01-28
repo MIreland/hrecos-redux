@@ -36,6 +36,17 @@ html {
     border: 2px solid blue;
     grid-template-columns: auto;
     grid-template-areas:
+            "hrecos station"
+            "metric metric"
+            "metric metric";;
+  }
+}
+
+@media (max-width: 800px) {
+  .grid-layout {
+    border: 2px solid blue;
+    grid-template-columns: auto;
+    grid-template-areas:
             "hrecos"
             "station"
             "metric"

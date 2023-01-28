@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import sizeMe from 'react-sizeme';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import useDimensions from 'react-cool-dimensions';
 import stationMetrics from '../utils/metrics';
 import salt from '../assets/HRECOS_PANEL_SALT.png';
 import chlorophyll from '../assets/HRECOS_PANEL_CHL.jpg';
@@ -46,7 +47,9 @@ const useStyles = makeStyles(theme => ({
   },
   chartWrapper: {
     border: '3px solid green',
-    gridArea: 'chartContent',
+    bottom: 0,
+    position: 'absolute',
+    // gridArea: 'chartContent',
   },
   formToggle: {
     position: 'absolute',
@@ -54,16 +57,16 @@ const useStyles = makeStyles(theme => ({
     zIndex: 110,
   },
   fullSizeChart: {
-    gridRow: '1 / 3',
+    height: '100%',
   },
   liveDataTitle: {
     color: '#e58030',
     fontFamily: 'Montserrate Black, sans-serif',
     fontSize: '24px',
     fontWeight: 800,
+    marginBottom: -10,
     marginLeft: '15%',
-    marginTop: '-2%',
-    position: 'absolute',
+    marginTop: 4,
     zIndex: 100,
   },
   offlineWarning: {
@@ -80,29 +83,29 @@ const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.paper,
     backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    display: 'grid',
-
-    fullHeightChart: {
-      gridTemplateRows: '1fr',
-    },
+    backgroundSize: '100% 100%',
 
     gridTemplateAreas: `
       'imageContent'
       'chartContent'
     `,
+
+    minHeight: 600,
     // flexGrow: 1,
     // gridColumnStart: 2,
     // gridRowEnd: 'span 2',
     // gridRowStart: 1,
-    gridTemplateRows: '2fr 1fr',
-    height: 'calc(100% - 48px)',
+    // gridTemplateRows: '3fr 2fr',
     position: 'relative',
   },
 }));
 
-function HydroContent({ size }) {
+function HydroContent({ size, windowSize }) {
   const [fullSizeChart, setFullSizeChart] = React.useState(false);
+  const [chartHeight, setChartHeight] = React.useState();
+  const [chartWidth, setChartWidth] = React.useState();
+
+  const backgroundSize = '100% 100%';
   // This pre-caches the background images.
   // The server used to host some of the displays has a very slow connection
   const imageRef = useRef({});
@@ -115,6 +118,21 @@ function HydroContent({ size }) {
     }, 2500);
   }, []);
 
+  const { observe, unobserve, width, height, entry } = useDimensions({
+    onResize: ({ observe, unobserve, width, height, entry }) => {
+      // Triggered whenever the size of the target is changed...
+
+      // unobserve(); // To stop observing the current target element
+      // observe(); // To re-start observing the current target element
+      if (chartWidth !== width) {
+        setChartHeight(height);
+        setChartWidth(width);
+      }
+      console.log('initial chart height', height);
+    },
+  });
+
+  console.log('chart height', chartHeight);
   const classes = useStyles();
   // const scale = useSelector(state => state.scale);
   const tabIndex = useSelector(state => state.tabIndex);
@@ -126,19 +144,20 @@ function HydroContent({ size }) {
 
   const stationData = useSelector(state => state.stationData);
 
-  const { width } = size || {};
-  const scale = width / 1252;
+  const { width: localWidth } = size || {};
+  const scale = localWidth / 1252;
 
   const scaleHeight = 800 * scale;
   const scaleWidth = 1250 * scale;
 
   const { config, isOffline, hasData } = getChartData({
-    height: scaleHeight,
+    fullSizeChart,
+    height: chartHeight,
     location,
     scale,
     stationData,
     tabIndex,
-    width: scaleWidth,
+    width: chartWidth,
   });
 
   const offlineWarning = isOffline && (
@@ -158,20 +177,22 @@ function HydroContent({ size }) {
   if (!imgSrc || fullSizeChart) {
     imgSrc = backgroundPanel;
   }
-  console.log('width', width);
+  console.log('width', width, config);
 
   return (
     <div
       className={`${classes.root} hydro-wrapper ${
         fullSizeChart && classes.fullHeightChart
       }`}
+      ref={observe}
       key={imgSrc}
-      style={{ backgroundImage: `url(${imgSrc})` }}
+      style={{ backgroundImage: `url(${imgSrc})`, backgroundSize }}
     >
       <FormControl className={classes.formToggle}>
         <InputLabel htmlFor="chartsize">Maximize Chart</InputLabel>
         <Switch
           value={fullSizeChart}
+          checked={fullSizeChart}
           onChange={() => setFullSizeChart(!fullSizeChart)}
         />
       </FormControl>

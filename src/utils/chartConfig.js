@@ -3,6 +3,8 @@ export const ORANGE = '#e58030';
 export const GREEN = '#04ca01';
 export const TEAL = '#4084a7';
 
+export const FULL_SIZE_CHART_HEIGHT = 700;
+export const CHART_HEIGHT = 400;
 export const getChartConfig = height =>
   JSON.parse(
     JSON.stringify({
@@ -67,7 +69,7 @@ export const getChartConfig = height =>
             }
             const dailyInterval =
               ((this.chart.firstValue - this.value) / (3600 * 1000)) % 24 === 0;
-            const fontSize = dailyInterval ? '2rem' : '1.25rem';
+            const fontSize = dailyInterval ? '1rem' : '1.25rem';
             return `<span style="font-size:${fontSize}">${this.axis.defaultLabelFormatter.call(
               this,
             )}</span>`;
@@ -75,7 +77,7 @@ export const getChartConfig = height =>
           style: {
             color: WHITE,
             fontFamily: 'Montserrate Light',
-            fontSize: '1.75rem',
+            fontSize: '0.75rem',
           },
         },
         // min,
@@ -87,7 +89,7 @@ export const getChartConfig = height =>
           style: {
             color: WHITE,
             fontFamily: 'Montserrate Light',
-            fontSize: '2.5rem',
+            fontSize: '0.5rem',
             fontWeight: 'bold',
           },
         },
@@ -103,13 +105,14 @@ export const getChartConfig = height =>
           style: {
             color: WHITE,
             fontFamily: 'Montserrate Light',
+            fontSize: '1.5rem',
           },
         },
         title: {
           style: {
             color: WHITE,
             fontFamily: 'Montserrate Light',
-            fontSize: '2.2rem',
+            fontSize: '1rem',
           },
         },
         visible: true,

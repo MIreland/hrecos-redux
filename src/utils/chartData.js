@@ -1,7 +1,13 @@
 /* eslint-disable no-param-reassign */
 import { get, set, forEach, last, isNumber } from 'lodash';
 import moment from 'moment';
-import { getChartConfig, GREEN, TEAL, CHART_HEIGHT } from './chartConfig';
+import {
+  getChartConfig,
+  GREEN,
+  TEAL,
+  CHART_HEIGHT,
+  FULL_SIZE_CHART_HEIGHT,
+} from './chartConfig';
 import stations from './stations';
 import metricConversion from './metrics';
 
@@ -35,6 +41,8 @@ const MIN_WIDTH = 800;
 export default function getChartData({
   tabIndex,
   width,
+  height,
+  fullSizeChart,
   stationData,
   location,
 }) {
@@ -47,7 +55,7 @@ export default function getChartData({
   const topHeight = -210 * imageScale * imageScale;
   const bottomHeight = -75 * imageScale;
 
-  // set(config, ['chart', 'width'], width || MIN_WIDTH);
+  set(config, ['chart', 'width'], width || MIN_WIDTH);
   // console.log('width', width);
   const metric = metricConversion[key];
   const units = metric.unit;
@@ -103,6 +111,12 @@ export default function getChartData({
   set(config, ['plotOptions', 'series', 'animation'], false);
   // set(config, ['xAxis', 'min'], xAxisMin);
   set(config, ['xAxis', 'dateTimeLabelFormats', 'day'], xAxisLabel);
+
+  const minHeight = fullSizeChart ? FULL_SIZE_CHART_HEIGHT : CHART_HEIGHT;
+  const chartHeight = fullSizeChart
+    ? Math.max(height - 25 || minHeight)
+    : height * 0.3;
+  set(config, ['chart', 'height'], chartHeight);
 
   return {
     config,
