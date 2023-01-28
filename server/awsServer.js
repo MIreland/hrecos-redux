@@ -5,6 +5,7 @@ const path = require('path');
 const cors = require('cors');
 const station = require('./stationParams');
 
+console.log('initializing server');
 const port = process.env.PORT || 3000;
 
 // app.options('*', cors())

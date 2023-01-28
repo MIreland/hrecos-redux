@@ -38,8 +38,10 @@ const useStyles = makeStyles(theme => ({
   },
   root: {
     backgroundColor: theme.palette.background.paper,
+    display: 'grid',
     flexGrow: 1,
     gridArea: 'metric',
+    gridTemplateRows: 'auto 1fr',
     // gridColumnStart: 2,
     // gridRowEnd: 'span 2',
     // gridRowStart: 1,
@@ -82,7 +84,7 @@ export default function SimpleTabs() {
   );
 
   return (
-    <div className={classes.root}>
+    <div className={`${classes.root} tab-card`}>
       <AppBar className={classes.appBar} position="static">
         <Tabs
           className={classes.tabs}
