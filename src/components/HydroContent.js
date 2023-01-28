@@ -46,10 +46,8 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
   },
   chartWrapper: {
-    border: '3px solid green',
     bottom: 0,
     position: 'absolute',
-    // gridArea: 'chartContent',
   },
   formToggle: {
     position: 'absolute',
