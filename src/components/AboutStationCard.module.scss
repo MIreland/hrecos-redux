@@ -1,4 +1,7 @@
-.content, .norrie, .beczak, .marist {
+.content,
+.norrie,
+.beczak,
+.marist {
   display: block;
   position: relative;
   font-family: 'queens', sans-serif !important;
@@ -9,7 +12,8 @@
   }
 }
 
-.norrie, .piermont {
+.norrie,
+.piermont {
   font-size: 1vw;
   margin-bottom: 2vh;
 }
@@ -26,7 +30,7 @@
   min-height: 25vh;
 }
 
-p.weatherTime{
+p.weatherTime {
   text-align: left;
   margin-bottom: 10px;
 }
@@ -34,9 +38,7 @@ p.weatherTime{
 div.marqueeContainer {
   overflow-x: hidden;
   white-space: nowrap;
-  font-family: 'Montserrat light';
   //position: absolute;
-
 }
 
 .weatherTicker {
@@ -98,7 +100,7 @@ div.marqueeContainer {
 
 .norrieImageText {
   text-align: center;
-  font-size: .75vw;
+  font-size: 0.75vw;
   margin: 0;
 }
 

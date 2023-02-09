@@ -19,8 +19,8 @@ const todoReducer = (state = defaultState, action) => {
     case ACTIONS.UPDATE_STATION: {
       return {
         ...state,
-        stationID: action.payload,
         stationData: {},
+        stationID: action.payload,
         tabIndex: 0,
       };
     }
@@ -39,8 +39,8 @@ const todoReducer = (state = defaultState, action) => {
       if (
         ['marist', 'piermont', 'norriePoint', 'pier84'].includes(
           state.stationID,
-        ) &&
-        stationData.ELEV
+        )
+        && stationData.ELEV
       ) {
         stationData.DEPTH = stationData.ELEV;
       }
@@ -48,8 +48,7 @@ const todoReducer = (state = defaultState, action) => {
     }
 
     case ACTIONS.COUNTDOWN: {
-      const countdown =
-        state.countdown > 1 ? state.countdown - 1 : COUNTDOWN_MAX;
+      const countdown = state.countdown > 1 ? state.countdown - 1 : COUNTDOWN_MAX;
       let { tabIndex } = state;
       if (state.countdown === 1) {
         tabIndex += 1;

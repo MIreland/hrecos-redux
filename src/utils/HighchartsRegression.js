@@ -10,7 +10,7 @@ import ReactHighcharts from 'react-highcharts';
 
 (function (H) {
   H.wrap(H.Chart.prototype, 'init', function (proceed) {
-    const series = arguments[1].series;
+    const { series } = arguments[1];
     const extraSeries = [];
     let i = 0;
     for (i = 0; i < series.length; i++) {
@@ -18,32 +18,29 @@ import ReactHighcharts from 'react-highcharts';
       if (s.regression && !s.rendered) {
         s.regressionSettings = s.regressionSettings || {};
         s.regressionSettings.tooltip = s.regressionSettings.tooltip || {};
-        s.regressionSettings.dashStyle =
-          s.regressionSettings.dashStyle || 'solid';
-        s.regressionSettings.decimalPlaces =
-          s.regressionSettings.decimalPlaces || 2;
-        s.regressionSettings.useAllSeries =
-          s.regressionSettings.useAllSeries || false;
+        s.regressionSettings.dashStyle = s.regressionSettings.dashStyle || 'solid';
+        s.regressionSettings.decimalPlaces = s.regressionSettings.decimalPlaces || 2;
+        s.regressionSettings.useAllSeries = s.regressionSettings.useAllSeries || false;
 
         const regressionType = s.regressionSettings.type || 'linear';
         var regression;
         const extraSerie = {
-          data: [],
           color: s.color,
-          yAxis: s.yAxis,
+          color: s.regressionSettings.color || '',
+          data: [],
+          dashStyle: s.regressionSettings.dashStyle || 'solid',
+          id: s.regressionSettings.id,
+          isRegressionLine: true,
           lineWidth: 2,
           marker: { enabled: false },
-          isRegressionLine: true,
-          visible: s.regressionSettings.visible,
-          type: s.regressionSettings.linetype || 'spline',
           name: s.regressionSettings.name || 'Equation: %eq',
-          id: s.regressionSettings.id,
-          color: s.regressionSettings.color || '',
-          dashStyle: s.regressionSettings.dashStyle || 'solid',
           showInLegend: !s.regressionSettings.hideInLegend,
           tooltip: {
             valueSuffix: s.regressionSettings.tooltip.valueSuffix || ' ',
           },
+          type: s.regressionSettings.linetype || 'spline',
+          yAxis: s.yAxis,
+          visible: s.regressionSettings.visible,
         };
 
         let mergedData = s.data;
@@ -197,8 +194,7 @@ import ReactHighcharts from 'react-highcharts';
       }
     }
 
-    const gradient =
-      (N * sum[3] - sum[0] * sum[1]) / (N * sum[2] - sum[0] * sum[0]);
+    const gradient = (N * sum[3] - sum[0] * sum[1]) / (N * sum[2] - sum[0] * sum[0]);
     const intercept = sum[1] / N - (gradient * sum[0]) / N;
     // var correlation = (N * sum[3] - sum[0] * sum[1]) / Math.sqrt((N * sum[2] - sum[0] * sum[0]) * (N * sum[4] - sum[1] * sum[1]));
 
@@ -391,8 +387,7 @@ import ReactHighcharts from 'react-highcharts';
 
     for (var i = equation.length - 1; i >= 0; i--) {
       if (i > 1) string += `${Math.round(equation[i] * 100) / 100}x^${i} + `;
-      else if (i == 1)
-        string += `${Math.round(equation[i] * 100) / 100}x` + ' + ';
+      else if (i == 1) string += `${Math.round(equation[i] * 100) / 100}x` + ' + ';
       else string += Math.round(equation[i] * 100) / 100;
     }
 
@@ -442,8 +437,8 @@ import ReactHighcharts from 'react-highcharts';
 
       if (i > 0) {
         if (
-          right < xval.length - 1 &&
-          xval[right + 1] - xval[i] < xval[i] - xval[left]
+          right < xval.length - 1
+          && xval[right + 1] - xval[i] < xval[i] - xval[left]
         ) {
           left++;
           right++;
@@ -601,4 +596,4 @@ import ReactHighcharts from 'react-highcharts';
 
     return SE;
   }
-})(ReactHighcharts.Highcharts);
+}(ReactHighcharts.Highcharts));

@@ -3,44 +3,44 @@ export const weatherParams = [
     getValue(data) {
       return '83.3%';
     },
-    text: 'Humidity',
     key: 'humidity',
+    text: 'Humidity',
   },
   {
     getValue(data) {
       return '13.2 knots from NE (High Gust 21 knots)';
     },
-    text: 'Wind',
     key: 'wind',
+    text: 'Wind',
   },
   {
     getValue(data) {
       return '0 in';
     },
-    text: 'Precipitation',
     key: 'precipitation',
+    text: 'Precipitation',
   },
   {
     getValue(data) {
       return '34.1 °F';
     },
-    text: 'Air Temperature',
     key: 'airTemp',
+    text: 'Air Temperature',
   },
   {
     getValue(data) {
       return '29.69 Hg';
     },
-    text: 'Pressure',
     key: 'pressure',
+    text: 'Pressure',
   },
   {
     getValue(data) {
       return '41 °F';
     },
+    key: 'dewPoint',
     superscript: '2',
     text: 'Dew Point',
-    key: 'dewPoint',
   },
 ];
 

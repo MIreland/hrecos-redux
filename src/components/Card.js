@@ -5,24 +5,24 @@ import AppBar from '@material-ui/core/AppBar';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
+    background: '#007465',
+    fontFamily: 'Montserrat,sans-serif !important',
+    fontSize: '2rem',
+    fontWeight: 'lighter',
     lineHeight: theme.typography.h3.fontSize,
     minHeight: theme.typography.h3.fontSize,
     padding: `0 ${theme.typography.body1.fontSize}`,
-    fontSize: '2rem',
-    fontFamily: 'Montserrat,sans-serif !important',
-    fontWeight: 'lighter',
-    background: '#007465',
+  },
+  cardContent: {
+    '& p': {
+      marginBlockStart: 0,
+    },
+    height: 'calc(100% - 4rem)',
+    padding: '1rem 1rem 0 1rem',
   },
   root: {
     backgroundColor: 'rgb(56, 125, 159)' || theme.palette.background.paper,
     overflowX: 'hidden',
-  },
-  cardContent: {
-    padding: '1rem 1rem 0 1rem',
-    height: 'calc(100% - 4rem)',
-    '& p': {
-      marginBlockStart: 0,
-    },
   },
 }));
 

@@ -15,14 +15,12 @@ import { makeStyles } from '@material-ui/core';
 import stations from '../utils/stations.json';
 import theme from './Drawer.module.scss';
 
-const disclaimerText =
-  'Production of this website was supported by the U.S. EPA, the Hudson River Foundation, and ' +
-  'the NY-NJ Harbor & Estuary Program.  It may not necessarily reflect the views of these organizations, ' +
-  'and no official endorsement should be inferred.';
+const disclaimerText = 'Production of this website was supported by the U.S. EPA, the Hudson River Foundation, and '
+  + 'the NY-NJ Harbor & Estuary Program.  It may not necessarily reflect the views of these organizations, '
+  + 'and no official endorsement should be inferred.';
 
-const sizeDisclaimer =
-  'This page is optimized for viewing at 1920x1080 resolution in ' +
-  "Chrome Web Browser's full-screen mode";
+const sizeDisclaimer = 'This page is optimized for viewing at 1920x1080 resolution in '
+  + "Chrome Web Browser's full-screen mode";
 
 const useStyles = makeStyles({
   fullList: {
@@ -50,7 +48,7 @@ function Drawer({ open, setOpen }) {
     }
   };
 
-  const navigateAndResetIndex = newStationID => {
+  const navigateAndResetIndex = (newStationID) => {
     dispatch({ payload: 0, type: ACTIONS.SET_TAB_INDEX });
     navigate(`/station/${newStationID}`);
   };

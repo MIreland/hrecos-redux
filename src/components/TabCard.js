@@ -67,7 +67,7 @@ export default function SimpleTabs() {
   const dispatch = useDispatch();
   const { params } = stations[location];
 
-  const tabs = params.map(key => {
+  const tabs = params.map((key) => {
     let label = stationMetrics[key].param_nm;
     if (label.toLocaleLowerCase().includes('temp')) {
       label = 'Water Temp';

@@ -75,8 +75,7 @@ function Header() {
     sponsorImage = logoImage;
     logoImage = temp;
   }
-  const stationTitle =
-    get(stations, `${stationID || 'piermont'}.title`) || 'Piermont';
+  const stationTitle = get(stations, `${stationID || 'piermont'}.title`) || 'Piermont';
 
   return (
     <AppBar position="static">

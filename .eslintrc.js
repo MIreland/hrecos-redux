@@ -27,6 +27,7 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     'sort-keys-fix/sort-keys-fix': 'warn',
+    'object-curly-newline': 'off',
   },
   settings: {
     "import/resolver": "webpack"

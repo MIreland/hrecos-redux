@@ -58,7 +58,6 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
   },
   liveDataTitle: {
-    color: '#e58030',
     fontFamily: 'Montserrate Black, sans-serif',
     fontSize: '24px',
     fontWeight: 800,
@@ -100,8 +99,8 @@ const useStyles = makeStyles(theme => ({
 
 function HydroContent({ size, windowSize }) {
   const [fullSizeChart, setFullSizeChart] = React.useState(false);
-  const [chartHeight, setChartHeight] = React.useState();
-  const [chartWidth, setChartWidth] = React.useState();
+  const [chartHeight, setChartHeight] = React.useState(0);
+  const [chartWidth, setChartWidth] = React.useState(0);
 
   const backgroundSize = '100% 100%';
   // This pre-caches the background images.
@@ -126,7 +125,6 @@ function HydroContent({ size, windowSize }) {
         setChartHeight(height);
         setChartWidth(width);
       }
-      console.log('initial chart height', height);
     },
   });
 
@@ -135,8 +133,7 @@ function HydroContent({ size, windowSize }) {
   // const scale = useSelector(state => state.scale);
   const tabIndex = useSelector(state => state.tabIndex);
   const location = useSelector(state => state.stationID);
-  const paramKey =
-    stations[location].params[tabIndex] || stations[location].params[0];
+  const paramKey = stations[location].params[tabIndex] || stations[location].params[0];
   const stationName = stations[location].title;
   const selectedParameter = stationMetrics[paramKey].param_nm;
 
@@ -144,9 +141,6 @@ function HydroContent({ size, windowSize }) {
 
   const { width: localWidth } = size || {};
   const scale = localWidth / 1252;
-
-  const scaleHeight = 800 * scale;
-  const scaleWidth = 1250 * scale;
 
   const { config, isOffline, hasData } = getChartData({
     fullSizeChart,
@@ -165,17 +159,10 @@ function HydroContent({ size, windowSize }) {
     </div>
   );
 
-  // These are an unfortunate result of using an image for content- there are ways around it,
-  // // but this is the simplest option.
-  // const chartOffset = scale * 600;
-  // const toolbarOffset = 48;
-  // const topOffset = chartOffset + toolbarOffset;
-
   let imgSrc = backgroundImages[`${paramKey.toLowerCase()}Image`];
   if (!imgSrc || fullSizeChart) {
     imgSrc = backgroundPanel;
   }
-  console.log('width', width, config);
 
   return (
     <div
