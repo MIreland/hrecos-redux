@@ -4,7 +4,7 @@ import { round } from 'lodash';
 import theme from 'components/AboutStationCard.module.scss';
 import stationText from '../../utils/aboutStationData';
 
-export function Beczak() {
+export function Marist() {
   const t = new Date();
   const timehash = `${t.getDate()}${t.getHours()}${round(t.getMinutes() / 15)}`;
   const maristImageLink = `http://www.hrecos.org/transfer/PumpSta.JPG#${timehash}`;
@@ -27,10 +27,4 @@ export function Beczak() {
   );
 }
 
-Beczak.propTypes = {
-  scale: PropTypes.number.isRequired,
-  time: PropTypes.string,
-  weatherTicker: PropTypes.object.isRequired,
-};
-
-export default Beczak;
+export default Marist;

@@ -67,14 +67,9 @@ function Header() {
     <img alt="hrecos.org" className={theme.code} src={qrCodeLink} />
   );
 
-  let sponsorImage = (
+  const sponsorImage = (
     <img alt={stationID} style={style} className={theme.sponsor} src={image} />
   );
-  if (stationID === 'pier84') {
-    const temp = sponsorImage;
-    sponsorImage = logoImage;
-    logoImage = temp;
-  }
   const stationTitle = get(stations, `${stationID || 'piermont'}.title`) || 'Piermont';
 
   return (

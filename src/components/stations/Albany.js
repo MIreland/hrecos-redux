@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import theme from 'components/AboutStationCard.module.scss';
+import theme from "../AboutStationCard.module.scss";
 import aboutPortOfAlbany from '../../assets/about_albany.png';
 import stationText from '../../utils/aboutStationData';
 
-export function Beczak({ weatherTicker, time, scale }) {
+export function Beczak({ weatherTicker, time, isLoading }) {
   return (
     <div className={theme.content}>
       <div className={theme.albany}>
@@ -13,7 +13,7 @@ export function Beczak({ weatherTicker, time, scale }) {
         </div>
         <p>{stationText.albany[0]}</p>
       </div>
-      <div className="marqueeRelative marqueeRelativeTest">
+      {!isLoading && <div className="marqueeRelative marqueeRelativeTest">
         <div className={theme.marqueeContainer}>
           <p className={theme.weatherTime}>
             <strong className={theme.underline}>Albany Weather</strong>
@@ -21,14 +21,14 @@ export function Beczak({ weatherTicker, time, scale }) {
           </p>
           <p className={theme.weatherTicker}>{weatherTicker}</p>
         </div>
-      </div>
+      </div>}
     </div>
   );
 }
 
 Beczak.propTypes = {
   scale: PropTypes.number.isRequired,
-  time: PropTypes.string,
+  isLoading: PropTypes.bool.isRequired,
   weatherTicker: PropTypes.object.isRequired,
 };
 

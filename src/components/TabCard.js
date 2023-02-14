@@ -54,7 +54,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SimpleTabs() {
+export default function SimpleTabs({failedToLoadData, isLoading}) {
   const classes = useStyles();
   const tabIndex = useSelector(state => state.tabIndex);
   const location = useSelector(state => state.stationID);
@@ -96,7 +96,12 @@ export default function SimpleTabs() {
         </Tabs>
         {countdownWrapper}
       </AppBar>
-      <HydroContent windowSize={windowSize} />
+      <HydroContent failedToLoadData={failedToLoadData} isLoading={isLoading} />
     </div>
   );
+}
+
+SimpleTabs.propTypes = {
+  failedToLoadData: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 }

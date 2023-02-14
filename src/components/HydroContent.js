@@ -8,6 +8,7 @@ import sizeMe from 'react-sizeme';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import useDimensions from 'react-cool-dimensions';
+import PropTypes from 'prop-types';
 import stationMetrics from '../utils/metrics';
 import salt from '../assets/HRECOS_PANEL_SALT.png';
 import chlorophyll from '../assets/HRECOS_PANEL_CHL.jpg';
@@ -75,6 +76,7 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
     textAlign: 'center',
     width: '100%',
+    minWidth: 200,
     zIndex: 100,
   },
   root: {
@@ -97,7 +99,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function HydroContent({ size, windowSize }) {
+function HydroContent({ failedToLoadData, isLoading }) {
   const [fullSizeChart, setFullSizeChart] = React.useState(false);
   const [chartHeight, setChartHeight] = React.useState(0);
   const [chartWidth, setChartWidth] = React.useState(0);
@@ -128,7 +130,6 @@ function HydroContent({ size, windowSize }) {
     },
   });
 
-  console.log('chart height', chartHeight);
   const classes = useStyles();
   // const scale = useSelector(state => state.scale);
   const tabIndex = useSelector(state => state.tabIndex);
@@ -139,14 +140,11 @@ function HydroContent({ size, windowSize }) {
 
   const stationData = useSelector(state => state.stationData);
 
-  const { width: localWidth } = size || {};
-  const scale = localWidth / 1252;
 
   const { config, isOffline, hasData } = getChartData({
     fullSizeChart,
     height: chartHeight,
     location,
-    scale,
     stationData,
     tabIndex,
     width: chartWidth,
@@ -158,6 +156,15 @@ function HydroContent({ size, windowSize }) {
       <div>{`(${isOffline})`}</div>
     </div>
   );
+
+  const loadingString = isLoading ? '(loading)' : '';
+
+  const failedToLoad = failedToLoadData && (
+    <div className={classes.offlineWarning}>
+      <div>FAILED TO LOAD DATA</div>
+    </div>
+  );
+
 
   let imgSrc = backgroundImages[`${paramKey.toLowerCase()}Image`];
   if (!imgSrc || fullSizeChart) {
@@ -194,15 +201,22 @@ function HydroContent({ size, windowSize }) {
         }`}
         key={width}
       >
+        {!failedToLoad && (
         <h3 className={classes.liveDataTitle}>
-          {`Live ${stationName} ${selectedParameter} Data`}
+          {`Live ${stationName} ${selectedParameter} Data ${loadingString}`}
         </h3>
+        )}
         {offlineWarning}
-        <HighchartsReact highcharts={Highcharts} options={config} immutable />
+        {failedToLoad}
+        {!failedToLoad && <HighchartsReact highcharts={Highcharts} options={config} immutable />}
       </div>
     </div>
   );
 }
+
+HydroContent.propTypes = {
+  failedToLoadData: PropTypes.bool.isRequired,
+};
 
 // export default sizeMe()(HydroContent);
 export default HydroContent;

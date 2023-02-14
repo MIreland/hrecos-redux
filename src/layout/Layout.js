@@ -2,6 +2,7 @@ import React, { useEffect, useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { useQuery } from '@tanstack/react-query';
 import Card from '../components/Card';
 import TabCard from '../components/TabCard';
 import AboutHRECOS from '../components/AboutHRECOS';
@@ -13,11 +14,17 @@ import style from './Layout.module.scss';
 const isLocal = window.location.href.includes('localhost');
 const INTERVAL = 60 * 1000 * 15;
 
-function Layout({ stationID, autoCycle, embedded, sample }) {
-  console.log('stationID', stationID, embedded, sample);
+const fetchStationData = async ({ queryKey }) => {
+  const stationID = queryKey[0];
+  const resp = await fetch(`${isLocal ? 'http://localhost:3002' : ''}/api/station/${stationID}`);
+  const data = await resp.json();
+  return data;
+};
+
+function Layout({ stationID, autoCycle, embedded }) {
+  console.log('stationID', stationID, embedded);
   const dispatch = useDispatch();
   const timerEnabled = useSelector(state => state.timerEnabled);
-  const [refresh, toggleRefresh] = useState(false);
 
   useEffect(() => {
     let timerID;
@@ -29,10 +36,6 @@ function Layout({ stationID, autoCycle, embedded, sample }) {
     return () => clearInterval(timerID);
   }, [dispatch, timerEnabled]);
 
-  useEffect(() => {
-    const timer = setInterval(() => toggleRefresh(!refresh), INTERVAL);
-    return () => clearInterval(timer);
-  });
 
   useEffect(() => {
     dispatch({
@@ -40,13 +43,19 @@ function Layout({ stationID, autoCycle, embedded, sample }) {
     });
   }, [autoCycle, dispatch]);
 
+  const { data: stationResponse, isError: failedToLoadData, isLoading } = useQuery({
+    onSuccess: (data) => {
+      dispatch({ payload: data, type: ACTIONS.LOADED_STATION });
+    },
+    refetchInterval: INTERVAL,
+    queryFn: fetchStationData,
+    queryKey: [stationID] });
+
+  console.log('stationResponse', stationResponse, failedToLoadData, isLoading);
+
   useEffect(() => {
     dispatch(updateStation(stationID));
-    dispatch({ type: ACTIONS.LOADING_STATION });
-    fetch(`${isLocal ? 'http://localhost:3002' : ''}/api/station/${stationID}`)
-      .then(data => data.json())
-      .then(data => dispatch({ payload: data, type: ACTIONS.LOADED_STATION }));
-  }, [dispatch, stationID, refresh]);
+  }, [dispatch, stationID]);
 
   if (embedded) {
     return (
@@ -67,9 +76,9 @@ function Layout({ stationID, autoCycle, embedded, sample }) {
           title="About Station"
           className={`about-station ${style.aboutStation}`}
         >
-          <AboutStation />
+          <AboutStation failedToLoadData={failedToLoadData} isLoading={isLoading} />
         </Card>
-        <TabCard />
+        <TabCard failedToLoadData={failedToLoadData} isLoading={isLoading}/>
       </div>
     </Fragment>
   );
@@ -78,7 +87,6 @@ function Layout({ stationID, autoCycle, embedded, sample }) {
 Layout.propTypes = {
   autoCycle: PropTypes.bool,
   embedded: PropTypes.bool,
-  sample: PropTypes.bool,
   stationID: PropTypes.string,
 };
 
