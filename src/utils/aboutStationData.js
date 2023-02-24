@@ -29,4 +29,7 @@ export default {
     'Tides exchange water between the Hudson and the marsh. Here the water is brackish (slightly salty), but can range to fresh depending on the season and weather events.',
     'This HRECOS monitoring station is operated by Lamont-Doherty Earth Observatory (Columbia University) researchers.',
   ],
+  westPoint: [
+    'The West Point Station exists',
+  ],
 };

@@ -37,10 +37,7 @@ const todoReducer = (state = defaultState, action) => {
     case ACTIONS.LOADED_STATION: {
       const stationData = action.payload;
       if (
-        ['marist', 'piermont', 'norriePoint', 'pier84'].includes(
-          state.stationID,
-        )
-        && stationData.ELEV
+        stationData.ELEV && !stationData.DEPTH
       ) {
         stationData.DEPTH = stationData.ELEV;
       }

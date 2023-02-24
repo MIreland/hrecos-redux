@@ -15,7 +15,7 @@ import chlorophyll from '../assets/HRECOS_PANEL_CHL.jpg';
 import phycocyan from '../assets/HRECOS_PANEL_FCP.jpg';
 import dissolvedOxygen from '../assets/HRECOS_PANEL_DO.png';
 // import backgroundSource from '../assets/HRECOS_background_small.png';
-import getChartData from '../utils/chartData';
+import getChartData from '../utils/updateChartConfig';
 import piermontDO from '../assets/HRECOS_PANEL_DO_PIERMONT.png';
 import conductivity from '../assets/HRECOS_PANEL_COND.png';
 import waterTemp from '../assets/HRECOS_PANEL_WATER_TEMP.png';
@@ -50,21 +50,17 @@ const useStyles = makeStyles(theme => ({
     bottom: 0,
     position: 'absolute',
   },
-  formToggle: {
-    position: 'absolute',
-    right: 20,
-    zIndex: 110,
-  },
   fullSizeChart: {
     height: '100%',
   },
   liveDataTitle: {
-    fontFamily: 'Montserrate Black, sans-serif',
+    fontFamily: 'Arial, sans-serif',
     fontSize: '24px',
+    color: 'white',
     fontWeight: 800,
-    marginBottom: -10,
+    marginBottom: -5,
     marginLeft: '15%',
-    marginTop: 4,
+    marginTop: 15,
     zIndex: 100,
   },
   offlineWarning: {
@@ -76,13 +72,13 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
     textAlign: 'center',
     width: '100%',
-    minWidth: 200,
+    minWidth: 400,
     zIndex: 100,
   },
   root: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: 'rgb(56, 125, 159)',
     backgroundRepeat: 'no-repeat',
-    backgroundSize: '100% 100%',
+    backgroundSize: 'cover',
 
     gridTemplateAreas: `
       'imageContent'
@@ -99,12 +95,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function HydroContent({ failedToLoadData, isLoading }) {
-  const [fullSizeChart, setFullSizeChart] = React.useState(false);
+function HydroContent({ failedToLoadData, isLoading, fullSizeChart }) {
+
   const [chartHeight, setChartHeight] = React.useState(0);
   const [chartWidth, setChartWidth] = React.useState(0);
 
-  const backgroundSize = '100% 100%';
+  const backgroundSize = 'contain';
   // This pre-caches the background images.
   // The server used to host some of the displays has a very slow connection
   const imageRef = useRef({});
@@ -180,14 +176,7 @@ function HydroContent({ failedToLoadData, isLoading }) {
       key={imgSrc}
       style={{ backgroundImage: `url(${imgSrc})`, backgroundSize }}
     >
-      <FormControl className={classes.formToggle}>
-        <InputLabel htmlFor="chartsize">Maximize Chart</InputLabel>
-        <Switch
-          value={fullSizeChart}
-          checked={fullSizeChart}
-          onChange={() => setFullSizeChart(!fullSizeChart)}
-        />
-      </FormControl>
+
       {/* <div className={`hydro-content ${classes.imageWrapper}`}> */}
       {/*  <img */}
       {/*    className={classes.backgroundImage} */}
@@ -216,6 +205,8 @@ function HydroContent({ failedToLoadData, isLoading }) {
 
 HydroContent.propTypes = {
   failedToLoadData: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  fullSizeChart: PropTypes.bool.isRequired,
 };
 
 // export default sizeMe()(HydroContent);

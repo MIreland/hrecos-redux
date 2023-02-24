@@ -6,7 +6,7 @@ import AppBar from '@material-ui/core/AppBar';
 const useStyles = makeStyles(theme => ({
   appBar: {
     background: '#007465',
-    fontFamily: 'Montserrat,sans-serif !important',
+    fontFamily: 'Arial,sans-serif !important',
     fontSize: '2rem',
     fontWeight: 'lighter',
     lineHeight: theme.typography.h3.fontSize,

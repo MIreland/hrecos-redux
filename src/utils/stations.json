@@ -3,7 +3,7 @@
     "id": "albany",
     "hydKey": "HRALBPH",
     "metKey": "HRALBPM",
-    "params": ["WTMP", "DO", "TURB", "SPCO", "PH"],
+    "params": ["DEPTH","WTMP", "DO", "TURB", "SPCO", "PH"],
     "title": "Port Of Albany",
     "usgsKey": "01359165"
   },
@@ -43,8 +43,16 @@
     "hydKey": "HRPMNTH",
     "id": "piermont",
     "metKey": "HRPMNTM",
-    "params": ["WTMP", "DEPTH", "DO", "TURB", "SALT", "PH"],
+    "params": ["DEPTH","WTMP", "DO", "TURB", "SALT", "PH"],
     "title": "Piermont Pier",
     "usgsKey": "01376269"
+  },
+  "westPoint": {
+    "hydKey": "WestPoint",
+    "id": "westPoint",
+    "metKey": "WEST_POINT",
+    "params": ["DEPTH","WTMP", "DO", "TURB", "SPCO", "PH"],
+    "title": "West Point",
+    "usgsKey": "01374019"
   }
 }

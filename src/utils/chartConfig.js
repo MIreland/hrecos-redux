@@ -28,8 +28,14 @@ export const getChartConfig = height => JSON.parse(
       series: {
         animation: false,
         color: LINE_LIGHT_COLOR,
-        lineWidth: 1,
+        lineWidth: 0,
+        states: {
+          hover: {
+            lineWidthPlus: 0,
+          }
+        },
         marker: {
+          enabled: true,
           fillColor: LINE_LIGHT_COLOR,
           radius: 3.5,
         },
@@ -49,7 +55,7 @@ export const getChartConfig = height => JSON.parse(
       floating: true,
       style: {
         color: WHITE,
-        fontFamily: 'Montserrate Light',
+        fontFamily: 'Arial',
         fontSize: '24px',
       },
       text: '',
@@ -82,28 +88,34 @@ export const getChartConfig = height => JSON.parse(
             this,
           )}</span>`;
         },
+        staggerLines: 2,
         style: {
           color: WHITE,
-          fontFamily: 'Montserrate Light',
-          fontSize: '0.75rem',
+          fontFamily: 'Arial',
+          fontSize: '1rem',
         },
       },
       // min,
       minRange: 3600 * 1000 * 24 * 3,
+      useHTML: true,
       minTickInterval: 24 * 3600 * 1000, // one day
       minorTickWidth: 12,
       tickInterval: 6 * 3600 * 1000,
       title: {
         style: {
           color: WHITE,
-          fontFamily: 'Montserrate Light',
-          fontSize: '0.5rem',
+          fontFamily: 'Arial',
+          fontSize: '1.5rem',
           fontWeight: 'bold',
         },
       },
       type: 'datetime',
       visible: true,
     },
+
+
+
+
     yAxis: {
       endOnTick: true,
       gridLineColor: WHITE,
@@ -112,14 +124,14 @@ export const getChartConfig = height => JSON.parse(
         enabled: true,
         style: {
           color: WHITE,
-          fontFamily: 'Montserrate Light',
+          fontFamily: 'Arial',
           fontSize: '1.25rem',
         },
       },
       title: {
         style: {
           color: WHITE,
-          fontFamily: 'Montserrate Light',
+          fontFamily: 'Arial',
           fontSize: '1.5rem',
         },
       },

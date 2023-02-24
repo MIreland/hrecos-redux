@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { get, set, forEach, last, isNumber } from 'lodash';
+import React from 'react';
 import moment from 'moment';
 import {
   getChartConfig,
@@ -66,10 +67,11 @@ export default function getChartData({
     : lastY.toFixed(2);
   lastY = parseFloat(lastY);
 
-  const isOffline = Math.abs(moment().valueOf() - lastX)
-    >= moment.duration(6, 'hours').valueOf()
-    ? moment(lastX).fromNow(true)
-    : false;
+  const isOffline =
+    Math.abs(moment().valueOf() - lastX) >=
+    moment.duration(6, 'hours').valueOf()
+      ? moment(lastX).fromNow(true)
+      : false;
 
   // rows.pop();
   // rows.push({
@@ -77,23 +79,34 @@ export default function getChartData({
   //   x: lastX,
   //   y: lastY,
   // });
-  const xAxisLabel = width > 1000 ? '%b %e' : '%e';
+  const xAxisLabel = width > 1000 ? '%b %eth' : '%eth';
   // const titleAlign = lastY < (max + min) / 2 ? topHeight : bottomHeight;
 
   // const isOfflineOffset = titleAlign > -100 || width < 1000 ? 0 : 85;
 
-  const seriesColor = fullSizeChart ? LINE_DARK_COLOR : LINE_LIGHT_COLOR;
+  const seriesColor = LINE_LIGHT_COLOR;
 
   set(config, ['plotOptions', 'series', 'color'], seriesColor);
   set(config, ['plotOptions', 'series', 'marker', 'fillColor'], seriesColor);
 
   set(config, ['series', '0', 'name'], metric.param_nm);
   set(config, ['series', '0', 'data'], rows);
-  set(
-    config,
-    ['yAxis', 'title', 'text'],
-    `${metric.param_nm} (${units.toLocaleLowerCase()})`,
+
+  let yAxisTitle = metric.param_nm.replace(
+    'Conductivity',
+    'Specific Conductivity',
   );
+  if (metric.param_code === 'PH') {
+    yAxisTitle = 'pH';
+  }
+
+  set(config, ['yAxis', 'title', 'text'], `${yAxisTitle} (${units})`);
+
+  const yLabelFormat = `{value:.${metric.decimals}f}`;
+
+  console.log('hihi', metric, { yLabelFormat }, `{value:.${metric.decimals}f}`);
+  set(config, ['yAxis', 'labels', 'format'], yLabelFormat);
+
   set(config, ['yAxis', 'tickInterval'], key === 'PH' ? 0.2 : undefined);
   // set(config, ['title', 'text'], finalString);
   // set(config, ['title', 'y'], titleAlign);
@@ -101,12 +114,31 @@ export default function getChartData({
   set(config, ['plotOptions', 'series', 'animation'], false);
   // set(config, ['xAxis', 'min'], xAxisMin);
   set(config, ['xAxis', 'dateTimeLabelFormats', 'day'], xAxisLabel);
+  set(config, ['xAxis', 'title', 'text'], 'Date/Time');
+  // set(config, ['xAxis', 'title', 'text'],  'Date/Time');
 
   set(config, ['tooltip', 'formatter'], function () {
+    const localDate = new Date(this.x);
+    const time = localDate.toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+    const day = localDate.toLocaleTimeString([], {
+      day: '2-digit',
+      month: 'short',
+    });
     return `<b>${
       this.series.name
-    }:</b> ${this.y.toLocaleString('en-US', { maximumSignificantDigits: metric.decimal, minimumSignificantDigits: metric.decimal })} ${metric.unit.toLocaleLowerCase()} at ${new Date(this.x).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+    }:</b> ${this.y.toLocaleString('en-US', { maximumFractionDigits: metric.decimals, minimumFractionDigits: metric.decimals })} ${metric.unit} at ${time} on ${day}`;
   });
+
+  // set(config, ['xAxis', 'labels', 'formatter'], function () {
+  //  console.log(this);
+  //   const localDate = new Date(this.pos);
+  //
+  //
+  //   return <span>{localDate.toLocaleTimeString()}</span>;
+  // });
 
   const minHeight = fullSizeChart ? FULL_SIZE_CHART_HEIGHT : CHART_HEIGHT;
   const chartHeight = fullSizeChart

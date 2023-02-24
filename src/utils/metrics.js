@@ -15,7 +15,7 @@ export const params = {
     decimals: 2,
     param_nm: 'Chlorophyll',
     param_type: 'hyd',
-    unit: 'RFU',
+    unit: 'ug/L',
     usgs_code: '32315',
   },
   CHLA: {
@@ -39,7 +39,7 @@ export const params = {
     param_code: 'DEPTH',
     param_nm: 'Water Level',
     param_type: 'hyd',
-    unit: 'Meters',
+    unit: 'meters',
     usgs_code: '62620',
   },
   ATMP: {

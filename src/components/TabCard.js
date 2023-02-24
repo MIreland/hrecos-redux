@@ -11,6 +11,9 @@ import stations from '../utils/stations.json';
 import stationMetrics from '../utils/metrics';
 import HydroContent from './HydroContent';
 import { useWindowSize } from '../utils/useWindowSize';
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Switch from "@material-ui/core/Switch";
 
 function TabContainer({ children }) {
   return (
@@ -28,7 +31,7 @@ const useStyles = makeStyles(theme => ({
   appBar: {
     background: '#007465',
     flexDirection: 'row',
-    fontFamily: 'Montserrat,sans-serif !important',
+    fontFamily: 'Arial,sans-serif !important',
     justifyContent: 'space-between',
   },
   countdown: {
@@ -52,6 +55,17 @@ const useStyles = makeStyles(theme => ({
   tabs: {
     display: 'flex',
   },
+  formToggle: {
+    display: 'grid',
+    gridTemplateColumns: 'auto auto',
+    zIndex: 110,
+  },
+  inputLabel: {
+    placeSelf: 'center',
+  },
+  inputSwitch: {
+    placeSelf: 'center',
+  }
 }));
 
 export default function SimpleTabs({failedToLoadData, isLoading}) {
@@ -61,6 +75,7 @@ export default function SimpleTabs({failedToLoadData, isLoading}) {
   const timerEnabled = useSelector(state => state.timerEnabled);
   const countdown = useSelector(state => state.countdown);
   const windowSize = useWindowSize();
+  const [fullSizeChart, setFullSizeChart] = React.useState(false);
 
   const orientation = windowSize.width < 1200 ? 'vertical' : 'horizontal';
 
@@ -69,7 +84,7 @@ export default function SimpleTabs({failedToLoadData, isLoading}) {
 
   const tabs = params.map((key) => {
     let label = stationMetrics[key].param_nm;
-    if (label.toLocaleLowerCase().includes('temp')) {
+    if (label.toLocaleLowerCase().includes('temp') && windowSize.width < 1500) {
       label = 'Water Temp';
     }
     return <Tab className={classes.tab} key={key} label={label} />;
@@ -94,9 +109,19 @@ export default function SimpleTabs({failedToLoadData, isLoading}) {
         >
           {tabs}
         </Tabs>
+        <FormControl className={classes.formToggle}>
+          <label htmlFor="chartsize" className={classes.inputLabel}>Maximize Chart</label>
+          <Switch
+            id={"chartsize"}
+            className={classes.inputSwitch}
+            value={fullSizeChart}
+            checked={fullSizeChart}
+            onChange={() => setFullSizeChart(!fullSizeChart)}
+          />
+        </FormControl>
         {countdownWrapper}
       </AppBar>
-      <HydroContent failedToLoadData={failedToLoadData} isLoading={isLoading} />
+      <HydroContent failedToLoadData={failedToLoadData} isLoading={isLoading} fullSizeChart={fullSizeChart}/>
     </div>
   );
 }

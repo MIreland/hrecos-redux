@@ -4,6 +4,7 @@ import Beczak from './Beczak';
 import Marist from './Marist';
 import Albany from './Albany';
 import Pier84 from './Pier84';
+import WestPoint from './WestPoint';
 
 export default {
   Albany,
@@ -12,4 +13,5 @@ export default {
   Norrie,
   Pier84,
   Piermont,
+  WestPoint
 };

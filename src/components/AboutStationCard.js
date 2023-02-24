@@ -66,6 +66,15 @@ export function AboutStationCard({ failedToLoadData, isLoading }) {
           time={weatherObject.time}
         />
       );
+    case stations.westPoint.id:
+      return (
+        <Stations.WestPoint
+          weatherTicker={weatherTicker}
+          isLoading={isLoading}
+          scale={scale}
+          time={weatherObject.time}
+        />
+      )
     case stations.piermont.id:
     default:
       return (

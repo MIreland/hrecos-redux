@@ -20,7 +20,7 @@ const mapMap = {
 
 const useStyles = makeStyles({
   centeredText: {
-    fontFamily: 'calibri',
+    fontFamily: 'Arial',
     fontStyle: 'italic',
     fontWeight: 'bold',
     textAlign: 'center',
@@ -34,7 +34,7 @@ const useStyles = makeStyles({
   },
   root: {
     color: 'white',
-    fontFamily: 'calibre',
+    fontFamily: 'Arial',
     position: 'relative',
   },
 });
