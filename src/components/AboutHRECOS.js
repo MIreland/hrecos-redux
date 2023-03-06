@@ -1,13 +1,12 @@
 /* eslint-disable max-len */
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core';
 import { useSelector } from 'react-redux';
-import maristMap from '../assets/Marist_map.png';
-import norrieMap from '../assets/Norrie_map.png';
-import pier84Map from '../assets/Pier84_map.png';
-import piermontPierMap from '../assets/Piermont_map.png';
-import albanyMap from '../assets/Albany_map.png';
-import RiverMap from '../assets/HRECOS_Map2_Medium.png';
+import maristMap from '../assets/maps/HRECOS_Stations_Marist.jpg';
+import norrieMap from '../assets/maps/HRECOS_Stations_Norrie.jpg';
+import pier84Map from '../assets/maps/HRECOS_Stations_Pier_84.jpg';
+import piermontPierMap from '../assets/maps/HRECOS_Stations_Piermont.jpg';
+import albanyMap from '../assets/maps/HRECOS_Stations_Port_of_Albany.jpg';
 import theme from './AboutHRECOS.module.scss';
 
 const mapMap = {
@@ -28,7 +27,6 @@ const useStyles = makeStyles({
   imageWrapper: {
     float: 'right',
     gridColumn: 3,
-    padding: '1em',
     position: 'relative',
     width: '30%',
   },
@@ -49,7 +47,7 @@ function AboutHRECOS() {
         <img
           alt={location}
           className={theme.mapImage}
-          src={mapMap[stationID] || RiverMap}
+          src={mapMap[stationID] || norrieMap}
         />
       </div>
       <p>
@@ -72,6 +70,7 @@ function AboutHRECOS() {
         <a
           style={{ color: 'white', fontWeight: 'bold' }}
           target="_blank"
+          rel="noreferrer noopener"
           href="http://www.hrecos.org"
         >
           www.hrecos.org

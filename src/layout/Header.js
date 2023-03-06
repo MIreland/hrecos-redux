@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { get } from 'lodash';
 import { useSelector } from 'react-redux';
 import React, { useState } from 'react';
+import useDimensions from 'react-cool-dimensions';
 import logo from '../assets/HRECOS.logo.png';
 import piermontLogo from '../assets/LamontLogo_trans_2.png';
 import maristLogo from '../assets/marist_logo.png';
@@ -32,7 +33,7 @@ const logoStyle = {
   beczak: { height: '100%' },
   marist: { height: '37.5%' },
   pier84: { width: '350px' },
-  piermont: { height: '70%', marginLeft: '-250px' },
+  piermont: { height: '70%' },
 };
 const titleStyle = {
   albany: { marginLeft: '-10rem' },
@@ -56,13 +57,16 @@ const useStyles = makeStyles(styleTheme => ({
 
 function Header() {
   const classes = useStyles();
+
+  const { observe, width } = useDimensions({});
+  console.log('width', width);
   const [open, setOpen] = useState(false);
   const stationID = useSelector(state => state.stationID);
   const image = logos[`${stationID}Logo`] || piermontLogo;
   const style = logoStyle[stationID] || { position: 'relative' };
   const titleLogoStyle = titleStyle[stationID] || {};
 
-  let logoImage = <img alt="HRECOS" className={theme.logo} src={logo} />;
+  const logoImage = <img alt="HRECOS" className={theme.logo} src={logo} />;
   const qrCode = (
     <img alt="hrecos.org" className={theme.code} src={qrCodeLink} />
   );
@@ -73,7 +77,7 @@ function Header() {
   const stationTitle = get(stations, `${stationID || 'piermont'}.title`) || 'Piermont';
 
   return (
-    <AppBar position="static">
+    <AppBar ref={observe} position="static">
       <Toolbar className={classes.toolbar}>
         <IconButton
           onClick={() => setOpen(!open)}
@@ -86,16 +90,20 @@ function Header() {
         </IconButton>
         <span className={theme.leftImageWrapper}>
           {logoImage}
-          <span className={theme.qrCodeWrapper}>
-            {qrCode}
-            <a href="https://www.hrecos.org">hrecos.org</a>
-          </span>
+          {width > 1200 && (
+            <span className={theme.qrCodeWrapper}>
+              {qrCode}
+              <a href="https://www.hrecos.org">hrecos.org</a>
+            </span>
+          )}
         </span>
 
         <h1 className={theme.title} style={titleLogoStyle}>
           {`${stationTitle} Monitoring Station`}
         </h1>
-        <span className={theme.rightImageWrapper}>{sponsorImage}</span>
+        {width > 1400 && (
+          <span className={theme.rightImageWrapper}>{sponsorImage}</span>
+        )}
       </Toolbar>
       <Drawer open={open} setOpen={setOpen} />
     </AppBar>

@@ -33,14 +33,8 @@ export default function getChartData({
 }) {
   const station = stations[location];
   const key = station.params[tabIndex];
-  const imageScale = width / 1250;
   const config = getChartConfig();
   const hasData = stationData[key];
-
-  console.log('key', key);
-
-  const topHeight = -210 * imageScale * imageScale;
-  const bottomHeight = -75 * imageScale;
 
   set(config, ['chart', 'width'], width || MIN_WIDTH);
   // console.log('width', width);
@@ -67,11 +61,10 @@ export default function getChartData({
     : lastY.toFixed(2);
   lastY = parseFloat(lastY);
 
-  const isOffline =
-    Math.abs(moment().valueOf() - lastX) >=
-    moment.duration(6, 'hours').valueOf()
-      ? moment(lastX).fromNow(true)
-      : false;
+  const isOffline = Math.abs(moment().valueOf() - lastX)
+    >= moment.duration(6, 'hours').valueOf()
+    ? moment(lastX).fromNow(true)
+    : false;
 
   // rows.pop();
   // rows.push({
@@ -104,7 +97,6 @@ export default function getChartData({
 
   const yLabelFormat = `{value:.${metric.decimals}f}`;
 
-  console.log('hihi', metric, { yLabelFormat }, `{value:.${metric.decimals}f}`);
   set(config, ['yAxis', 'labels', 'format'], yLabelFormat);
 
   set(config, ['yAxis', 'tickInterval'], key === 'PH' ? 0.2 : undefined);
@@ -127,9 +119,10 @@ export default function getChartData({
       day: '2-digit',
       month: 'short',
     });
-    return `<b>${
-      this.series.name
-    }:</b> ${this.y.toLocaleString('en-US', { maximumFractionDigits: metric.decimals, minimumFractionDigits: metric.decimals })} ${metric.unit} at ${time} on ${day}`;
+    return `<b>${this.series.name}:</b> ${this.y.toLocaleString('en-US', {
+      maximumFractionDigits: metric.decimals,
+      minimumFractionDigits: metric.decimals,
+    })} ${metric.unit} at ${time} on ${day}`;
   });
 
   // set(config, ['xAxis', 'labels', 'formatter'], function () {

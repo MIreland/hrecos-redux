@@ -30,6 +30,8 @@ export default {
     'This HRECOS monitoring station is operated by Lamont-Doherty Earth Observatory (Columbia University) researchers.',
   ],
   westPoint: [
-    'The West Point Station exists',
+    'The HRECOS site at West Point represents one of the most variable portions of the Hudson River Estuary and is in the region where the salt front moves up and down River with changes in freshwater flow.',
+    'The USGS operated this site from 1991 to 2014 as part of their modeling of salt intrusions that might affect drinking water supplies.',
+    'Cary installed new equipment and began operating the site in 2016. This site is near the northern end of the Highlands - a major change in River bathymetry.',
   ],
 };

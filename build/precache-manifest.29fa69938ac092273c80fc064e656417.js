@@ -1,35 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "1407743c03e444f7dbbbffd7fee5c60b",
+    "revision": "31a07701924b587d5a193e883d6cb85d",
     "url": "/index.html"
   },
   {
-    "revision": "b664c5aa619b9525184a",
+    "revision": "e6452f695c4fc3c9a515",
     "url": "/static/css/main.89fd0ba7.chunk.css"
   },
   {
-    "revision": "17764560f9492a42b678",
-    "url": "/static/js/2.3a087402.chunk.js"
+    "revision": "e2bb8bcd664c74c28be7",
+    "url": "/static/js/2.fb0caf3b.chunk.js"
   },
   {
-    "revision": "b664c5aa619b9525184a",
-    "url": "/static/js/main.71c1b29a.chunk.js"
+    "revision": "e6452f695c4fc3c9a515",
+    "url": "/static/js/main.41121af5.chunk.js"
   },
   {
     "revision": "d15c03722aa864771e5f",
     "url": "/static/js/runtime~main.4b92532b.js"
   },
   {
-    "revision": "de52dc0a76c554b3f11f2641d37aa3e5",
-    "url": "/static/media/Albany_map.de52dc0a.png"
-  },
-  {
     "revision": "0f0ed6289bc2956af5d0049df89f7841",
     "url": "/static/media/HRECOS.logo.0f0ed628.png"
-  },
-  {
-    "revision": "b5b04486d3eed36238328a4e0c787d61",
-    "url": "/static/media/HRECOS_Map2_Medium.b5b04486.png"
   },
   {
     "revision": "a7234e706eac0d2a2083eb6269263f9b",
@@ -72,28 +64,32 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/HRECOS_PANEL_WATER_TEMP.978ca4ce.png"
   },
   {
+    "revision": "33d33fee1d3b7b8b2f3110966ab3aec9",
+    "url": "/static/media/HRECOS_Stations_Marist.33d33fee.jpg"
+  },
+  {
+    "revision": "396908b4d0077d4d392cdbd9dda8999d",
+    "url": "/static/media/HRECOS_Stations_Norrie.396908b4.jpg"
+  },
+  {
+    "revision": "c0be97d356899ed9a788cd4e20a94ac0",
+    "url": "/static/media/HRECOS_Stations_Pier_84.c0be97d3.jpg"
+  },
+  {
+    "revision": "7752d3974eace3d6d818c68b942afaef",
+    "url": "/static/media/HRECOS_Stations_Piermont.7752d397.jpg"
+  },
+  {
+    "revision": "1e3fe3b74beec1d721d7ce26ae30a81b",
+    "url": "/static/media/HRECOS_Stations_Port_of_Albany.1e3fe3b7.jpg"
+  },
+  {
     "revision": "58b050cc2bba91b244ac49f296a341b4",
     "url": "/static/media/HRECOS_background.58b050cc.png"
   },
   {
     "revision": "2d21e4a189b872ab46e4926f595161b5",
     "url": "/static/media/LamontLogo_trans_2.2d21e4a1.png"
-  },
-  {
-    "revision": "65beed6011c1d8eeac18717c4bc7e6a5",
-    "url": "/static/media/Marist_map.65beed60.png"
-  },
-  {
-    "revision": "b5bad90b45e55fdcbe33a43d8503fb01",
-    "url": "/static/media/Norrie_map.b5bad90b.png"
-  },
-  {
-    "revision": "5975588b7a89c6cafc25e7322e08b9de",
-    "url": "/static/media/Pier84_map.5975588b.png"
-  },
-  {
-    "revision": "d2686df4ca4d3f5fd266f5af49354506",
-    "url": "/static/media/Piermont_map.d2686df4.png"
   },
   {
     "revision": "1c19e8d75c60ac306bb0421bcc5a970b",
@@ -130,5 +126,9 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "1995fa7395029506ae1b06e109483302",
     "url": "/static/media/nysdec_logo.1995fa73.png"
+  },
+  {
+    "revision": "8194d9cc791891b3fa771e761ee4c3d2",
+    "url": "/static/media/west-point-image.8194d9cc.JPG"
   }
 ]);

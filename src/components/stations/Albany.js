@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import theme from "../AboutStationCard.module.scss";
+import theme from '../AboutStationCard.module.scss';
 import aboutPortOfAlbany from '../../assets/about_albany.png';
 import stationText from '../../utils/aboutStationData';
 
