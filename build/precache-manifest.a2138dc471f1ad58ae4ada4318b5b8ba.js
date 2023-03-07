@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "31a07701924b587d5a193e883d6cb85d",
+    "revision": "3813559a52e772aae87c878ecdddb8b6",
     "url": "/index.html"
   },
   {
-    "revision": "e6452f695c4fc3c9a515",
+    "revision": "9c366c50b24c7704cf90",
     "url": "/static/css/main.89fd0ba7.chunk.css"
   },
   {
-    "revision": "e2bb8bcd664c74c28be7",
-    "url": "/static/js/2.fb0caf3b.chunk.js"
+    "revision": "d8c8ca34a8567cd29a08",
+    "url": "/static/js/2.4057928a.chunk.js"
   },
   {
-    "revision": "e6452f695c4fc3c9a515",
-    "url": "/static/js/main.41121af5.chunk.js"
+    "revision": "9c366c50b24c7704cf90",
+    "url": "/static/js/main.c69a1dd4.chunk.js"
   },
   {
     "revision": "d15c03722aa864771e5f",
@@ -86,6 +86,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "58b050cc2bba91b244ac49f296a341b4",
     "url": "/static/media/HRECOS_background.58b050cc.png"
+  },
+  {
+    "revision": "2996ff0e4c41ac0faba7547213f1de0c",
+    "url": "/static/media/HRECOS_background_extend_1.2996ff0e.png"
   },
   {
     "revision": "2d21e4a189b872ab46e4926f595161b5",

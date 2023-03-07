@@ -4,7 +4,6 @@ import Switch from '@material-ui/core/Switch';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import { useSelector } from 'react-redux';
-import sizeMe from 'react-sizeme';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import useDimensions from 'react-cool-dimensions';
@@ -23,6 +22,7 @@ import turb from '../assets/HRECOS_PANEL_TURB.png';
 import waterDepth from '../assets/HRECOS_PANEL_WATER_LEVEL.png';
 import acidity from '../assets/HRECOS_PANEL_PH.png';
 import backgroundPanel from '../assets/HRECOS_background.png';
+import extendedBackground from '../assets/HRECOS_background_extend_1.png';
 import stations from '../utils/stations.json';
 
 const backgroundImages = {
@@ -54,9 +54,9 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
   },
   liveDataTitle: {
+    color: 'white',
     fontFamily: 'Arial, sans-serif',
     fontSize: '24px',
-    color: 'white',
     fontWeight: 800,
     marginBottom: -5,
     marginLeft: '15%',
@@ -69,10 +69,10 @@ const useStyles = makeStyles(theme => ({
     fontSize: '1.5rem',
     fontWeight: 'bold',
     marginRight: '15px',
+    minWidth: 400,
     position: 'absolute',
     textAlign: 'center',
     width: '100%',
-    minWidth: 400,
     zIndex: 100,
   },
   root: {
@@ -96,7 +96,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function HydroContent({ failedToLoadData, isLoading, fullSizeChart }) {
-
   const [chartHeight, setChartHeight] = React.useState(0);
   const [chartWidth, setChartWidth] = React.useState(0);
 
@@ -136,7 +135,6 @@ function HydroContent({ failedToLoadData, isLoading, fullSizeChart }) {
 
   const stationData = useSelector(state => state.stationData);
 
-
   const { config, isOffline, hasData } = getChartData({
     fullSizeChart,
     height: chartHeight,
@@ -161,7 +159,6 @@ function HydroContent({ failedToLoadData, isLoading, fullSizeChart }) {
     </div>
   );
 
-
   let imgSrc = backgroundImages[`${paramKey.toLowerCase()}Image`];
   if (!imgSrc || fullSizeChart) {
     imgSrc = backgroundPanel;
@@ -170,34 +167,55 @@ function HydroContent({ failedToLoadData, isLoading, fullSizeChart }) {
   return (
     <div
       className={`${classes.root} hydro-wrapper ${
-        fullSizeChart && classes.fullHeightChart
+        fullSizeChart ? classes.fullHeightChart : ''
       }`}
       ref={observe}
       key={imgSrc}
-      style={{ backgroundImage: `url(${imgSrc})`, backgroundSize }}
+      style={{
+        backgroundImage: `url(${extendedBackground})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+      }}
     >
-
-      {/* <div className={`hydro-content ${classes.imageWrapper}`}> */}
-      {/*  <img */}
-      {/*    className={classes.backgroundImage} */}
-      {/*    alt={`${paramKey}`} */}
-      {/*    src={imgSrc} */}
-      {/*  /> */}
-      {/* </div> */}
       <div
-        className={`${fullSizeChart && classes.fullSizeChart}  ${
-          classes.chartWrapper
-        }`}
-        key={width}
+        className="hydro-update"
+        style={{
+          backgroundImage: `url(${imgSrc})`,
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize,
+          height: '100%',
+          width: '100%',
+        }}
       >
-        {!failedToLoad && (
-        <h3 className={classes.liveDataTitle}>
-          {`Live ${stationName} ${selectedParameter} Data ${loadingString}`}
-        </h3>
-        )}
-        {offlineWarning}
-        {failedToLoad}
-        {!failedToLoad && <HighchartsReact highcharts={Highcharts} options={config} immutable />}
+        {/* <div className={`hydro-content ${classes.imageWrapper}`}> */}
+        {/*  <img */}
+        {/*    className={classes.backgroundImage} */}
+        {/*    alt={`${paramKey}`} */}
+        {/*    src={imgSrc} */}
+        {/*  /> */}
+        {/* </div> */}
+        <div
+          className={`${fullSizeChart && classes.fullSizeChart}  ${
+            classes.chartWrapper
+          }`}
+          key={width}
+        >
+          {!failedToLoad && (
+            <h3 className={classes.liveDataTitle}>
+              {`Live ${stationName} ${selectedParameter} Data ${loadingString}`}
+            </h3>
+          )}
+          {offlineWarning}
+          {failedToLoad}
+          {!failedToLoad && (
+            <HighchartsReact
+              highcharts={Highcharts}
+              options={config}
+              immutable
+            />
+          )}
+        </div>
       </div>
     </div>
   );
@@ -205,8 +223,8 @@ function HydroContent({ failedToLoadData, isLoading, fullSizeChart }) {
 
 HydroContent.propTypes = {
   failedToLoadData: PropTypes.bool.isRequired,
-  isLoading: PropTypes.bool.isRequired,
   fullSizeChart: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 // export default sizeMe()(HydroContent);
