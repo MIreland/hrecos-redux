@@ -16,6 +16,7 @@ html {
   grid-column-gap: 0px;
   grid-row-gap: 0px;
 }
+
 .div1 {
   grid-area: 1 / 2 / 3 / 3;
 }
@@ -29,7 +30,7 @@ html {
     'station metric';
   //height: calc(100vh - 128px);
   grid-gap: 1em;
-  min-height: 800px;
+  min-height: calc(100vh - 150px);
   margin: 1em;
 }
 
@@ -63,6 +64,7 @@ html {
 .aboutStation {
   grid-area: station;
 }
+
 //.leftSide {
 //  grid-area: hrecos;
 //  flex-direction: column;

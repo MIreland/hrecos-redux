@@ -10,8 +10,8 @@ import useDimensions from 'react-cool-dimensions';
 import PropTypes from 'prop-types';
 import stationMetrics from '../utils/metrics';
 import salt from '../assets/HRECOS_PANEL_SALT.png';
-import chlorophyll from '../assets/HRECOS_PANEL_CHL.jpg';
-import phycocyan from '../assets/HRECOS_PANEL_FCP.jpg';
+import chlorophyll from '../assets/backgrounds/ab_chl_all.png';
+import phycocyan from '../assets/backgrounds/ab_phyco_all.png';
 import dissolvedOxygen from '../assets/HRECOS_PANEL_DO.png';
 // import backgroundSource from '../assets/HRECOS_background_small.png';
 import getChartData from '../utils/updateChartConfig';
@@ -23,6 +23,7 @@ import waterDepth from '../assets/HRECOS_PANEL_WATER_LEVEL.png';
 import acidity from '../assets/HRECOS_PANEL_PH.png';
 import backgroundPanel from '../assets/HRECOS_background.png';
 import extendedBackground from '../assets/HRECOS_background_extend_1.png';
+import extendedChlorophyl from '../assets/backgrounds/ab_bg.jpg';
 import stations from '../utils/stations.json';
 
 const backgroundImages = {
@@ -164,6 +165,10 @@ function HydroContent({ failedToLoadData, isLoading, fullSizeChart }) {
     imgSrc = backgroundPanel;
   }
 
+  console.log('paramKey', paramKey);
+  const isAlgae = ['CHL', 'FPC'].includes(paramKey);
+  const backgroundExtension = isAlgae ? extendedChlorophyl : extendedBackground;
+
   return (
     <div
       className={`${classes.root} hydro-wrapper ${
@@ -172,7 +177,7 @@ function HydroContent({ failedToLoadData, isLoading, fullSizeChart }) {
       ref={observe}
       key={imgSrc}
       style={{
-        backgroundImage: `url(${extendedBackground})`,
+        backgroundImage: `url(${backgroundExtension})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
       }}
@@ -184,7 +189,7 @@ function HydroContent({ failedToLoadData, isLoading, fullSizeChart }) {
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           backgroundSize,
-          height: '100%',
+          height: isAlgae ? '65%' : '100%',
           width: '100%',
         }}
       >
