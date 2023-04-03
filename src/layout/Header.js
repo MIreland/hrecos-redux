@@ -8,12 +8,13 @@ import { useSelector } from 'react-redux';
 import React, { useState } from 'react';
 import useDimensions from 'react-cool-dimensions';
 import logo from '../assets/HRECOS.logo.png';
-import piermontLogo from '../assets/LamontLogo_trans_2.png';
+import carrieLogo from '../assets/logos/CaryLogo.png';
+import piermontLogo from '../assets/logos/ColumbiaLamontLogo.png';
 import maristLogo from '../assets/marist_logo.png';
 import beczakLogo from '../assets/beczak_logo.jpg';
-import norriePointLogo from '../assets/norriePoint_logo.jpg';
+import norriePointLogo from '../assets/logos/NationalMarineResearchLogo.jpg';
 import albanyLogo from '../assets/nysdec_logo.png';
-import pier84Logo from '../assets/pier84_logo.png';
+import pier84Logo from '../assets/logos/HudsonRiverPkLogo.png';
 import qrCodeLink from '../assets/hrecos-qr-code.png';
 import stations from '../utils/stations.json';
 import theme from './Header.module.scss';
@@ -26,6 +27,7 @@ const logos = {
   norriePointLogo,
   pier84Logo,
   piermontLogo,
+  westPointLogo: carrieLogo,
 };
 
 const logoStyle = {
@@ -34,6 +36,7 @@ const logoStyle = {
   marist: { height: '37.5%' },
   pier84: { width: '350px' },
   piermont: { height: '70%' },
+  westPoint: { height: '100%' },
 };
 const titleStyle = {
   albany: { marginLeft: '-10rem' },

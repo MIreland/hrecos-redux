@@ -4,6 +4,8 @@ import { makeStyles } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import maristMap from '../assets/maps/HRECOS_Stations_Marist.jpg';
 import norrieMap from '../assets/maps/HRECOS_Stations_Norrie.jpg';
+import beczakMap from '../assets/maps/HRECOS_Stations_Beczak.jpg';
+import westPointMap from '../assets/maps/HRECOS_Stations_West_Point.jpg';
 import pier84Map from '../assets/maps/HRECOS_Stations_Pier_84.jpg';
 import piermontPierMap from '../assets/maps/HRECOS_Stations_Piermont.jpg';
 import albanyMap from '../assets/maps/HRECOS_Stations_Port_of_Albany.jpg';
@@ -11,10 +13,12 @@ import theme from './AboutHRECOS.module.scss';
 
 const mapMap = {
   albany: albanyMap,
+  beczak: beczakMap,
   marist: maristMap,
   norriePoint: norrieMap,
   pier84: pier84Map,
   piermont: piermontPierMap,
+  westPoint: westPointMap,
 };
 
 const useStyles = makeStyles({

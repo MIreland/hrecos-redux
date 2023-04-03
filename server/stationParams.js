@@ -60,20 +60,18 @@ const SOAP_METRIC_MAPPING = {
   pH: 'PH',
 };
 const memoizedTime = memoize(dateStr =>
-  moment.tz(dateStr, 'YYYY-MM-DD HH:mm:ss', 'America/New_York').valueOf(),
-);
+  moment.tz(dateStr, 'YYYY-MM-DD HH:mm:ss', 'America/New_York').valueOf());
 
 function getStationData(station, res) {
   let { stationID } = station.params;
   stationID = stationID || 'piermont';
   const startDate = moment.utc().add(-3, 'days').format('YYYY-MM-DD');
   const endDate = moment.utc().format('YYYY-MM-DD');
-  const stationStatus =
-    'https://docs.google.com/spreadsheets/d/e/2PACX-1vRTd9ro6ylJ4LBECGlszV_UI9od-5MAC6W60iqpWB2HTZFjK5q5y0G1CMHVcNXL4IptubblYo-w7gDz/pub?gid=0&single=true&output=csv';
+  const stationStatus = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRTd9ro6ylJ4LBECGlszV_UI9od-5MAC6W60iqpWB2HTZFjK5q5y0G1CMHVcNXL4IptubblYo-w7gDz/pub?gid=0&single=true&output=csv';
 
   fetch(stationStatus)
     .then(statusResponse => statusResponse.text())
-    .then(status => {
+    .then((status) => {
       const stationStatusDetails = Papa.parse(status, {
         dynamicTyping: true,
         header: true,
@@ -81,20 +79,19 @@ function getStationData(station, res) {
 
       // Norrie Point
       if (stationID === 'norriePoint') {
-        const soapURL =
-          'http://cdmo.baruch.sc.edu/webservices2/requests.cfc?wsdl';
+        const soapURL = 'http://cdmo.baruch.sc.edu/webservices2/requests.cfc?wsdl';
 
         // eslint-disable-next-line sort-keys-fix/sort-keys-fix
         const waterArgs = {
-          station_code: 'hudnpwq',
-          mindate: startDate,
           maxdate: endDate,
+          mindate: startDate,
+          station_code: 'hudnpwq',
         };
         // eslint-disable-next-line sort-keys-fix/sort-keys-fix
         const atmosArgs = {
-          station_code: 'hudnpmet',
-          mindate: startDate,
           maxdate: endDate,
+          mindate: startDate,
+          station_code: 'hudnpmet',
         };
         const dataMapping = { sourceUrl: soapURL, stationStatusDetails };
 
@@ -106,7 +103,7 @@ function getStationData(station, res) {
                 atmosArgs,
                 (soapWaterErr, atmosResult) => {
                   const results = [waterResult, atmosResult];
-                  results.forEach(result => {
+                  results.forEach((result) => {
                     const data = get(
                       result,
                       'exportAllParamsDateRangeXMLNewReturn.returnData.data',
@@ -118,12 +115,12 @@ function getStationData(station, res) {
                       return;
                     }
                     try {
-                      data.reverse().forEach(row => {
+                      data.reverse().forEach((row) => {
                         const timeStamp = moment(
                           row.DateTimeStamp,
                           'MM/DD/YYYY HH:mm',
                         ).valueOf();
-                        Object.keys(SOAP_METRIC_MAPPING).forEach(key => {
+                        Object.keys(SOAP_METRIC_MAPPING).forEach((key) => {
                           if (!row[key]) {
                             return;
                           }
@@ -166,10 +163,10 @@ function getStationData(station, res) {
         );
 
         const url = `${urlRoot}${urlParams}&format=rdb&site_no=${siteID}&period=4&begin_date=${startDate}&end_date=${endDate}`;
-
+        console.log('url', url);
         fetch(url)
           .then(usgsRes => usgsRes.text())
-          .then(siteData => {
+          .then((siteData) => {
             const csvString = siteData.slice(siteData.lastIndexOf('#') + 3);
             const values = Papa.parse(csvString, { dynamicTyping: true }).data;
 
@@ -211,7 +208,7 @@ function getStationData(station, res) {
           });
       }
     })
-    .catch(e => {
+    .catch((e) => {
       res.send({ e, error: 'error' });
     });
 }

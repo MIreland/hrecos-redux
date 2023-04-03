@@ -89,17 +89,23 @@ export default function getChartData({
     'Conductivity',
     'Specific Conductivity',
   );
+
+  yAxisTitle = `${yAxisTitle} (${units})`;
   if (metric.param_code === 'PH') {
     yAxisTitle = 'pH';
+    console.log('hmmm');
+    set(config, ['yAxis', 'minorTickInterval'], '0.1');
+    // set(config, ['xAxis', 'width'], 4);
   }
 
-  set(config, ['yAxis', 'title', 'text'], `${yAxisTitle} (${units})`);
+  console.log('config', metric.param_code, config, config.yAxis.tickInterval);
+  set(config, ['yAxis', 'title', 'text'], yAxisTitle);
 
   const yLabelFormat = `{value:.${metric.decimals}f}`;
 
   set(config, ['yAxis', 'labels', 'format'], yLabelFormat);
 
-  set(config, ['yAxis', 'tickInterval'], key === 'PH' ? 0.2 : undefined);
+  set(config, ['yAxis', 'tickInterval'], key === 'PH' ? 0.1 : undefined);
   // set(config, ['title', 'text'], finalString);
   // set(config, ['title', 'y'], titleAlign);
   set(config, ['chart', 'animation'], false);

@@ -1,6 +1,3 @@
-// noinspection JSUnresolvedVariable
-import { find } from 'lodash';
-
 // Date/Time,Depth,,,Dissolved Oxygen,,,Dissolved Oxygen Percent,,,
 // Acidity,,,Salinity,,,Specific Conductance,,,Turbidity,,,Water Temperature,,
 export const params = {
@@ -11,11 +8,28 @@ export const params = {
     param_type: 'hyd',
     unit: 'psia',
   },
+  ATMP: {
+    conversion: unit => unit * 1.8 + 32,
+    decimals: 1,
+    param_code: 'ATMP',
+    param_nm: 'Air Temperature',
+    param_type: 'met',
+    unit: '°F',
+    usgs_code: '00020',
+  },
+  BARO: {
+    decimals: 1,
+    param_code: 'BARO',
+    param_nm: 'Barometric Pressure',
+    param_type: 'met',
+    unit: 'Millibars',
+    usgs_code: '75969',
+  },
   CHL: {
     decimals: 2,
     param_nm: 'Chlorophyll',
     param_type: 'hyd',
-    unit: 'ug/L',
+    unit: 'RFU',
     usgs_code: '32315',
   },
   CHLA: {
@@ -42,13 +56,12 @@ export const params = {
     unit: 'meters',
     usgs_code: '62620',
   },
-  ATMP: {
-    param_type: 'met',
-    param_code: 'ATMP',
-    usgs_code: '00020',
-    param_nm: 'Air Temperature',
+  DEWP: {
     conversion: unit => unit * 1.8 + 32,
     decimals: 1,
+    param_code: 'DEWP',
+    param_nm: 'Dew Point',
+    param_type: 'met',
     unit: '°F',
   },
   DO: {
@@ -60,14 +73,6 @@ export const params = {
     unit: 'mg/L',
     usgs_code: '00300',
   },
-  BARO: {
-    param_code: 'BARO',
-    param_type: 'met',
-    param_nm: 'Barometric Pressure',
-    usgs_code: '75969',
-    decimals: 1,
-    unit: 'Millibars',
-  },
   DOPC: {
     decimals: 1,
     param_code: 'DOPC',
@@ -76,36 +81,21 @@ export const params = {
     unit: '%',
     usgs_code: '00301',
   },
-  DEWP: {
-    param_code: 'DEWP',
-    conversion: unit => unit * 1.8 + 32,
-    param_type: 'met',
-    decimals: 1,
-    param_nm: 'Dew Point',
-    unit: '°F',
-  },
-  PWL: {
-    param_type: 'hyd',
-    param_code: 'PWL',
-    param_nm: 'Pumping Water Level',
-    decimals: 2,
-    unit: 'Meters',
-  },
   ELEV: {
+    conversion: unit => unit * 0.3048,
     decimals: 1,
     param_code: 'ELEV',
-    conversion: unit => unit * 0.3048,
     param_nm: 'Water Surface Elevation (relative to NAVD88)',
     param_type: 'hyd',
     unit: 'Meters',
     usgs_code: '62620',
   },
   FPC: {
+    decimals: 2,
     param_nm: 'Phycocyanin',
     param_type: 'hyd',
-    decimals: 2,
-    usgs_code: '32315',
     unit: 'RFU',
+    usgs_code: '32315',
   },
   GST: {
     decimals: 1,
@@ -130,6 +120,13 @@ export const params = {
     unit: 'pH',
     usgs_code: '00400',
   },
+  PWL: {
+    decimals: 2,
+    param_code: 'PWL',
+    param_nm: 'Pumping Water Level',
+    param_type: 'hyd',
+    unit: 'Meters',
+  },
   RAD: {
     decimals: 1,
     param_code: 'RAD',
@@ -145,29 +142,12 @@ export const params = {
     unit: 'mm',
     usgs_code: '00045',
   },
-  SALT: {
-    param_code: 'SALT',
-    param_nm: 'Salinity',
-    decimals: 1,
-    param_type: 'hyd',
-    unit: 'ppt',
-    usgs_code: '90860',
-  },
   RAINDC: {
     decimals: 1,
     param_code: 'RAINDC',
     param_nm: 'Rainfall Daily Accumulation',
     param_type: 'met',
     unit: 'mm',
-  },
-  SPCO: {
-    param_code: 'SPCO',
-    nerrs_code: 'SpCond',
-    param_type: 'hyd',
-    decimals: 0,
-    usgs_code: '00095',
-    param_nm: 'Conductivity',
-    unit: 'µS/cm',
   },
   RHUM: {
     decimals: 1,
@@ -176,14 +156,22 @@ export const params = {
     param_type: 'met',
     unit: '%',
   },
-  TURB: {
-    param_code: 'TURB',
-    param_type: 'hyd',
-    nerrs_code: 'Turb',
-    usgs_code: '63680',
+  SALT: {
     decimals: 1,
-    param_nm: 'Turbidity',
-    unit: 'NTU',
+    param_code: 'SALT',
+    param_nm: 'Salinity',
+    param_type: 'hyd',
+    unit: 'ppt',
+    usgs_code: '90860',
+  },
+  SPCO: {
+    decimals: 0,
+    nerrs_code: 'SpCond',
+    param_code: 'SPCO',
+    param_nm: 'Conductivity',
+    param_type: 'hyd',
+    unit: 'µS/cm',
+    usgs_code: '00095',
   },
   STMP: {
     conversion: unit => unit * 1.8 + 32,
@@ -193,15 +181,14 @@ export const params = {
     param_type: 'met',
     unit: '°F',
   },
-  WTMP: {
+  TURB: {
+    decimals: 1,
+    nerrs_code: 'Turb',
+    param_code: 'TURB',
+    param_nm: 'Turbidity',
     param_type: 'hyd',
-    param_code: 'WTMP',
-    usgs_code: '00010',
-    nerrs_code: 'Temp',
-    param_nm: 'Water Temperature',
-    decimals: 2,
-    conversion: unit => unit * 1.8 + 32,
-    unit: '°F',
+    unit: 'NTU',
+    usgs_code: '63680',
   },
   WD: {
     decimals: 1,
@@ -232,6 +219,16 @@ export const params = {
     param_type: 'met',
     unit: 'm/s',
     usgs_code: '82127',
+  },
+  WTMP: {
+    conversion: unit => unit * 1.8 + 32,
+    decimals: 2,
+    nerrs_code: 'Temp',
+    param_code: 'WTMP',
+    param_nm: 'Water Temperature',
+    param_type: 'hyd',
+    unit: '°F',
+    usgs_code: '00010',
   },
 };
 

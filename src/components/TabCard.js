@@ -7,13 +7,13 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import { useDispatch, useSelector } from 'react-redux';
 import { setTabIndex } from 'modules/action';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Switch from '@material-ui/core/Switch';
 import stations from '../utils/stations.json';
 import stationMetrics from '../utils/metrics';
 import HydroContent from './HydroContent';
 import { useWindowSize } from '../utils/useWindowSize';
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import Switch from "@material-ui/core/Switch";
 
 function TabContainer({ children }) {
   return (
@@ -39,6 +39,17 @@ const useStyles = makeStyles(theme => ({
     lineHeight: '3rem',
     width: '17%',
   },
+  formToggle: {
+    display: 'grid',
+    gridTemplateColumns: 'auto auto',
+    zIndex: 110,
+  },
+  inputLabel: {
+    placeSelf: 'center',
+  },
+  inputSwitch: {
+    placeSelf: 'center',
+  },
   root: {
     backgroundColor: theme.palette.background.paper,
     display: 'grid',
@@ -55,20 +66,9 @@ const useStyles = makeStyles(theme => ({
   tabs: {
     display: 'flex',
   },
-  formToggle: {
-    display: 'grid',
-    gridTemplateColumns: 'auto auto',
-    zIndex: 110,
-  },
-  inputLabel: {
-    placeSelf: 'center',
-  },
-  inputSwitch: {
-    placeSelf: 'center',
-  }
 }));
 
-export default function SimpleTabs({failedToLoadData, isLoading}) {
+export default function SimpleTabs({ failedToLoadData, isLoading }) {
   const classes = useStyles();
   const tabIndex = useSelector(state => state.tabIndex);
   const location = useSelector(state => state.stationID);
@@ -86,6 +86,12 @@ export default function SimpleTabs({failedToLoadData, isLoading}) {
     let label = stationMetrics[key].param_nm;
     if (label.toLocaleLowerCase().includes('temp') && windowSize.width < 1500) {
       label = 'Water Temp';
+    }
+    if (
+      label.toLocaleLowerCase() === 'conductivity'
+      && windowSize.width > 1600
+    ) {
+      label = 'Specific Conductivity';
     }
     return <Tab className={classes.tab} key={key} label={label} />;
   });
@@ -110,9 +116,11 @@ export default function SimpleTabs({failedToLoadData, isLoading}) {
           {tabs}
         </Tabs>
         <FormControl className={classes.formToggle}>
-          <label htmlFor="chartsize" className={classes.inputLabel}>Maximize Chart</label>
+          <label htmlFor="chartsize" className={classes.inputLabel}>
+            Maximize Chart
+          </label>
           <Switch
-            id={"chartsize"}
+            id="chartsize"
             className={classes.inputSwitch}
             value={fullSizeChart}
             checked={fullSizeChart}
@@ -121,7 +129,11 @@ export default function SimpleTabs({failedToLoadData, isLoading}) {
         </FormControl>
         {countdownWrapper}
       </AppBar>
-      <HydroContent failedToLoadData={failedToLoadData} isLoading={isLoading} fullSizeChart={fullSizeChart}/>
+      <HydroContent
+        failedToLoadData={failedToLoadData}
+        isLoading={isLoading}
+        fullSizeChart={fullSizeChart}
+      />
     </div>
   );
 }
@@ -129,4 +141,4 @@ export default function SimpleTabs({failedToLoadData, isLoading}) {
 SimpleTabs.propTypes = {
   failedToLoadData: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
-}
+};

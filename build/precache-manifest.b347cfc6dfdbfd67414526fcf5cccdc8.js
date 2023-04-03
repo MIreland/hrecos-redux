@@ -1,23 +1,31 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "efff50c7d082dbb5543c72b33bbc9f24",
+    "revision": "265e8c1a8e0e623a5cedb4b8b90f5281",
     "url": "/index.html"
   },
   {
-    "revision": "372c8f0743502b155d5d",
+    "revision": "5c3d2e91de7d91efc67d",
     "url": "/static/css/main.439ecb14.chunk.css"
   },
   {
-    "revision": "c37a44b0894204ed564a",
-    "url": "/static/js/2.58d32539.chunk.js"
+    "revision": "35fe2692b445c7ac10d6",
+    "url": "/static/js/2.35d52c05.chunk.js"
   },
   {
-    "revision": "372c8f0743502b155d5d",
-    "url": "/static/js/main.c177ea29.chunk.js"
+    "revision": "5c3d2e91de7d91efc67d",
+    "url": "/static/js/main.bd76df9e.chunk.js"
   },
   {
     "revision": "d15c03722aa864771e5f",
     "url": "/static/js/runtime~main.4b92532b.js"
+  },
+  {
+    "revision": "17b875aadc309bc9ec189ab99bf37b53",
+    "url": "/static/media/CaryLogo.17b875aa.png"
+  },
+  {
+    "revision": "8b4ac0e6ff1999ec88935b95737c9db9",
+    "url": "/static/media/ColumbiaLamontLogo.8b4ac0e6.png"
   },
   {
     "revision": "0f0ed6289bc2956af5d0049df89f7841",
@@ -56,6 +64,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/HRECOS_PANEL_WATER_TEMP.978ca4ce.png"
   },
   {
+    "revision": "3a2d8a63d65cc646c1e376a3b05e40a1",
+    "url": "/static/media/HRECOS_Stations_Beczak.3a2d8a63.jpg"
+  },
+  {
     "revision": "33d33fee1d3b7b8b2f3110966ab3aec9",
     "url": "/static/media/HRECOS_Stations_Marist.33d33fee.jpg"
   },
@@ -76,6 +88,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/HRECOS_Stations_Port_of_Albany.1e3fe3b7.jpg"
   },
   {
+    "revision": "e2826f98032253432b204a76aa342c89",
+    "url": "/static/media/HRECOS_Stations_West_Point.e2826f98.jpg"
+  },
+  {
     "revision": "58b050cc2bba91b244ac49f296a341b4",
     "url": "/static/media/HRECOS_background.58b050cc.png"
   },
@@ -84,8 +100,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/HRECOS_background_extend_1.2996ff0e.png"
   },
   {
-    "revision": "2d21e4a189b872ab46e4926f595161b5",
-    "url": "/static/media/LamontLogo_trans_2.2d21e4a1.png"
+    "revision": "94632fa96f0b59e461649e25dd24f1da",
+    "url": "/static/media/HudsonRiverPkLogo.94632fa9.png"
+  },
+  {
+    "revision": "32d027ad1a55e0cbeec99700b6f2bb69",
+    "url": "/static/media/NationalMarineResearchLogo.32d027ad.jpg"
   },
   {
     "revision": "279933f265c2c440cdb914f232bc66f0",
@@ -126,10 +146,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "6e58fc513f68c4779f1cb0f957553ab4",
     "url": "/static/media/norrieCanoe.6e58fc51.jpg"
-  },
-  {
-    "revision": "e9313b21eb088d6567a0bb20efb35b88",
-    "url": "/static/media/norriePoint_logo.e9313b21.jpg"
   },
   {
     "revision": "1995fa7395029506ae1b06e109483302",

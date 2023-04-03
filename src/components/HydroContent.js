@@ -185,7 +185,7 @@ function HydroContent({ failedToLoadData, isLoading, fullSizeChart }) {
       <div
         className="hydro-update"
         style={{
-          backgroundImage: `url(${imgSrc})`,
+          backgroundImage: !fullSizeChart && `url(${imgSrc})`,
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           backgroundSize,

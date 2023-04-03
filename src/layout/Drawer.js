@@ -31,6 +31,16 @@ const useStyles = makeStyles({
   },
 });
 
+const sortedStations = [
+  'albany',
+  'norriePoint',
+  'marist',
+  'westPoint',
+  'piermont',
+  'beczak',
+  'pier84',
+];
+
 function Drawer({ open, setOpen }) {
   const classes = useStyles();
 
@@ -53,16 +63,19 @@ function Drawer({ open, setOpen }) {
     navigate(`/station/${newStationID}`);
   };
 
-  const ListItems = Object.values(stations).map(station => (
-    <ListItem
-      key={station.id}
-      button
-      selected={stationID === station.id}
-      onClick={() => navigateAndResetIndex(station.id)}
-    >
-      <ListItemText primary={station.title} />
-    </ListItem>
-  ));
+  const ListItems = sortedStations.map((stationKey) => {
+    const station = stations[stationKey];
+    return (
+      <ListItem
+        key={station.id}
+        button
+        selected={stationID === station.id}
+        onClick={() => navigateAndResetIndex(station.id)}
+      >
+        <ListItemText primary={station.title} />
+      </ListItem>
+    );
+  });
   return (
     <ToolboxDrawer open={open} onClose={() => setOpen(!open)}>
       <div className={classes.list}>
