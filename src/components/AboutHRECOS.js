@@ -31,6 +31,7 @@ const useStyles = makeStyles({
   imageWrapper: {
     float: 'right',
     gridColumn: 3,
+    marginLeft: '1rem',
     position: 'relative',
     width: '30%',
   },

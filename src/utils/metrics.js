@@ -187,7 +187,7 @@ export const params = {
     param_code: 'TURB',
     param_nm: 'Turbidity',
     param_type: 'hyd',
-    unit: 'NTU',
+    unit: 'FNU',
     usgs_code: '63680',
   },
   WD: {

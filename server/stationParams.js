@@ -59,8 +59,9 @@ const SOAP_METRIC_MAPPING = {
   Wdir: 'WD',
   pH: 'PH',
 };
+
 const memoizedTime = memoize(dateStr =>
-  moment.tz(dateStr, 'YYYY-MM-DD HH:mm:ss', 'America/New_York').valueOf());
+  moment.tz(dateStr, 'YYYY-MM-DD HH:mm:ss', 'EST').valueOf());
 
 function getStationData(station, res) {
   let { stationID } = station.params;
