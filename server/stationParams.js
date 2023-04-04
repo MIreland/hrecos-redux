@@ -12,6 +12,8 @@ const stations = require('../src/utils/stations.json');
 
 const myCache = new NodeCache({ checkperiod: 60 * 2, stdTTL: 60 * 15 });
 
+const DEBUG_LOG = process.env.DEBUG_LOG || false;
+
 // Piermont: https://waterdata.usgs.gov/nwis/uv/?site_no=01376269&agency_cd=USGS&amp;
 
 const METRIC_MAPPING = {
@@ -97,9 +99,18 @@ function getStationData(station, res) {
         const dataMapping = { sourceUrl: soapURL, stationStatusDetails };
 
         soap.createClient(soapURL, (err, client) => {
+          if (DEBUG_LOG && err) {
+            console.log('Error creating client', err);
+            return res.send({ soapClientError: err });
+          }
           client.exportAllParamsDateRangeXMLNew(
             waterArgs,
             (soapErr, waterResult) => {
+              if (DEBUG_LOG && soapErr) {
+                console.log('Error retrieving water data', soapErr);
+                return res.send({ waterClientError: soapErr });
+              }
+
               client.exportAllParamsDateRangeXMLNew(
                 atmosArgs,
                 (soapWaterErr, atmosResult) => {
@@ -164,7 +175,6 @@ function getStationData(station, res) {
         );
 
         const url = `${urlRoot}${urlParams}&format=rdb&site_no=${siteID}&period=4&begin_date=${startDate}&end_date=${endDate}`;
-        console.log('url', url);
         fetch(url)
           .then(usgsRes => usgsRes.text())
           .then((siteData) => {
