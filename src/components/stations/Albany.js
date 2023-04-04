@@ -13,21 +13,22 @@ export function Beczak({ weatherTicker, time, isLoading }) {
         </div>
         <p>{stationText.albany[0]}</p>
       </div>
-      {!isLoading && <div className="marqueeRelative marqueeRelativeTest">
-        <div className={theme.marqueeContainer}>
-          <p className={theme.weatherTime}>
-            <strong className={theme.underline}>Albany Weather</strong>
-            {` as of ${time}:`}
-          </p>
-          <p className={theme.weatherTicker}>{weatherTicker}</p>
+      {!isLoading && (
+        <div className="marqueeRelative marqueeRelativeTest">
+          <div className={theme.marqueeContainer}>
+            <p className={theme.weatherTime}>
+              <strong className={theme.underline}>Albany Weather</strong>
+              {` as of ${time}:`}
+            </p>
+            <p className={theme.weatherTicker}>{weatherTicker}</p>
+          </div>
         </div>
-      </div>}
+      )}
     </div>
   );
 }
 
 Beczak.propTypes = {
-  scale: PropTypes.number.isRequired,
   isLoading: PropTypes.bool.isRequired,
   weatherTicker: PropTypes.object.isRequired,
 };

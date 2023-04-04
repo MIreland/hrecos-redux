@@ -1,12 +1,20 @@
 body {
-  margin: 0;
-  font-family: 'Arial',
+    margin: 0;
+    font-family: 'Arial',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.highcharts-xaxis-grid path:first-child {
+    stroke-width: 4px !important;
+}
+
+.highcharts-yaxis-grid path:first-child {
+    stroke-width: 4px !important;
 }

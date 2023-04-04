@@ -48,6 +48,10 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
   },
   chartWrapper: {
+    '& .highcharts-xaxis-grid': {
+      color: 'red',
+      'stroke-width': 12,
+    },
     bottom: 0,
     position: 'absolute',
   },

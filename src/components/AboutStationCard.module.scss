@@ -14,8 +14,6 @@
 
 .norrie,
 .piermont {
-  font-size: 1vw;
-  margin-bottom: 2vh;
 }
 
 .beczak {
@@ -69,14 +67,14 @@ div.marqueeContainer {
 
 .maristImage {
   width: 38%;
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .piermontImageWrapper {
   float: left;
   width: 8vw;
-  padding-right: 1em;
+  margin-right: 1rem;
 
   img {
     width: 8vw;
@@ -86,12 +84,12 @@ div.marqueeContainer {
 .beczakImageWrapper {
   @extend .piermontImageWrapper;
   float: left;
-  padding-right: 10px;
+  padding-right: 1rem;
 }
 
 .norrieImageWrapper {
   text-align: center;
-  margin-top: 1vh;
+  margin-top: 1rem;
 
   img {
     height: 13vh;

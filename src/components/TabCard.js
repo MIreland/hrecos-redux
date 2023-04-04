@@ -30,17 +30,23 @@ TabContainer.propTypes = {
 const useStyles = makeStyles(theme => ({
   appBar: {
     background: '#007465',
+    display: 'grid',
     flexDirection: 'row',
     fontFamily: 'Arial,sans-serif !important',
+    gridTemplateAreas: '"maximize tabs countdown"',
+    gridTemplateColumns: 'auto 1fr auto',
     justifyContent: 'space-between',
+    paddingLeft: 12,
+    paddingRight: 12,
   },
   countdown: {
     display: 'flex',
     lineHeight: '3rem',
-    width: '17%',
+    placeItems: 'center',
   },
   formToggle: {
     display: 'grid',
+    gridArea: 'maximize',
     gridTemplateColumns: 'auto auto',
     zIndex: 110,
   },
@@ -60,11 +66,15 @@ const useStyles = makeStyles(theme => ({
     // gridRowEnd: 'span 2',
     // gridRowStart: 1,
   },
+  spacer: {
+    display: 'flex',
+  },
   tab: {
     minWidth: 140,
   },
   tabs: {
     display: 'flex',
+    gridArea: 'tabs',
   },
 }));
 

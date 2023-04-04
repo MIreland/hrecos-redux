@@ -15,21 +15,23 @@ export function Norrie({ weatherTicker, time }) {
         </div>
         <p className={theme.norrieImageText}>{stationText.norrie[1]}</p>
       </div>
-      <div className={theme.marqueeContainer}>
-        <p className={theme.weatherTime}>
-          <strong className={theme.underline}>Norrie Weather</strong>
-          {` as of ${time}:`}
-        </p>
-        <Marquee
-          gradient={false}
-          style={{
-            width: 400,
-          }}
-          speed={50}
-        >
-          {weatherTicker}
-        </Marquee>
-      </div>
+      {time && (
+        <div className={theme.marqueeContainer}>
+          <p className={theme.weatherTime}>
+            <strong className={theme.underline}>Norrie Weather</strong>
+            {` as of ${time}:`}
+          </p>
+          <Marquee
+            gradient={false}
+            style={{
+              width: 400,
+            }}
+            speed={50}
+          >
+            {weatherTicker}
+          </Marquee>
+        </div>
+      )}
     </div>
   );
 }
