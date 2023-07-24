@@ -94,11 +94,13 @@ export default function SimpleTabs({ failedToLoadData, isLoading, embedded }) {
 
   if (embedded) {
     return (
-      <HydroContent
-        failedToLoadData={failedToLoadData}
-        isLoading={isLoading}
-        fullSizeChart={fullSizeChart}
-      />
+      <div className={`${classes.root} tab-card`}>
+        <HydroContent
+          failedToLoadData={failedToLoadData}
+          isLoading={isLoading}
+          fullSizeChart={fullSizeChart}
+        />
+      </div>
     );
   }
 
