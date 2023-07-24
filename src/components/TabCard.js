@@ -91,6 +91,7 @@ export default function SimpleTabs({ failedToLoadData, isLoading, embedded }) {
 
   const dispatch = useDispatch();
   const { params } = stations[location];
+  console.log('windowSize Width', windowSize.width);
 
   if (embedded && windowSize.width < 1000) {
     return (
