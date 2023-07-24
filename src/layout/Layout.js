@@ -16,7 +16,9 @@ const INTERVAL = 60 * 1000 * 15;
 
 const fetchStationData = async ({ queryKey }) => {
   const stationID = queryKey[0];
-  const resp = await fetch(`${isLocal ? 'http://localhost:3002' : ''}/api/station/${stationID}`);
+  const resp = await fetch(
+    `${isLocal ? 'http://localhost:3002' : ''}/api/station/${stationID}`,
+  );
   const data = await resp.json();
   return data;
 };
@@ -36,20 +38,24 @@ function Layout({ stationID, autoCycle, embedded }) {
     return () => clearInterval(timerID);
   }, [dispatch, timerEnabled]);
 
-
   useEffect(() => {
     dispatch({
       type: autoCycle ? ACTIONS.ENABLE_TIMER : ACTIONS.DISABLE_TIMER,
     });
   }, [autoCycle, dispatch]);
 
-  const { data: stationResponse, isError: failedToLoadData, isLoading } = useQuery({
+  const {
+    data: stationResponse,
+    isError: failedToLoadData,
+    isLoading,
+  } = useQuery({
     onSuccess: (data) => {
       dispatch({ payload: data, type: ACTIONS.LOADED_STATION });
     },
-    refetchInterval: INTERVAL,
     queryFn: fetchStationData,
-    queryKey: [stationID] });
+    queryKey: [stationID],
+    refetchInterval: INTERVAL,
+  });
 
   console.log('stationResponse', stationResponse, failedToLoadData, isLoading);
 
@@ -60,7 +66,11 @@ function Layout({ stationID, autoCycle, embedded }) {
   if (embedded) {
     return (
       <div className={style.embedded}>
-        <TabCard embedded />
+        <TabCard
+          embedded
+          failedToLoadData={failedToLoadData}
+          isLoading={isLoading}
+        />
       </div>
     );
   }
@@ -76,9 +86,12 @@ function Layout({ stationID, autoCycle, embedded }) {
           title="About Station"
           className={`about-station ${style.aboutStation}`}
         >
-          <AboutStation failedToLoadData={failedToLoadData} isLoading={isLoading} />
+          <AboutStation
+            failedToLoadData={failedToLoadData}
+            isLoading={isLoading}
+          />
         </Card>
-        <TabCard failedToLoadData={failedToLoadData} isLoading={isLoading}/>
+        <TabCard failedToLoadData={failedToLoadData} isLoading={isLoading} />
       </div>
     </Fragment>
   );

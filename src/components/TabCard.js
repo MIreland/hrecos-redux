@@ -78,7 +78,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SimpleTabs({ failedToLoadData, isLoading }) {
+export default function SimpleTabs({ failedToLoadData, isLoading, embedded }) {
   const classes = useStyles();
   const tabIndex = useSelector(state => state.tabIndex);
   const location = useSelector(state => state.stationID);
@@ -91,6 +91,16 @@ export default function SimpleTabs({ failedToLoadData, isLoading }) {
 
   const dispatch = useDispatch();
   const { params } = stations[location];
+
+  if (embedded && windowSize.width < 1000) {
+    return (
+      <HydroContent
+        failedToLoadData={failedToLoadData}
+        isLoading={isLoading}
+        fullSizeChart={fullSizeChart}
+      />
+    );
+  }
 
   const tabs = params.map((key) => {
     let label = stationMetrics[key].param_nm;
@@ -149,6 +159,7 @@ export default function SimpleTabs({ failedToLoadData, isLoading }) {
 }
 
 SimpleTabs.propTypes = {
+  embedded: PropTypes.bool,
   failedToLoadData: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
 };
