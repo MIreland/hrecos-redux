@@ -100,7 +100,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function HydroContent({ failedToLoadData, isLoading, fullSizeChart }) {
+function HydroContent({
+  failedToLoadData,
+  isLoading,
+  fullSizeChart,
+  embedded,
+}) {
   const [chartHeight, setChartHeight] = React.useState(0);
   const [chartWidth, setChartWidth] = React.useState(0);
 
@@ -138,11 +143,15 @@ function HydroContent({ failedToLoadData, isLoading, fullSizeChart }) {
   const stationName = stations[location].title;
   const selectedParameter = stationMetrics[paramKey].param_nm;
 
+  const isMobile = embedded && width < 700;
+
   const stationData = useSelector(state => state.stationData);
 
   const { config, isOffline, hasData } = getChartData({
+    embedded,
     fullSizeChart,
     height: chartHeight,
+    isMobile,
     location,
     stationData,
     tabIndex,
@@ -169,9 +178,17 @@ function HydroContent({ failedToLoadData, isLoading, fullSizeChart }) {
     imgSrc = backgroundPanel;
   }
 
-  console.log('paramKey', paramKey);
   const isAlgae = ['CHL', 'FPC'].includes(paramKey);
   const backgroundExtension = isAlgae ? extendedChlorophyl : extendedBackground;
+
+  let liveDataTitle = `Live ${stationName} ${selectedParameter} Data ${loadingString}`;
+  if (isMobile) {
+    if (isLoading) {
+      liveDataTitle = '(loading)';
+    } else {
+      liveDataTitle = `${selectedParameter}`;
+    }
+  }
 
   return (
     <div
@@ -211,9 +228,7 @@ function HydroContent({ failedToLoadData, isLoading, fullSizeChart }) {
           key={width}
         >
           {!failedToLoad && (
-            <h3 className={classes.liveDataTitle}>
-              {`Live ${stationName} ${selectedParameter} Data ${loadingString}`}
-            </h3>
+            <h3 className={classes.liveDataTitle}>{liveDataTitle}</h3>
           )}
           {offlineWarning}
           {failedToLoad}
@@ -231,6 +246,7 @@ function HydroContent({ failedToLoadData, isLoading, fullSizeChart }) {
 }
 
 HydroContent.propTypes = {
+  embedded: PropTypes.bool.isRequired,
   failedToLoadData: PropTypes.bool.isRequired,
   fullSizeChart: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,

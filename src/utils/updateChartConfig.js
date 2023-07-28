@@ -30,7 +30,10 @@ export default function getChartData({
   fullSizeChart,
   stationData,
   location,
+  isMobile,
 }) {
+  console.log('width', width);
+
   const station = stations[location];
   const key = station.params[tabIndex];
   const config = getChartConfig();
@@ -40,6 +43,13 @@ export default function getChartData({
   // console.log('width', width);
   const metric = metricConversion[key];
   const units = metric.unit;
+
+  if (isMobile) {
+    set(config, ['xAxis', 'minRange'], 3600 * 1000 * 24 * 3);
+    set(config, ['xAxis', 'minTickInterval'], 24 * 3600 * 1000);
+    set(config, ['xAxis', 'minorTickWidth'], undefined);
+    set(config, ['xAxis', 'tickInterval'], 24 * 3600 * 1000);
+  }
 
   let rows = stationData[key] ? stationData[key].slice() : [];
   if (Array.isArray(rows) && metric.conversion) {
@@ -96,6 +106,9 @@ export default function getChartData({
     console.log('hmmm');
     set(config, ['yAxis', 'minorTickInterval'], '0.1');
     // set(config, ['xAxis', 'width'], 4);
+  }
+  if (isMobile) {
+    yAxisTitle = units;
   }
 
   console.log('config', metric.param_code, config, config.yAxis.tickInterval);

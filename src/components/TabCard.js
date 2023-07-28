@@ -99,6 +99,7 @@ export default function SimpleTabs({ failedToLoadData, isLoading, embedded }) {
           failedToLoadData={failedToLoadData}
           isLoading={isLoading}
           fullSizeChart={fullSizeChart}
+          embedded
         />
       </div>
     );
